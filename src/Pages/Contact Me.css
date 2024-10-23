@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+.nunito-sans-header {
+  font-family: "Nunito Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100,
+    "YTLC" 500;
+}
+.contact-card{
+    color: #EA8E1D;
+  }
+.contact-text{
+    color:#EA8E1D;
+}
+  .unbounded-uniquifier-h1 {
+    font-family: "Unbounded", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+  }
+  .unbounded-uniquifier-p {
+    font-family: "Unbounded", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .header-contact {
+    /* <h5 class="text-primary text-uppercase" style={{spacing:" 5px"}}>Contact Us</h5> */
+
+    background-image: url("https://i.pinimg.com/originals/47/ca/c8/47cac854462569b133f9799a3fb16f69.gif");
+    /* https://i.pinimg.com/originals/31/b8/69/31b869df169a0983da9334af646079e8.gif */
+    /* https://i.pinimg.com/564x/17/3b/23/173b2319c6ab7d62599110461bfe37fe.jpg */
+    /* https://i.pinimg.com/736x/32/7c/88/327c881765aedaa54d15c291d282ff5e.jpg */
+    background-size: auto;
+    background-position: center;
+    background-repeat: repeat;
+    height: 300px;
+    width: auto;
+  }
+  .header-contact h1{
+    display: flex;
+    justify-content: center;
+    padding-top: 75px;
+  }
+  .header-contact p{
+    display: flex;
+    justify-content: center;
+  }
+  .card-color{
+    background-color: #39545B;
+  }

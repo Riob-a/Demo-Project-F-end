@@ -1,0 +1,73 @@
+  /*art addition form  */
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 30px;
+    
+  }
+  
+  .card {
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+  }
+  
+  /* .card img {
+    width: 100%;
+    height: auto;
+  } */
+  
+  .card-content {
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 150px;
+  }
+  
+  .card-content h3 {
+    margin: 10px 0;
+    font-size: 1.2em;
+    display: flex;
+    font-family: "Unbounded", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+    word-wrap: break-word;
+  }
+  
+  .card-content p {
+    color: #666;
+    font-size: 0.9em;
+    display: flex;
+    font-family: "Unbounded", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 250;
+    word-wrap: break-word;
+  }
+
+  @media (max-width: 768px) {
+    .card-content h3 {
+      font-size: 1em; /* Reduce font size for smaller screens */
+    }
+  
+    .card-content p {
+      font-size: 0.8em; /* Adjust paragraph size for smaller screens */
+    }
+  }
+    .unbounded-uniquifier-p1 {
+    font-family: "Unbounded", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 250;
+    font-style: normal;
+  }
+  .unbounded-uniquifier-h1 {
+    font-family: "Unbounded", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+  }
+  
