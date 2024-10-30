@@ -9,7 +9,8 @@ function Artwork() {
     name: '',
     email: '',
     imageUrl: '',
-    type:''
+    description:'',
+    style:''
   });
 
   useEffect(() => {
@@ -166,12 +167,24 @@ function Artwork() {
                         required
                       />
                     </Form.Group>
+                    <Form.Group>
+                      <Form.Label className="unbounded-uniquifier-h1">Description</Form.Label>
+                      <Form.Control 
+                        as="textarea"
+                        rows={3}
+                        placeholder="Describe your artwork"
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChange}
+                        required
+                        />
+                    </Form.Group>
                     <Form.Group controlId="formOption" className="mb-3">
-                      <Form.Label className="unbounded-uniquifier-h1">Type(Animated/Static)</Form.Label>
+                      <Form.Label className="unbounded-uniquifier-h1">Style(Animated/Static)</Form.Label>
                       <Form.Select
                         placeholder="Select type"
-                        name="type"
-                        value={formData.type}
+                        name="style"
+                        value={formData.style}
                         onChange={handleChange}
                         required
                         >
