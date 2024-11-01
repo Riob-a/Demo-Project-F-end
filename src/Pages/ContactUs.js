@@ -11,6 +11,8 @@ const ContactForm = () => {
     message: ''
   });
 
+  const [responseMessage, setResponseMessage] = useState('');
+
   useEffect(() => {
     new WOW.WOW().init();
   }, []);
@@ -23,31 +25,52 @@ const ContactForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+
+    try {
+      const response = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        setResponseMessage(result.message);
+        setFormData({ name: '', email: '', message: '' }); // Reset form
+      } else {
+        const errorData = await response.json();
+        setResponseMessage(errorData.message || 'Something went wrong!');
+      }
+    } catch (error) {
+      console.error("Error submitting contact form:", error);
+      setResponseMessage('Failed to submit. Please try again later.');
+    }
   };
 
   return (
     <div>
       {/* Header Section */}
       <div className="header-contact text-center mb-4 wow fadeInDown" data-wow-duration="0.8s" style={{ boxShadow: "0 4px 15px rgba(0, 0, 0, 0.5)" }}>
-        <h1 className="display-4 unbounded-uniquifier-h1 text-white" >Get in Touch</h1>
-        <p className="lead unbounded-uniquifier-header text-white"><a href='/' style={{color: "#EA8E1D"}}>HomePage</a>
+        <h1 className="display-4 unbounded-uniquifier-h1 text-white">Get in Touch</h1>
+        <p className="lead unbounded-uniquifier-header text-white">
+          <a href='/' style={{ color: "#EA8E1D" }}>HomePage</a>
         </p>
       </div>
 
       <Container className='justify-content-center mb-5'>
         <Row className="gy-5 justify-content-center">
-          {/* Contact Form inside a Card */}
-          <div className="text-center mx-auto mb-5 p-2 wow fadeInUp bg-dark rounded" data-wow-delay="0.1s" style={{ width: "600px", boxShadow: "0 4px 15px rgba(0, 0, 0, 0.5)" }} >
-                <h5 className="text-white text-uppercase unbounded-uniquifier-header mt-5" style={{spacing:" 5px"}}>Contact Us</h5>
-                <p className="lead unbounded-uniquifier-p1 text-white"> We'd love to hear from you! Whether you have a question or just want to say hello, our team is here to help.</p>
+          <div className="text-center mx-auto mb-5 p-2 wow fadeInUp bg-dark rounded" data-wow-delay="0.1s" style={{ width: "600px", boxShadow: "0 4px 15px rgba(0, 0, 0, 0.5)" }}>
+            <h5 className="text-white text-uppercase unbounded-uniquifier-header mt-5" style={{ spacing: "5px" }}>Contact Us</h5>
+            <p className="lead unbounded-uniquifier-p1 text-white">We'd love to hear from you! Whether you have a question or just want to say hello, our team is here to help.</p>
           </div>
           <Col xs={12} md={6}>
             <div className="wow fadeInLeft" data-wow-duration="1s">
-              <Card className="card-color text-white " style={{ boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }} border="" bg='' data-bs-theme="">
-                <Card.Body className=" p-5">
+              <Card className="card-color text-white" style={{ boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }} border="" bg=''>
+                <Card.Body className="p-5">
                   <Card.Title className="contact-card mb-4 unbounded-uniquifier-header">Contact Me</Card.Title>
                   <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="formName" className="mb-3">
@@ -87,10 +110,11 @@ const ContactForm = () => {
                       />
                     </Form.Group>
 
-                    <Button variant="primary unbounded-uniquifier-header" type="submit" >
+                    <Button variant="primary unbounded-uniquifier-header" type="submit">
                       Submit
                     </Button>
                   </Form>
+                  {responseMessage && <p className="mt-3 text-success">{responseMessage}</p>}
                 </Card.Body>
               </Card>
             </div>
@@ -99,8 +123,8 @@ const ContactForm = () => {
           {/* Contact Info inside a Card */}
           <Col xs={12} md={4}>
             <div className="wow fadeInRight" data-wow-duration="1s">
-              <Card className="card-color text-white " style={{ boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }} border="" bg='' data-bs-theme="">
-                <Card.Body className=" py-5">
+              <Card className="card-color text-white" style={{ boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }} border="" bg=''>
+                <Card.Body className="py-5">
                   <section className="text-center">
                     <Card.Title className='contact-card unbounded-uniquifier-header'><u>Our Office</u></Card.Title>
                     <p>

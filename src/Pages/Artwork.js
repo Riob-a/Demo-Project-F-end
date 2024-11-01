@@ -84,7 +84,7 @@ function Artwork() {
 
   const renderArtworkGrid = (artworks) => {
     return (
-      <div className="grid-container">
+      <div className="grid-container p-2">
         {artworks.map((artwork, index) => (
           <motion.div
             className="card wow fadeInLeft"
@@ -185,7 +185,7 @@ function Artwork() {
                         />
                       </Form.Group>
                       <Form.Group controlId="email">
-                        <Form.Label>Email</Form.Label>
+                        <Form.Label className="unbounded-uniquifier-header">Email</Form.Label>
                         <Form.Control
                           type="email"
                           name="email"
@@ -197,7 +197,7 @@ function Artwork() {
 
 
                       <Form.Group controlId="imageUrl">
-                        <Form.Label>Image URL</Form.Label>
+                        <Form.Label className="unbounded-uniquifier-header">Image URL</Form.Label>
                         <Form.Control
                           type="url"
                           name="imageUrl"
@@ -208,7 +208,7 @@ function Artwork() {
                       </Form.Group>
 
                       <Form.Group controlId="style">
-                        <Form.Label>Style</Form.Label>
+                        <Form.Label className="unbounded-uniquifier-header">Style</Form.Label>
                         <Form.Select
                           name="style"
                           value={formData.style}
@@ -221,7 +221,7 @@ function Artwork() {
                       </Form.Group>
 
                       <Form.Group controlId="description">
-                        <Form.Label>Description</Form.Label>
+                        <Form.Label className="unbounded-uniquifier-header">Description</Form.Label>
                         <Form.Control
                           as="textarea"
                           name="description"
@@ -232,7 +232,7 @@ function Artwork() {
                         />
                       </Form.Group>
 
-                  <Button variant="primary" type="submit" className="mt-3">
+                  <Button variant="primary" type="submit" className="mt-3 unbounded-uniquifier-header">
                     Submit Artwork
                   </Button>
                 </Form>

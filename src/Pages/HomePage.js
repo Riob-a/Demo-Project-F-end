@@ -29,6 +29,11 @@ function HomePage() {
       {/* Art Category Sections */}
       <section className="py-5 mt-5 mb-5">
         <Container>
+          <Row className="mb-4">
+            <h1 className="unbounded-uniquifier-header wow fadeInLeft">Navigate</h1>
+            <hr/>
+            <p className="unbounded-uniquifier-header wow fadeInleft" data-wow-duration="1s" data-wow-delay="0.2s">Click the cards to directly go to the specific art section</p>
+          </Row>
           <Row className="gy-5 text-center justify-content-center">
             <Col>
               <motion.div className="wow fadeInUp" data-wow-duration="1s" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} data-bs-theme="dark">
@@ -47,29 +52,29 @@ function HomePage() {
 
             <Col>
               <motion.div className="wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} data-bs-theme="dark">
-                <Card className="mx-auto" style={{ width: "21rem", boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }} onClick={() => handleCardClick("/artwork#animated-artworks")}>
-                  <Card.Img variant="top" src="https://i.pinimg.com/originals/db/5a/54/db5a547a554cfaebfcb48aa1e8462918.gif" />
+                <Card className="mx-auto" style={{ width: "21rem", boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }} onClick={() => handleCardClick("/artwork#static-artworks")}>
+                  <Card.Img variant="top" src="https://i.pinimg.com/564x/10/9a/dd/109addc2397a3257c90b61acccb7a273.jpg" />
                   <Card.Body>
-                    <Card.Title className="unbounded-uniquifier-header">Raging fury</Card.Title>
+                    <Card.Title className="unbounded-uniquifier-header">Tesla</Card.Title>
                     <Card.Text className="unbounded-uniquifier-p2 text-muted">An example of the kind of animated art on view, tap the card to see more</Card.Text>
                   </Card.Body>
                   <ListGroup variant="flush">
-                    <ListGroupItem className="unbounded-uniquifier-header"><Card.Link href="/artwork#animated-artworks">Animated <FaArrowRight /></Card.Link></ListGroupItem>
+                    <ListGroupItem className="unbounded-uniquifier-header"><Card.Link href="/artwork#static-artworks">Static <FaArrowRight /></Card.Link></ListGroupItem>
                   </ListGroup>
                 </Card>
               </motion.div>
             </Col>
-
+           
             <Col>
               <motion.div className="wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.4s" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} data-bs-theme="dark">
-                <Card className="mx-auto" style={{ width: "21rem", boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }} onClick={() => handleCardClick("/artwork#static-artworks")}>
-                  <Card.Img variant="top" src="https://i.pinimg.com/564x/10/9a/dd/109addc2397a3257c90b61acccb7a273.jpg" />
+                <Card className="mx-auto" style={{ width: "21rem", boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }} onClick={() => handleCardClick("/artwork#add-artwork")}>
+                  <Card.Img variant="top" src=" https://i.pinimg.com/originals/db/5a/54/db5a547a554cfaebfcb48aa1e8462918.gif" />
                   <Card.Body>
-                     <Card.Title className="unbounded-uniquifier-header">Tesla</Card.Title>
-                     <Card.Text className="unbounded-uniquifier-p2 text-muted">An example of the kind of static art on view, tap the card to see more</Card.Text>
+                     <Card.Title className="unbounded-uniquifier-header">Raging Fury</Card.Title>
+                     <Card.Text className="unbounded-uniquifier-p2 text-muted">To submit your own work of art, tap the card to go through the submission process</Card.Text>
                   </Card.Body>
                   <ListGroup variant="flush">
-                  <ListGroupItem className="unbounded-uniquifier-header"><Card.Link href="/artwork#static-artworks">Static <FaArrowRight /></Card.Link></ListGroupItem>
+                  <ListGroupItem className="unbounded-uniquifier-header"><Card.Link href="/artwork#add-artwork">Submit <FaArrowRight /></Card.Link></ListGroupItem>
                   </ListGroup>
                 </Card>
               </motion.div>
