@@ -32,7 +32,7 @@ function HomePage() {
           <Row className="mb-4">
             <h1 className="unbounded-uniquifier-header wow fadeInLeft">Navigate</h1>
             <hr/>
-            <p className="unbounded-uniquifier-header wow fadeInleft" data-wow-duration="1s" data-wow-delay="0.2s">Click the cards to directly go to the specific art section</p>
+            <p className="unbounded-uniquifier-header wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s">Click the cards to directly go to the specific art section</p>
           </Row>
           <Row className="gy-5 text-center justify-content-center">
             <Col>
@@ -41,7 +41,7 @@ function HomePage() {
                   <Card.Img variant="top" src="https://i.pinimg.com/originals/a3/7e/48/a37e48e6e5e0edb1b2ffbee6a73fbd59.gif" />
                   <Card.Body>
                     <Card.Title className="unbounded-uniquifier-header">Lights 0NN</Card.Title>
-                    <Card.Text className="unbounded-uniquifier-p2 text-muted">An example of the kind of animated on view, tap the card to see more</Card.Text>
+                    <Card.Text className="unbounded-uniquifier-p2 text-muted">We at Derricks Demo provide a myriad of art on view, to see more animated/gifs that we have on offer, tap the card</Card.Text>
                   </Card.Body>
                   <ListGroup variant="flush">
                   <ListGroupItem className="unbounded-uniquifier-header"><Card.Link href="/artwork#animated-artworks">Animated <FaArrowRight /></Card.Link></ListGroupItem>
@@ -56,7 +56,7 @@ function HomePage() {
                   <Card.Img variant="top" src="https://i.pinimg.com/564x/10/9a/dd/109addc2397a3257c90b61acccb7a273.jpg" />
                   <Card.Body>
                     <Card.Title className="unbounded-uniquifier-header">Tesla</Card.Title>
-                    <Card.Text className="unbounded-uniquifier-p2 text-muted">An example of the kind of animated art on view, tap the card to see more</Card.Text>
+                    <Card.Text className="unbounded-uniquifier-p2 text-muted">We at Derricks Demo provide a myriad of art on view, to see more regular/static art that we have on offer, tap the card</Card.Text>
                   </Card.Body>
                   <ListGroup variant="flush">
                     <ListGroupItem className="unbounded-uniquifier-header"><Card.Link href="/artwork#static-artworks">Static <FaArrowRight /></Card.Link></ListGroupItem>
@@ -71,7 +71,7 @@ function HomePage() {
                   <Card.Img variant="top" src=" https://i.pinimg.com/originals/db/5a/54/db5a547a554cfaebfcb48aa1e8462918.gif" />
                   <Card.Body>
                      <Card.Title className="unbounded-uniquifier-header">Raging Fury</Card.Title>
-                     <Card.Text className="unbounded-uniquifier-p2 text-muted">To submit your own work of art, tap the card to go through the submission process</Card.Text>
+                     <Card.Text className="unbounded-uniquifier-p2 text-muted">If you fancy yourself a bit of an artist, tap the card, and go through the process of posting your own art piece</Card.Text>
                   </Card.Body>
                   <ListGroup variant="flush">
                   <ListGroupItem className="unbounded-uniquifier-header"><Card.Link href="/artwork#add-artwork">Submit <FaArrowRight /></Card.Link></ListGroupItem>

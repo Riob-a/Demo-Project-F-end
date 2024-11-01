@@ -28,7 +28,7 @@ function Register() {
                 // Delay navigation to the home page by 2 seconds
                 setTimeout(() => {
                     setShowAlert(false); // Hide the alert before redirecting
-                    navigate('/'); // Redirect to the home page
+                    navigate('/sign-in'); // Redirect to the home page
                 }, 2000);
             } else {
                 setMessage(result.message || 'Error registering user');
@@ -45,9 +45,11 @@ function Register() {
     }, []);
 
     return (
-        <Container className="justify-content-center mb-5 mt-5">
-            <Row className="justify-content-center mb-5 mt-5">
-                <Col xs={12} md={6} className="wow fadeInLeft mt-5" data-wow-duration="1s">
+        <Container className="justify-content-center mb-2 mt-5">
+            <Row className="justify-content-center  text-center wow fadeInLeft" data-wow-delay="" data-wow-duration="1s"><h2 className='unbounded-uniquifier-header'>Register an Account</h2></Row>
+            {/* <hr/> */}
+            <Row className="justify-content-center mb-5 mt-2">
+                <Col xs={12} md={6} className="wow fadeInLeft mt-5" data-wow-duration="1s" data-wow-delay="0.4s">
                     <Card className="card-color text-white" style={{ boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }}>
                         <Card.Body className="p-5">
                             <Card.Title className="contact-card mb-4 unbounded-uniquifier-h1">Register</Card.Title>

@@ -45,8 +45,9 @@ function SignIn() {
 
     return (
         <Container className="justify-content-center mb-5 mt-5">
-            <Row className="justify-content-center mb-5 mt-5">
-                <Col xs={12} md={6} className="wow fadeInLeft mt-5" data-wow-duration="1s">
+            <Row className="justify-content-center  text-center wow fadeInLeft" data-wow-delay="" data-wow-duration="1s"><h2 className='unbounded-uniquifier-header'>Sign In</h2></Row>
+            <Row className="justify-content-center mb-5 ">
+                <Col xs={12} md={6} className="wow fadeInLeft mt-5" data-wow-duration="1s" data-wow-delay="0.2s">
                     <Card className="card-color text-white" style={{ boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }}>
                         <Card.Body className="p-5">
                             <Card.Title className="contact-card mb-4 unbounded-uniquifier-h1">Sign In</Card.Title>
@@ -87,6 +88,7 @@ function SignIn() {
                     </Card>
                 </Col>
             </Row>
+            <Row className="justify-content-center text-center wow fadeInLeft" data-wow-delay="0.4s" data-wow-duration="1s"><p className='unbounded-uniquifier-header'>If you don't have an account <a href="/register"> Go here</a></p></Row>
         </Container>
     );
 }

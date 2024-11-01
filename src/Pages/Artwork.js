@@ -15,6 +15,7 @@ function Artwork() {
 
   const [animatedArtworks, setAnimatedArtworks] = useState([]);
   const [staticArtworks, setStaticArtworks] = useState([]);
+  
 
   useEffect(() => {
     new WOW.WOW().init();
