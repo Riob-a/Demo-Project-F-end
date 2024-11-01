@@ -30,6 +30,8 @@ function BasicExample() {
             <Nav.Link href="/" className={`brand ${activeKey === '/' ? 'active' : ''}`}>Home |</Nav.Link>
             <Nav.Link href="/reference" className={`brand ${activeKey === '/reference' ? 'active' : ''}`}>Reference | </Nav.Link>
             <Nav.Link href="/artwork" className={`brand ${activeKey === '/artwork' ? 'active' : ''}`}>ARt | </Nav.Link>
+            <Nav.Link href="/register" className={`brand ${activeKey === '/register' ? 'active' : ''}`}>Register |</Nav.Link>
+            <Nav.Link href="/sign-in" className={`brand ${activeKey === '/sign-in' ? 'active' : ''}`}>Sign-in |</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown" className="brand">
               <NavDropdown.Item href="/artwork" className={activeKey === '/artwork' ? 'brand' : ''}>ARt</NavDropdown.Item>
               <NavDropdown.Item href="/contact" className={activeKey === '/contact' ? 'brand' : ''}>Contact Us</NavDropdown.Item>
