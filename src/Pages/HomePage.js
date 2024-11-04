@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Container, Row, Col, Card, Button, Image, ListGroup, ListGroupItem } from "react-bootstrap";
 import "./HomePage.css";
-import { FaArrowAltCircleRight, FaArrowRight } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
 import WOW from "wowjs";
 import "animate.css";

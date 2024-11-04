@@ -27,9 +27,10 @@ function Logout() {
 
                     if (response.ok) {
                         setMessage(result.message || "You have been logged out.");
-                    } else {
-                        setMessage(result.message || "Failed to log out.");
-                    }
+                    } 
+                    // else {
+                    //     setMessage(result.message || "Failed to log out.");
+                    // }
                 } catch (error) {
                     setMessage("An error occurred while logging out.");
                 }
