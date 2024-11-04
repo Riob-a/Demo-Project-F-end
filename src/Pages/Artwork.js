@@ -40,9 +40,11 @@ function Artwork() {
 
       if (response.ok) {
         console.log("Artwork submitted successfully");
+        alert("Artwork submitted successfully!");
         fetchArtworks(formData.style); // Reload artworks of the submitted style
       } else {
         console.error("Failed to submit artwork");
+        alert("Failed to submit artwork. Please try again.");
       }
     } catch (error) {
       console.error("Error:", error);
