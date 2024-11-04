@@ -30,9 +30,9 @@ function HomePage() {
       <section className="py-5 mt-5 mb-5">
         <Container>
           <Row className="mb-4">
-            <h1 className="unbounded-uniquifier-header wow fadeInLeft">Navigate</h1>
+            <h1 className="unbounded-uniquifier-header wow fadeInLeft text-center">Navigate</h1>
             <hr/>
-            <p className="unbounded-uniquifier-header wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s">Click the cards to directly go to the specific art section</p>
+            <p className="unbounded-uniquifier-header wow fadeInLeft mt-2" data-wow-duration="1s" data-wow-delay="0.2s">Click the cards to directly go to the specific art section</p>
           </Row>
           <Row className="gy-5 text-center justify-content-center">
             <Col>

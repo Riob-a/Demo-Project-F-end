@@ -11,19 +11,21 @@ import About from './Pages/About';
 import Artwork from './Pages/Artwork';
 import SignIn from './Pages/SignIn';
 import Register from './Pages/Register';
+import Logout from './Pages/LogOut';
 
 function Layout(){
   const location = useLocation();
-  const hideNavAndFooter = location.pathname === '/sign-in';
+  const hideNavAndFooter = location.pathname === '/' || location.pathname=== '/logout';
 
   return(
     <>
     {!hideNavAndFooter && <Navbar />}
         {/* <Navbar /> */}
         <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="home" element={<HomePage />} />
         <Route path='register' element={<Register />} />
-        <Route path='sign-in' element={<SignIn />} />
+        <Route path='/' element={<SignIn />} />
+        <Route path='logout' element={<Logout />} />
         <Route path='artwork' element={<Artwork />} />
         <Route path='reference' element={<Reference />} />
         <Route path='contact' element={<ContactForm />} />

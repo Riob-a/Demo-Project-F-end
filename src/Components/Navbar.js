@@ -20,18 +20,19 @@ function BasicExample() {
   return (
     <Navbar expand="lg" bg='dark' data-bs-theme="dark" className=''>
       <Container>
-        <Navbar.Brand href="/" className="Navbar-header">
+        <Navbar.Brand href="/home" className="Navbar-header">
           <Image roundedCircle alt='logo' src={logo} width="30" height="30" className='d-inline-block align-top' />
           {' '}D3-<b> RRICKS</b>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="brand" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto" activeKey={activeKey} onSelect={(selectedKey) => setActiveKey(selectedKey)}>
-            <Nav.Link href="/" className={`brand ${activeKey === '/' ? 'active' : ''}`}>Home |</Nav.Link>
+            <Nav.Link href="/home" className={`brand ${activeKey === '/home' ? 'active' : ''}`}>Home |</Nav.Link>
             <Nav.Link href="/reference" className={`brand ${activeKey === '/reference' ? 'active' : ''}`}>Reference | </Nav.Link>
             <Nav.Link href="/artwork" className={`brand ${activeKey === '/artwork' ? 'active' : ''}`}>ARt | </Nav.Link>
             <Nav.Link href="/register" className={`brand ${activeKey === '/register' ? 'active' : ''}`}>Register |</Nav.Link>
-            <Nav.Link href="/sign-in" className={`brand ${activeKey === '/sign-in' ? 'active' : ''}`}>Sign-in |</Nav.Link>
+            <Nav.Link href="/" className={`brand ${activeKey === '/' ? 'active' : ''}`}>Sign-in |</Nav.Link>
+            <Nav.Link href="/logout" className={`brand ${activeKey === '/logout' ? 'active' : ''}`}>Log Out</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown" className="brand">
               <NavDropdown.Item href="/artwork" className={activeKey === '/artwork' ? 'brand' : ''}>ARt</NavDropdown.Item>
               <NavDropdown.Item href="/contact" className={activeKey === '/contact' ? 'brand' : ''}>Contact Us</NavDropdown.Item>
