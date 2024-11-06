@@ -10,44 +10,37 @@ function Logout() {
 
     useEffect(() => {
         const performLogout = async () => {
-            // Retrieve token from local storage
             const token = localStorage.getItem('access_token');
-
-            // If token exists, make a logout request to the backend
             if (token) {
                 try {
                     const response = await fetch('http://127.0.0.1:5000/api/logout', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
+                            'Authorization': `Bearer ${token}`,
                         },
                     });
+    
                     const result = await response.json();
-
+                    setMessage(result.message || "You have been logged out.");
+    
                     if (response.ok) {
-                        setMessage(result.message || "You have been logged out.");
-                    } 
-                    // else {
-                    //     setMessage(result.message || "Failed to log out.");
-                    // }
+                        // Ensure token removal after logout success
+                        localStorage.removeItem('access_token');
+                    }
                 } catch (error) {
                     setMessage("An error occurred while logging out.");
                 }
             } else {
                 setMessage("No active session found.");
             }
-
-            // Clear token from local storage
-            localStorage.removeItem('access_token');
-
-            // Hide the alert and navigate to the sign-in page after a delay
+    
             setTimeout(() => {
                 setShowAlert(false);
                 navigate('/');
             }, 2000); // Redirect after 2 seconds
         };
-
+    
         performLogout();
     }, [navigate]);
 

@@ -28,7 +28,7 @@ function Register() {
                 // Delay navigation to the home page by 2 seconds
                 setTimeout(() => {
                     setShowAlert(false); // Hide the alert before redirecting
-                    navigate('/sign-in'); // Redirect to the home page
+                    navigate('/'); // Redirect to the home page
                 }, 2000);
             } else {
                 setMessage(result.message || 'Error registering user');

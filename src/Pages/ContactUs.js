@@ -26,13 +26,16 @@ const ContactForm = () => {
   };
 
   const handleSubmit = async (e) => {
+    const token = localStorage.getItem("access_token")
+
     e.preventDefault();
 
     try {
       const response = await fetch('http://localhost:5000/api/contact', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(formData)
       });
