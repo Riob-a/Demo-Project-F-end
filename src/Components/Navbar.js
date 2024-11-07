@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, Button, Image, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Container, Image, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import logo from '../Img/pointed fingure.gif';
 import "./Components.css";
-import WOW from "wowjs";
 
 function BasicExample() {
   // State to track the active link
@@ -27,7 +26,7 @@ function BasicExample() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="brand" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto" activeKey={activeKey} onSelect={(selectedKey) => setActiveKey(selectedKey)}>
-            <Nav.Link href="/home" className={`brand ${activeKey === '/home' ? 'active' : ''}`}>Home |</Nav.Link>
+            <Nav.Link href="/home" className={`brand ${activeKey === '/home' ? 'active' : ''}`}>Home | </Nav.Link>
             <Nav.Link href="/reference" className={`brand ${activeKey === '/reference' ? 'active' : ''}`}>Reference | </Nav.Link>
             <Nav.Link href="/artwork" className={`brand ${activeKey === '/artwork' ? 'active' : ''}`}>ARt | </Nav.Link>
             <Nav.Link href="/register" className={`brand ${activeKey === '/register' ? 'active' : ''}`}>Register |</Nav.Link>

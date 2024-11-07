@@ -2,17 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Londrina+Sketch&display=swap');
 
-/* .sixtyfour-convergence-header {
-  font-family: "Sixtyfour Convergence", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-variation-settings:
-    "BLED" 0,
-    "SCAN" 0,
-    "XELA" 0,
-    "YELA" 0;
-} */
 .Navbar-header {
   font-family: "Londrina Sketch", sans-serif;
   font-weight: 400;
@@ -22,6 +11,10 @@
 }
 .brand{
     color:#547562 ;
+}
+.navbar-nav {
+  display: flex;
+  gap: 10px; /* Adjust this value to increase/decrease spacing */
 }
 .navbar .nav-link.active {
     /* text-decoration: underline; */
@@ -65,11 +58,24 @@
 .collapse {
   transition: max-height 0.5s ease-in-out;
   max-height: 0;
-  /* overflow: hidden; */
+  /* overflow: auto; */
 }
 
 .collapse.show {
   max-height: 500px; /* Adjust depending on the content size */
+}
+.navbar-collapse {
+  padding-left: 20px; /* Adjust this value to the desired distance */
+}
+
+/* For extra spacing in collapsed navbar for smaller screens */
+@media (max-width: 768px) {
+  .navbar-collapse {
+    margin-left: 20px; /* This will add space from the left edge */
+  }
+  .navbar-nav {
+    padding-left: 10px; /* Optional: Add space to the left side of nav links */
+  }
 }
 
 
