@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Container, Row, Form, Button, Card, Col, Accordion } from "react-bootstrap";
 import { motion } from "framer-motion";
 import WOW from "wowjs";
 import "./ARt.css";
+import { FaCircleArrowUp } from "react-icons/fa6";
 
 function Artwork() {
   const [formData, setFormData] = useState({
@@ -15,6 +16,15 @@ function Artwork() {
 
   const [animatedArtworks, setAnimatedArtworks] = useState([]);
   const [staticArtworks, setStaticArtworks] = useState([]);
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
+
+  // Use useCallback to memoize the fetchArtworks function
+  const fetchArtworks = useCallback(async (style) => {
+    const data = await fetchData(`http://127.0.0.1:5000/api/artworks/${style}`);
+    if (data) {
+      style === "animated" ? setAnimatedArtworks(data) : setStaticArtworks(data);
+    }
+  }, []); // Empty dependency array, as this function does not depend on any external state
 
   useEffect(() => {
     const wowInstance = new WOW.WOW();
@@ -32,9 +42,28 @@ function Artwork() {
         element.scrollIntoView({ behavior: "smooth" });
       }
     }
+    // Scroll up button
+    const handleScroll = () => {
+      setShowScrollToTop(window.scrollY > 200);
+    };
+    window.addEventListener("scroll", handleScroll);
 
     return () => wowInstance.sync();
-  }, []);
+  }, [fetchArtworks]); // Including fetchArtworks in the dependency array to ensure it is up-to-date
+
+  const scrollToTop = () => {
+    const scrollAnimation = () => {
+      const scrollDuration = 250; // Total scroll duration in milliseconds
+      const scrollStep = -window.scrollY / (scrollDuration / 25); // Calculate step size
+  
+      if (window.scrollY !== 0) {
+        window.scrollBy(0, scrollStep);
+        requestAnimationFrame(scrollAnimation);
+      }
+    };
+  
+    requestAnimationFrame(scrollAnimation);
+  };
 
   const fetchData = async (url, options = {}) => {
     const token = localStorage.getItem("access_token");
@@ -49,6 +78,10 @@ function Artwork() {
       });
       if (response.ok) {
         return await response.json();
+      } else if (response.status === 401) {
+        alert("Session expired. Please Sign in again");
+        localStorage.removeItem("access_token");
+        window.location.href = "/";
       } else {
         console.error("Failed to fetch data");
         return null;
@@ -56,13 +89,6 @@ function Artwork() {
     } catch (error) {
       console.error("Error:", error);
       return null;
-    }
-  };
-
-  const fetchArtworks = async (style) => {
-    const data = await fetchData(`http://127.0.0.1:5000/api/artworks/${style}`);
-    if (data) {
-      style === "animated" ? setAnimatedArtworks(data) : setStaticArtworks(data);
     }
   };
 
@@ -120,7 +146,7 @@ function Artwork() {
                     <a
                       href="#animated-artworks"
                       className="unbounded-uniquifier-header wow fadeInLeft"
-                      data-wow-delay=""
+                      data-wow-delay="0"
                       onClick={() => fetchArtworks("animated")}
                     >
                       Animated Artworks
@@ -242,6 +268,10 @@ function Artwork() {
           </section>
         </Row>
       </Container>
+
+      {showScrollToTop && (
+        <Button onClick={scrollToTop} className="scroll-btn"><FaCircleArrowUp /> </Button>
+      )}
     </div>
   );
 }
