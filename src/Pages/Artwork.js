@@ -9,22 +9,20 @@ function Artwork() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    imageUrl: "",
     description: "",
     style: ""
   });
-
+  const [imageFile, setImageFile] = useState(null);  // Add image file state
   const [animatedArtworks, setAnimatedArtworks] = useState([]);
   const [staticArtworks, setStaticArtworks] = useState([]);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
 
-  // Use useCallback to memoize the fetchArtworks function
   const fetchArtworks = useCallback(async (style) => {
     const data = await fetchData(`http://127.0.0.1:5000/api/artworks/${style}`);
     if (data) {
       style === "animated" ? setAnimatedArtworks(data) : setStaticArtworks(data);
     }
-  }, []); // Empty dependency array, as this function does not depend on any external state
+  }, []);
 
   useEffect(() => {
     const wowInstance = new WOW.WOW();
@@ -35,33 +33,24 @@ function Artwork() {
     };
     fetchBothArtworks();
 
-    // Handle URL hash scrolling
-    if (window.location.hash) {
-      const element = document.querySelector(window.location.hash);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-    // Scroll up button
     const handleScroll = () => {
       setShowScrollToTop(window.scrollY > 200);
     };
     window.addEventListener("scroll", handleScroll);
 
     return () => wowInstance.sync();
-  }, [fetchArtworks]); // Including fetchArtworks in the dependency array to ensure it is up-to-date
+  }, [fetchArtworks]);
 
   const scrollToTop = () => {
     const scrollAnimation = () => {
-      const scrollDuration = 250; // Total scroll duration in milliseconds
-      const scrollStep = -window.scrollY / (scrollDuration / 25); // Calculate step size
-  
+      const scrollDuration = 250;
+      const scrollStep = -window.scrollY / (scrollDuration / 25);
+
       if (window.scrollY !== 0) {
         window.scrollBy(0, scrollStep);
         requestAnimationFrame(scrollAnimation);
       }
     };
-  
     requestAnimationFrame(scrollAnimation);
   };
 
@@ -72,7 +61,6 @@ function Artwork() {
         ...options,
         headers: {
           ...options.headers,
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`
         }
       });
@@ -96,14 +84,31 @@ function Artwork() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleFileChange = (e) => {
+    setImageFile(e.target.files[0]);  // Set the image file
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await fetchData("http://127.0.0.1:5000/api/artworks/submit", {
+    
+    // Create a FormData object to send the file along with other data
+    const token = localStorage.getItem("access_token");
+    const data = new FormData();
+    data.append("name", formData.name);
+    data.append("email", formData.email);
+    data.append("style", formData.style);
+    data.append("description", formData.description);
+    if (imageFile) data.append("image", imageFile);  // Add image file if exists
+
+    const response = await fetch("http://127.0.0.1:5000/api/artworks/submit", {
       method: "POST",
-      body: JSON.stringify(formData)
+      body: data,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     });
 
-    if (data) {
+    if (response.ok) {
       alert("Artwork submitted successfully!");
       fetchArtworks(formData.style);
     } else {
@@ -143,31 +148,13 @@ function Artwork() {
               <nav>
                 <ul>
                   <li>
-                    <a
-                      href="#animated-artworks"
-                      className="unbounded-uniquifier-header wow fadeInLeft"
-                      data-wow-delay="0"
-                      onClick={() => fetchArtworks("animated")}
-                    >
-                      Animated Artworks
-                    </a>
+                    <a href="#animated-artworks" className="unbounded-uniquifier-header wow fadeInLeft" data-wow-delay="0"onClick={() => fetchArtworks("animated")}>Animated Artworks</a>
                   </li>
                   <li>
-                    <a
-                      href="#static-artworks"
-                      className="unbounded-uniquifier-header wow fadeInLeft"
-                      data-wow-delay="0.2s"
-                      onClick={() => fetchArtworks("static")}
-                    >
-                      Static Artworks
-                    </a>
+                    <a href="#static-artworks" className="unbounded-uniquifier-header wow fadeInLeft" data-wow-delay="0.2s" onClick={() => fetchArtworks("static")}>Static Artworks</a>
                   </li>
                   <li>
-                    <a href="#add-artwork" className="unbounded-uniquifier-header wow fadeInLeft"
-                       data-wow-delay="0.4s"
-                    >
-                      Submit Artwork
-                    </a>
+                    <a href="#add-artwork" className="unbounded-uniquifier-header wow fadeInLeft" data-wow-delay="0.4s">Submit Artwork</a>
                   </li>
                 </ul>
               </nav>
@@ -201,8 +188,8 @@ function Artwork() {
                 <Card.Body className="p-5">
                   <Card.Title className="contact-card mb-4 unbounded-uniquifier-h1">Submit Your Artwork</Card.Title>
                   <Form onSubmit={handleSubmit}>
-                    <Form.Group controlId="name" className="mb-3">
-                      <Form.Label className="unbounded-uniquifier-h1">Name</Form.Label>
+                    <Form.Group controlId="name">
+                      <Form.Label className="unbounded-uniquifier-header">Name</Form.Label>
                       <Form.Control
                         type="text"
                         name="name"
@@ -222,14 +209,12 @@ function Artwork() {
                       />
                     </Form.Group>
 
-                    <Form.Group controlId="imageUrl">
-                      <Form.Label className="unbounded-uniquifier-header">Image URL</Form.Label>
+                    <Form.Group controlId="image">
+                      <Form.Label className="unbounded-uniquifier-header">Upload Image</Form.Label>
                       <Form.Control
-                        type="url"
-                        name="imageUrl"
-                        placeholder="Enter image URL"
-                        value={formData.imageUrl}
-                        onChange={handleChange}
+                        type="file"
+                        name="image"
+                        onChange={handleFileChange}
                       />
                     </Form.Group>
 
