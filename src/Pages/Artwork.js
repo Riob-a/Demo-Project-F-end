@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { Container, Row, Form, Button, Card, Col, Accordion } from "react-bootstrap";
+import { Container, Row, Form, Button, Card, Col, Accordion, Spinner, ProgressBar } from "react-bootstrap";
 import { motion } from "framer-motion";
 import WOW from "wowjs";
 import "./ARt.css";
 import { FaCircleArrowUp } from "react-icons/fa6";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 function Artwork() {
   const [formData, setFormData] = useState({
@@ -17,6 +18,8 @@ function Artwork() {
   const [animatedArtworks, setAnimatedArtworks] = useState([]);
   const [staticArtworks, setStaticArtworks] = useState([]);
   const [submissionStatus, setSubmissionStatus] = useState(null); // New state for submission status
+  const [isSubmitting, setIsSubmitting] = useState(false); // Track submission state
+  const [uploadProgress, setUploadProgress] = useState(0);  // Track upload progress (for progress bar)
   const [showScrollToTop, setShowScrollToTop] = useState(false);
   const [staticLoaded, setStaticLoaded] = useState(false);
   const staticRef = useRef(null); // Ref for the static artworks section
@@ -124,7 +127,8 @@ function Artwork() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmissionStatus("Submitting..."); // Set status to "Submitting..."
+    setIsSubmitting(true); // Set to true to show the spinner
+    setUploadProgress(0);  // Reset progress bar to 0
     
     const token = localStorage.getItem("access_token");
     const data = new FormData();
@@ -134,29 +138,39 @@ function Artwork() {
     data.append("description", formData.description);
     if (imageFile) data.append("image", imageFile);
 
-    const response = await fetch("http://127.0.0.1:5000/api/artworks/submit", {
-      method: "POST",
-      body: data,
+    try {
+    const response = await axios.post("http://127.0.0.1:5000/api/artworks/submit", data, {
       headers: {
         Authorization: `Bearer ${token}`
+      },
+      onUploadProgress: (progressEvent) => {
+        const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+        setUploadProgress(percent); // Update progress state
       }
     });
 
-    if (response.ok) {
+    if (response.status === 201) {
       setSubmissionStatus("Artwork submitted successfully!");
-      // Resets form
-      setTimeout(() => {
-        setFormData({ name: "", email: "", description: "", style: "" });
-        setImageFile(null);
-        setSubmissionStatus(null); // Reset status after a short delay
-      }, 1000);
+      setFormData({ name: "", email: "", description: "", style: "" });
+      setImageFile(null);
+      setTimeout(()=>{
+        setSubmissionStatus(null);
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        setTimeout(() => window.location.reload(), 500);
+      }, 3000);      
 
       fetchArtworks(formData.style);
 
-      window.scrollTo({ top : 0, behaviour: "smooth" });
     } else {
       setSubmissionStatus("Failed to submit artwork. Please try again.");
     }
+  }catch (error) {
+    console.error("Error:", error);
+    setSubmissionStatus("Error occurred. Please try again.")
+  }finally {
+    setIsSubmitting(false);
+  }
   };
 
   const renderArtworkGrid = (artworks) => (
@@ -286,8 +300,16 @@ function Artwork() {
                       />
                     </Form.Group>
 
-                    <Button type="submit" className="mt-3 unbounded-uniquifier-header">Submit Artwork</Button>
+                    <Button type="submit" className="mt-3 unbounded-uniquifier-header" disabled={isSubmitting}>Submit Artwork</Button>
                   </Form>
+                  {isSubmitting && (
+                    <div className="d-flex justify-content-center mt-3">
+                       {/* <Spinner animation="border" variant="primary" /> */}
+                       <ProgressBar now={uploadProgress} label={`${uploadProgress}%`} />
+                       {/* <span className="ml-2">Submitting...</span> */}
+                    </div>
+                  )}
+
                   {submissionStatus && ( <div className="mt-3">{submissionStatus}</div> )}
                 </Card.Body>
               </Card>
