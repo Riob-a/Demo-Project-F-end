@@ -20,7 +20,7 @@ function About() {
             <p className="lead wow fadeInUp unbounded-uniquifier-p" data-wow-delay="1.2s">
               A website dedicated to display the artworks of one Derrick Ongwae
             </p>
-            <motion.a className="btn welcome-button  text-dark wow fadeInUp" href="/artwork" role="button" whileHover={{ scale: 1.05, color: "#FF0000" }} whileTap={{ scale: 0.95 }} style={{boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }}>
+            <motion.a className="btn btn-primary  unbounded-uniquifier-header wow fadeInUp" href="/artwork" role="button" whileHover={{ scale: 1.05, color: "#FF0000" }} whileTap={{ scale: 0.95 }} style={{boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }}>
               ARt <FaArrowRight />
             </motion.a>
           </Col>
@@ -30,7 +30,7 @@ function About() {
               src="https://i.pinimg.com/564x/10/9a/dd/109addc2397a3257c90b61acccb7a273.jpg"
               alt="..."
               fluid
-              className="wow animate__animated animate__fadeInUp"
+              className="wow fadeInUp"
               data-wow-delay="0.1s"
             />
           </Col>

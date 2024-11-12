@@ -7,21 +7,31 @@ import WOW from "wowjs";
 import "animate.css";
 import "./HomePage.css";
 
-const MemoizedCard = React.memo(({ section, href , imgSrc, title, text, wowDelay, navigateToSection }) => (
+// Centralized image URLs
+const imageUrls = {
+  animatedArt: "https://i.pinimg.com/originals/a3/7e/48/a37e48e6e5e0edb1b2ffbee6a73fbd59.gif",
+  staticArt: "https://i.pinimg.com/564x/10/9a/dd/109addc2397a3257c90b61acccb7a273.jpg",
+  submitArt: "https://i.pinimg.com/originals/db/5a/54/db5a547a554cfaebfcb48aa1e8462918.gif",
+  museumImage: "https://i.pinimg.com/564x/10/9a/dd/109addc2397a3257c90b61acccb7a273.jpg",
+};
+
+// Lazy-loaded Image component
+const LazyImage = ({ src, alt, rounded = false }) => (
+  <Image src={src} alt={alt} fluid rounded={rounded} loading="lazy" />
+);
+
+// Reusable card component without unnecessary memoization
+const CardComponent = ({ section, imgSrc, title, text, wowDelay, navigateToSection }) => (
   <motion.div
-    className="wow fadeInUp"
+    className="wow fadeInUp card-hover"
     data-wow-duration="1s"
     data-wow-delay={wowDelay}
     data-bs-theme="dark"
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
     onClick={() => navigateToSection(section)}
-    style={{ cursor: "pointer" }}
   >
-    <Card
-      className="mx-auto"
-      style={{ width: "21rem", boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }}
-    >
+    <Card className="mx-auto" style={{ width: "21rem" ,  boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }}>
       <Card.Img variant="top" src={imgSrc} loading="lazy" />
       <Card.Body>
         <Card.Title className="unbounded-uniquifier-header">{title}</Card.Title>
@@ -29,21 +39,19 @@ const MemoizedCard = React.memo(({ section, href , imgSrc, title, text, wowDelay
       </Card.Body>
       <ListGroup variant="flush">
         <ListGroupItem className="unbounded-uniquifier-header">
-          <Card.Link href={href}>{title} <FaArrowRight /></Card.Link>
+          <Card.Link href={`#${section}`}>{title} <FaArrowRight /></Card.Link>
         </ListGroupItem>
       </ListGroup>
     </Card>
   </motion.div>
-));
-
+);
 function HomePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const wowInstance = new WOW.WOW();
-    wowInstance.init();
-    return () => wowInstance.sync();
-  }, []);
+      const wowInstance = new WOW.WOW();
+      wowInstance.init();
+    }, []);
 
   const navigateToSection = (section) => {
     navigate(`/artwork#${section}`);
@@ -53,9 +61,9 @@ function HomePage() {
     <div>
       {/* Header Section */}
       <header className="header-section bg-dark text-white text-center py-4 wow fadeInDown" data-wow-duration="1.5s">
-        <h1 className="display-4 unbounded-uniquifier-h1">DERRICKS CREATION DEMO</h1>
+        <h1 className="display-4">DERRICKS CREATION DEMO</h1>
         <p>Discover the world of art, history, and culture</p>
-        <a className="btn welcome-button btn-dark text-dark unbounded-uniquifier-h1" href="/reference" role="button">
+        <a className="btn welcome-button btn-dark  unbounded-uniquifier-h1" href="/reference" role="button">
           Learn More <FaArrowRight />
         </a>
       </header>
@@ -72,9 +80,9 @@ function HomePage() {
           </Row>
           <Row className="gy-5 text-center justify-content-center">
             <Col>
-              <MemoizedCard
+              <CardComponent
                 section="animated-artworks"
-                imgSrc="https://i.pinimg.com/originals/a3/7e/48/a37e48e6e5e0edb1b2ffbee6a73fbd59.gif"
+                imgSrc={imageUrls.animatedArt}
                 title="Animated"
                 text="See more animated art by tapping the card."
                 wowDelay="0s"
@@ -82,9 +90,9 @@ function HomePage() {
               />
             </Col>
             <Col>
-              <MemoizedCard
+              <CardComponent
                 section="static-artworks"
-                imgSrc="https://i.pinimg.com/564x/10/9a/dd/109addc2397a3257c90b61acccb7a273.jpg"
+                imgSrc={imageUrls.staticArt}
                 title="Static"
                 text="Explore our static art collection by tapping the card."
                 wowDelay="0.2s"
@@ -92,9 +100,9 @@ function HomePage() {
               />
             </Col>
             <Col>
-              <MemoizedCard
+              <CardComponent
                 section="add-artwork"
-                imgSrc="https://i.pinimg.com/originals/db/5a/54/db5a547a554cfaebfcb48aa1e8462918.gif"
+                imgSrc={imageUrls.submitArt}
                 title="Submit"
                 text="Submit your own artwork by tapping the card."
                 wowDelay="0.4s"
@@ -118,19 +126,13 @@ function HomePage() {
               <Button
                 variant="dark"
                 href="/about"
-                className="welcome-button m-5 text-dark unbounded-uniquifier-h1"
-                style={{ boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }}
+                className="welcome-button m-5  unbounded-uniquifier-h1"
               >
                 More About <FaArrowRight />
               </Button>
             </Col>
             <Col>
-              <Image
-                src="https://i.pinimg.com/564x/10/9a/dd/109addc2397a3257c90b61acccb7a273.jpg"
-                alt="Museum"
-                fluid
-                loading="lazy"
-              />
+              <LazyImage src={imageUrls.museumImage} alt="Museum" />
             </Col>
           </Row>
         </Container>
@@ -148,7 +150,7 @@ function HomePage() {
             { src: "https://i.pinimg.com/564x/12/c2/25/12c225b47a96bf8b2fdb62811caff5a3.jpg", alt: "911", caption: "911" }
           ].map((item, idx) => (
               <Col key={idx} md={3}>
-                <Image src={item.src} alt={item.alt} fluid rounded loading="lazy" />
+                 <LazyImage src={item.src} alt={item.alt} rounded />
                 <p className="unbounded-uniquifier-h1">{item.caption}</p>
               </Col>
           ))}
