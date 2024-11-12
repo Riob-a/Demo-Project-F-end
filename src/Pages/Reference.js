@@ -1,157 +1,146 @@
-import React from "react";
+import React, { useEffect, lazy, Suspense } from "react";
 import { Container, Row, Col, Card, Button, Image, ListGroup, ListGroupItem } from "react-bootstrap";
-import "./HomePage.css"
-import { FaArrowAltCircleDown, FaArrowAltCircleRight, FaArrowRight } from "react-icons/fa";
-import "animate.css";
+import "./HomePage.css";
+import { FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import { useEffect } from "react";
+import WOW from "wowjs";
+import "animate.css";
 
-
+const MemoizedCard = React.memo(({ href, imgSrc, title, text, wowDelay }) => (
+  <motion.div
+    className={`wow fadeInUp`}
+    data-wow-duration="1s"
+    data-wow-delay={wowDelay}
+     data-bs-theme="dark"
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+  >
+    <Card
+      className="mx-auto"
+      style={{ width: "21rem", boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }}
+      onClick={() => window.location.href = href}
+    >
+      <Card.Img variant="top" src={imgSrc} loading="lazy" />
+      <Card.Body>
+        <Card.Title className="unbounded-uniquifier-header">{title}</Card.Title>
+        <Card.Text className="unbounded-uniquifier-p2 text-muted">{text}</Card.Text>
+      </Card.Body>
+      <ListGroup variant="flush">
+        <ListGroupItem className="unbounded-uniquifier-header">
+          <Card.Link href={href}>{title} <FaArrowRight /></Card.Link>
+        </ListGroupItem>
+      </ListGroup>
+    </Card>
+  </motion.div>
+));
 
 function HomePage() {
-  const { ref, inView } = useInView({
-    triggerTwo: true,   // Animation triggers only once when in view
-    threshold: 0.1       // Trigger when 10% of the section is visible
-  });
-  
+  useEffect(() => {
+    const wowInstance = new WOW.WOW();
+    wowInstance.init();
+    return () => wowInstance.sync();
+  }, []);
+
   return (
     <div>
       {/* Header Section */}
-      <motion.header className="header-section bg-dark text-white text-center py-4"
-      initial={{ opacity: 0, y:-50 }}
-      animate={{ opacity: 1, y: 0}}
-      transition={{ duration: 1.5}}>
-        <h1 style={{textShadow: "0 0px 15px rgba(0, 0, 0, 0.5)"}}>Art and History Museum Ozeum</h1>
-        <p className="" style={{textShadow: "0 0px 15px rgba(0, 0, 0, 0.5)"}}>Discover the world of art, history, and culture</p>
-        <motion.a className="btn welcome-button btn-dark text-dark" href="/reference" role="button" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>Learn More <FaArrowAltCircleRight/> </motion.a>
-      </motion.header>
+      <header className="header-section bg-dark text-white text-center py-4 wow fadeInDown" data-wow-duration="1.5s">
+        <h1 className="display-4 unbounded-uniquifier-h1">DERRICKS CREATION DEMO</h1>
+        <p>Discover the world of art, history, and culture</p>
+        <a className="btn welcome-button btn-dark text-dark unbounded-uniquifier-h1" href="/reference" role="button">
+          Learn More <FaArrowRight />
+        </a>
+      </header>
 
       {/* Art Category Sections */}
       <section className="py-5 mt-5 mb-5">
         <Container>
+          <Row className="mb-4 text-center">
+            <h1 className="unbounded-uniquifier-header wow fadeInLeft">Navigate</h1>
+            <hr />
+            <p className="unbounded-uniquifier-header wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s">
+              Click the cards to go to the specific art section
+            </p>
+          </Row>
           <Row className="gy-5 text-center justify-content-center">
             <Col>
-              {/* <h3></h3> */}
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Card className="mx-auto" style={{ width: "21rem", boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }} border="" bg='' data-bs-theme="light">
-                <Card.Img variant="top" src="https://i.pinimg.com/564x/c2/ce/8c/c2ce8c29b59e0087d10c92a7fe16e075.jpg"/>
-                <ListGroup variant="flush">
-                  <ListGroupItem>item 1</ListGroupItem>
-                  <ListGroupItem>item 1</ListGroupItem>
-                  <ListGroupItem>item 1</ListGroupItem>
-                </ListGroup>
-              </Card>
-              </motion.div>
+              <MemoizedCard
+                href="/artwork#animated-artworks"
+                imgSrc="https://i.pinimg.com/originals/a3/7e/48/a37e48e6e5e0edb1b2ffbee6a73fbd59.gif"
+                title="Animated"
+                text="See more animated art by tapping the card."
+                wowDelay="0s"
+              />
             </Col>
-
             <Col>
-              {/* <h3></h3> */}
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Card className="mx-auto" style={{ width: "21rem", boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }} border="" bg='' data-bs-theme="light">
-                <Card.Img variant="top" src="https://i.pinimg.com/564x/90/ed/8c/90ed8ca7e9a78888e49dc591131cbb7c.jpg"/>
-                <ListGroup variant="flush">
-                  <ListGroupItem>iteme 1</ListGroupItem>
-                  <ListGroupItem>iteme 1</ListGroupItem>
-                  <ListGroupItem>iteme 1</ListGroupItem>
-                </ListGroup>
-              </Card>
-              </motion.div>
+              <MemoizedCard
+                href="/artwork#static-artworks"
+                imgSrc="https://i.pinimg.com/564x/10/9a/dd/109addc2397a3257c90b61acccb7a273.jpg"
+                title="Static"
+                text="Explore our static art collection by tapping the card."
+                wowDelay="0.2s"
+              />
             </Col>
-
             <Col>
-              {/* <h3></h3> */}
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Card className="mx-auto" style={{ width: "21rem", boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }} border="" bg='' data-bs-theme="light">
-                <Card.Img variant="top" src="https://i.pinimg.com/564x/10/9a/dd/109addc2397a3257c90b61acccb7a273.jpg"/>
-                <ListGroup variant="flush">
-                  <ListGroupItem>item 1</ListGroupItem>
-                  <ListGroupItem>item 1</ListGroupItem>
-                  <ListGroupItem>item 1</ListGroupItem>
-                </ListGroup>
-              </Card>
-              </motion.div>
+              <MemoizedCard
+                href="/artwork#add-artwork"
+                imgSrc="https://i.pinimg.com/originals/db/5a/54/db5a547a554cfaebfcb48aa1e8462918.gif"
+                title="Submit"
+                text="Submit your own artwork by tapping the card."
+                wowDelay="0.4s"
+              />
             </Col>
           </Row>
         </Container>
       </section>
 
       {/* Welcome Section */}
-      <motion.section 
-      ref={ref}
-      className=" welcome-section py-5 text-center bg-dark text-white"
-      initial={{ opacity: 0, y: -50 }}
-      animate={inView ? { opacity: 1, y: 0} : { opacity: 0, y: 50}}
-      transition={{ duration: 1.5}}
-      >
+      <section className="welcome-section py-5 text-center bg-dark text-white wow fadeInUp" data-wow-duration="1.5s">
         <Container>
           <Row>
             <Col>
-              <h2>Welcome To The Art And History Museum Ozeum</h2>
+              <h2 className="unbounded-uniquifier-header">Welcome To The Art And History Museum Ozeum</h2>
               <hr />
-              <p>
-                Not only the outstanding quality of the collection, but also our high
-                level of activity in the areas of research, exhibitions, and education
-                guarantee the Ozeum's prominent position in the international museum
-                landscape.
+              <p className="unbounded-uniquifier-p1">
+                Our high-quality collection and active research, exhibitions, and education keep us at the forefront of the museum landscape.
               </p>
-              <Button variant="dark" href="#" className=" welcome-button m-5 text-dark">
-                More About <FaArrowRight/>
+              <Button
+                variant="dark"
+                href="/about"
+                className="welcome-button m-5 text-dark unbounded-uniquifier-h1"
+                style={{ boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }}
+              >
+                More About <FaArrowRight />
               </Button>
             </Col>
-
             <Col>
               <Image
                 src="https://i.pinimg.com/564x/10/9a/dd/109addc2397a3257c90b61acccb7a273.jpg"
-                alt="..."
+                alt="Museum"
                 fluid
+                loading="lazy"
               />
             </Col>
           </Row>
         </Container>
-      </motion.section>
+      </section>
 
       {/* Collection Section */}
-      <section className="container overflow-hidden py-5">
-        <h3 className="text-center">Collection</h3>
+      <section className="container overflow-hidden py-5 wow fadeInUp" data-wow-duration="1s">
+        <h3 className="text-center unbounded-uniquifier-h1">Collection</h3>
         <hr />
         <Row>
-          <Col md={3}>
-            <Image
-              src="https://art.rtistiq.com/en-us/_next/image?url=https%3A%2F%2Fd28jbe41jq1wak.cloudfront.net%2FBlogsImages%2FContemporaryArt_Compressed_638218930354738719.jpg&w=1920&q=75"
-              alt="Madonna with Saints"
-              fluid
-              rounded
-            />
-            <p>Madonna with Saints</p>
-          </Col>
-          <Col md={3}>
-            <Image
-              src="https://art.rtistiq.com/en-us/_next/image?url=https%3A%2F%2Fd28jbe41jq1wak.cloudfront.net%2FBlogsImages%2FContemporaryArt_Compressed_638218930354738719.jpg&w=1920&q=75"
-              alt="The Adoration of the Magi"
-              fluid
-              rounded
-            />
-            <p>The Adoration of the Magi</p>
-          </Col>
-          <Col md={3}>
-            <Image
-              src="https://art.rtistiq.com/en-us/_next/image?url=https%3A%2F%2Fd28jbe41jq1wak.cloudfront.net%2FBlogsImages%2FContemporaryArt_Compressed_638218930354738719.jpg&w=1920&q=75"
-              alt="Pallas and the Centaur"
-              fluid
-              rounded
-            />
-            <p>Pallas and the Centaur</p>
-          </Col>
-          <Col md={3}>
-            <Image
-              src="https://art.rtistiq.com/en-us/_next/image?url=https%3A%2F%2Fd28jbe41jq1wak.cloudfront.net%2FBlogsImages%2FContemporaryArt_Compressed_638218930354738719.jpg&w=1920&q=75"
-              alt="Annunciation"
-              fluid
-              rounded
-            />
-            <p>Annunciation</p>
-          </Col>
+          {[
+            { src: "https://i.pinimg.com/564x/ab/68/86/ab68861f180d341161e5e69082b9d974.jpg", alt: "Smoking kills", caption: "Smoking kills" },
+            { src: "https://i.pinimg.com/736x/6b/37/9b/6b379bbc075111aa52bf6f06f1bfc0ed.jpg", alt: "Halftone", caption: "Halftone" },
+            { src: "https://i.pinimg.com/564x/9c/fe/01/9cfe017fd0ad40807f79fead11415e3d.jpg", alt: "Speedster", caption: "Speedster" },
+            { src: "https://i.pinimg.com/564x/12/c2/25/12c225b47a96bf8b2fdb62811caff5a3.jpg", alt: "911", caption: "911" }
+          ].map((item, idx) => (
+            <Col key={idx} md={3}>
+              <Image src={item.src} alt={item.alt} fluid rounded loading="lazy" />
+              <p className="unbounded-uniquifier-h1">{item.caption}</p>
+            </Col>
+          ))}
         </Row>
       </section>
     </div>

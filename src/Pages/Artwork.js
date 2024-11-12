@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Container, Row, Form, Button, Card, Col, Accordion } from "react-bootstrap";
 import { motion } from "framer-motion";
 import WOW from "wowjs";
 import "./ARt.css";
 import { FaCircleArrowUp } from "react-icons/fa6";
+import { useLocation } from "react-router-dom";
 
 function Artwork() {
   const [formData, setFormData] = useState({
@@ -12,10 +13,15 @@ function Artwork() {
     description: "",
     style: ""
   });
-  const [imageFile, setImageFile] = useState(null);  // Add image file state
+  const [imageFile, setImageFile] = useState(null);
   const [animatedArtworks, setAnimatedArtworks] = useState([]);
   const [staticArtworks, setStaticArtworks] = useState([]);
+  const [submissionStatus, setSubmissionStatus] = useState(null); // New state for submission status
   const [showScrollToTop, setShowScrollToTop] = useState(false);
+  const [staticLoaded, setStaticLoaded] = useState(false);
+  const staticRef = useRef(null); // Ref for the static artworks section
+
+  const location = useLocation();
 
   const fetchArtworks = useCallback(async (style) => {
     const data = await fetchData(`http://127.0.0.1:5000/api/artworks/${style}`);
@@ -28,18 +34,46 @@ function Artwork() {
     const wowInstance = new WOW.WOW();
     wowInstance.init();
 
-    const fetchBothArtworks = async () => {
-      await Promise.all([fetchArtworks("animated"), fetchArtworks("static")]);
-    };
-    fetchBothArtworks();
+    // Fetch animated artworks on load
+    fetchArtworks("animated");
 
+    // Scroll event for scroll-to-top button
     const handleScroll = () => {
       setShowScrollToTop(window.scrollY > 200);
     };
     window.addEventListener("scroll", handleScroll);
 
-    return () => wowInstance.sync();
-  }, [fetchArtworks]);
+    // IntersectionObserver to fetch static artworks when section is in view
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !staticLoaded) {
+            fetchArtworks("static");
+            setStaticLoaded(true); // Ensure it only loads once
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const currentStaticRef = staticRef.current; // Copy ref to local variable
+    if (currentStaticRef) observer.observe(currentStaticRef);
+
+     // Scroll to section if hash exists in URL
+    if (location.hash) {
+      const sectionId = location.hash.replace('#', '');
+      const sectionElement = document.getElementById(sectionId);
+      if (sectionElement) {
+        sectionElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    return () => {
+      wowInstance.sync();
+      window.removeEventListener("scroll", handleScroll);
+      if (currentStaticRef) observer.unobserve(currentStaticRef);
+    };
+  }, [fetchArtworks, location.hash, staticLoaded]);
 
   const scrollToTop = () => {
     const scrollAnimation = () => {
@@ -85,20 +119,20 @@ function Artwork() {
   };
 
   const handleFileChange = (e) => {
-    setImageFile(e.target.files[0]);  // Set the image file
+    setImageFile(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmissionStatus("Submitting..."); // Set status to "Submitting..."
     
-    // Create a FormData object to send the file along with other data
     const token = localStorage.getItem("access_token");
     const data = new FormData();
     data.append("name", formData.name);
     data.append("email", formData.email);
     data.append("style", formData.style);
     data.append("description", formData.description);
-    if (imageFile) data.append("image", imageFile);  // Add image file if exists
+    if (imageFile) data.append("image", imageFile);
 
     const response = await fetch("http://127.0.0.1:5000/api/artworks/submit", {
       method: "POST",
@@ -109,10 +143,19 @@ function Artwork() {
     });
 
     if (response.ok) {
-      alert("Artwork submitted successfully!");
+      setSubmissionStatus("Artwork submitted successfully!");
+      // Resets form
+      setTimeout(() => {
+        setFormData({ name: "", email: "", description: "", style: "" });
+        setImageFile(null);
+        setSubmissionStatus(null); // Reset status after a short delay
+      }, 1000);
+
       fetchArtworks(formData.style);
+
+      window.scrollTo({ top : 0, behaviour: "smooth" });
     } else {
-      alert("Failed to submit artwork. Please try again.");
+      setSubmissionStatus("Failed to submit artwork. Please try again.");
     }
   };
 
@@ -148,7 +191,7 @@ function Artwork() {
               <nav>
                 <ul>
                   <li>
-                    <a href="#animated-artworks" className="unbounded-uniquifier-header wow fadeInLeft" data-wow-delay="0"onClick={() => fetchArtworks("animated")}>Animated Artworks</a>
+                    <a href="#animated-artworks" className="unbounded-uniquifier-header wow fadeInLeft" data-wow-delay="0" onClick={() => fetchArtworks("animated")}>Animated Artworks</a>
                   </li>
                   <li>
                     <a href="#static-artworks" className="unbounded-uniquifier-header wow fadeInLeft" data-wow-delay="0.2s" onClick={() => fetchArtworks("static")}>Static Artworks</a>
@@ -172,7 +215,7 @@ function Artwork() {
         </Row>
 
         <Row className="mb-5">
-          <section id="static-artworks" className="wow fadeInLeft">
+          <section id="static-artworks" className="wow fadeInLeft" ref={staticRef}>
             <h1 className="unbounded-uniquifier-h1">Static Artworks</h1>
             <hr />
             {renderArtworkGrid(staticArtworks)}
@@ -219,13 +262,13 @@ function Artwork() {
                     </Form.Group>
 
                     <Form.Group controlId="style">
-                      <Form.Label className="unbounded-uniquifier-header">Style</Form.Label>
+                      <Form.Label className="unbounded-uniquifier-header">Artwork Style</Form.Label>
                       <Form.Select
                         name="style"
                         value={formData.style}
                         onChange={handleChange}
                       >
-                        <option>Select style</option>
+                        <option value="">Select a style</option>
                         <option value="animated">Animated</option>
                         <option value="static">Static</option>
                       </Form.Select>
@@ -236,17 +279,16 @@ function Artwork() {
                       <Form.Control
                         as="textarea"
                         name="description"
-                        placeholder="Add a description"
+                        rows={3}
+                        placeholder="Enter description"
                         value={formData.description}
                         onChange={handleChange}
-                        rows={3}
                       />
                     </Form.Group>
 
-                    <Button variant="primary" type="submit" className="mt-3 unbounded-uniquifier-header">
-                      Submit Artwork
-                    </Button>
+                    <Button type="submit" className="mt-3 unbounded-uniquifier-header">Submit Artwork</Button>
                   </Form>
+                  {submissionStatus && ( <div className="mt-3">{submissionStatus}</div> )}
                 </Card.Body>
               </Card>
             </Col>
@@ -255,7 +297,11 @@ function Artwork() {
       </Container>
 
       {showScrollToTop && (
-        <Button onClick={scrollToTop} className="scroll-btn"><FaCircleArrowUp /> </Button>
+        <FaCircleArrowUp
+          className="scroll-to-top"
+          onClick={scrollToTop}
+          style={{ fontSize: "2rem", position: "fixed", bottom: "20px", right: "20px", cursor: "pointer" }}
+        />
       )}
     </div>
   );

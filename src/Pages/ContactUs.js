@@ -60,7 +60,7 @@ const ContactForm = () => {
       <div className="header-contact text-center mb-4 wow fadeInDown" data-wow-duration="0.8s" style={{ boxShadow: "0 4px 15px rgba(0, 0, 0, 0.5)" }}>
         <h1 className="display-4 unbounded-uniquifier-h1 text-white">Get in Touch</h1>
         <p className="lead unbounded-uniquifier-header text-white">
-          <a href='/' style={{ color: "#EA8E1D" }}>HomePage</a>
+          <a href='/home' style={{ color: "#EA8E1D" }}>HomePage</a>
         </p>
       </div>
 
