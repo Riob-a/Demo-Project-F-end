@@ -1,4 +1,3 @@
-// SignIn.js
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Card, Col, Container, Row, Alert } from 'react-bootstrap';
 import WOW from "wowjs";
@@ -22,16 +21,22 @@ function SignIn() {
             });
             const result = await response.json();
             if (response.ok) {
-                // Store token in local storage
+                // Store token and user role in local storage
                 localStorage.setItem('access_token', result.access_token);
+                localStorage.setItem('user_role', result.user.role);  // Storing role
+                
                 setMessage('Sign-in successful');
                 setShowAlert(true);
                 setIsError(false); // Login success, no error
 
-                // Delay navigation to the home page by 2 seconds
+                // Delay navigation to the appropriate page by 2 seconds
                 setTimeout(() => {
                     setShowAlert(false); // Hide the alert before redirecting
-                    navigate('/home'); // Redirect to the home page
+                    if (result.user.role === 'admin') {
+                        navigate('/admin-dashboard'); // Redirect admin to the admin dashboard
+                    } else {
+                        navigate('/home'); // Redirect regular user to the home page
+                    }
                 }, 2000);
             } else {
                 setMessage(result.message || 'Error signing in');
