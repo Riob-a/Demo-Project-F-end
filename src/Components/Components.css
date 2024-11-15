@@ -32,6 +32,11 @@
     transition: color 0.3s ease-in-out, transform 0.3s ease-in-out; 
   }
 
+  .navbar .dropdown-menu .dropdown-item.active{
+    color: #EA8E1D;
+    background-color: #547562;
+  }
+
 /* Add smooth transitions for all links */
 .navbar .nav-link {
   transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;

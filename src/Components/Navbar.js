@@ -1,41 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Container, Image, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { NavLink } from 'react-router-dom';
 import logo from '../Img/pointed fingure.gif';
 import "./Components.css";
 
 function BasicExample() {
-  // State to track the active link
-  const [activeKey, setActiveKey] = useState(window.location.pathname);
-
-  // Update active link based on navigation
-  useEffect(() => {
-    const handleLocationChange = () => {
-      setActiveKey(window.location.pathname);
-    };
-    window.addEventListener('popstate', handleLocationChange);
-    return () => window.removeEventListener('popstate', handleLocationChange);
-  }, []);
-
   return (
     <Navbar expand="lg" bg='dark' data-bs-theme="dark" className=''>
       <Container>
-        <Navbar.Brand href="/home" className="Navbar-header">
+        <Navbar.Brand as={NavLink} to="/home" className="Navbar-header">
           <Image roundedCircle alt='logo' src={logo} width="30" height="30" className='d-inline-block align-top' />
           {' '}D3-<b> RRICKS</b>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="brand" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto" activeKey={activeKey} onSelect={(selectedKey) => setActiveKey(selectedKey)}>
-            <Nav.Link href="/home" className={`brand ${activeKey === '/home' ? 'active' : ''}`}>Home | </Nav.Link>
-            <Nav.Link href="/reference" className={`brand ${activeKey === '/reference' ? 'active' : ''}`}>Reference | </Nav.Link>
-            <Nav.Link href="/artwork" className={`brand ${activeKey === '/artwork' ? 'active' : ''}`}>ARt | </Nav.Link>
-            <Nav.Link href="/register" className={`brand ${activeKey === '/register' ? 'active' : ''}`}>Register |</Nav.Link>
-            {/* <Nav.Link href="/" className={`brand ${activeKey === '/' ? 'active' : ''}`}>Sign-in |</Nav.Link> */}
-            <Nav.Link href="/logout" className={`brand ${activeKey === '/logout' ? 'active' : ''}`}>Log Out</Nav.Link>
+          <Nav className="me-auto">
+            <Nav.Link as={NavLink} to="/home" activeClassName="active" className="brand">Home | </Nav.Link>
+            <Nav.Link as={NavLink} to="/reference" activeClassName="active" className="brand">Reference | </Nav.Link>
+            <Nav.Link as={NavLink} to="/artwork" activeClassName="active" className="brand">ARt | </Nav.Link>
+            <Nav.Link as={NavLink} to="/register" activeClassName="active" className="brand">Register |</Nav.Link>
+            {/* <Nav.Link as={NavLink} to="/" className="brand">Sign-in |</Nav.Link> */}
+            <Nav.Link as={NavLink} to="/logout"activeClassName="active"  className="brand">Log Out</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown" className="brand">
-              <NavDropdown.Item href="/artwork" className={activeKey === '/artwork' ? 'brand' : ''}>ARt</NavDropdown.Item>
-              <NavDropdown.Item href="/contact" className={activeKey === '/contact' ? 'brand' : ''}>Contact Us</NavDropdown.Item>
-              <NavDropdown.Item href="/about" className={activeKey === '/about' ? 'brand' : ''}>About</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/artwork" activeClassName="active" className="brand">ARt</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/contact" activeClassName="active" className="brand">Contact Us</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/about" activeClassName="active" className="brand">About</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="https://automated-donation-platform-front-end.vercel.app/">
                 Fund.Girls
