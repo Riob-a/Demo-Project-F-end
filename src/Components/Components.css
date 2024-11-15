@@ -11,6 +11,10 @@
 }
 .brand{
     color:#547562 ;
+    font-family: "Unbounded", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 450;
+    font-style: normal;
 }
 .navbar-nav {
   display: flex;
