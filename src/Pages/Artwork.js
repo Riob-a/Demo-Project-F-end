@@ -178,7 +178,7 @@ function Artwork() {
       {artworks.map((artwork, index) => (
         <motion.div
           className="card wow fadeInLeft"
-          key={index}
+          key={artwork.id}
           data-wow-duration="1s"
           data-wow-delay={`${0.1 * index}s`}
           whileHover={{ scale: 1.05 }}
@@ -246,11 +246,11 @@ function Artwork() {
                   <Card.Title className="contact-card mb-4 unbounded-uniquifier-h1">Submit Your Artwork</Card.Title>
                   <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="name">
-                      <Form.Label className="unbounded-uniquifier-header">Name</Form.Label>
+                      <Form.Label className="unbounded-uniquifier-header">Title</Form.Label>
                       <Form.Control
                         type="text"
                         name="name"
-                        placeholder="Enter your name"
+                        placeholder="Enter your title"
                         value={formData.name}
                         onChange={handleChange}
                       />
