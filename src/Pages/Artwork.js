@@ -27,7 +27,7 @@ function Artwork() {
   const location = useLocation();
 
   const fetchArtworks = useCallback(async (style) => {
-    const data = await fetchData(`http://127.0.0.1:5000/api/artworks/${style}`);
+    const data = await fetchData(`https://demo-project-backend-qrd8.onrender.com/api/artworks/${style}`);
     if (data) {
       style === "animated" ? setAnimatedArtworks(data) : setStaticArtworks(data);
     }
@@ -139,7 +139,7 @@ function Artwork() {
     if (imageFile) data.append("image", imageFile);
 
     try {
-    const response = await axios.post("http://127.0.0.1:5000/api/artworks/submit", data, {
+    const response = await axios.post("https://demo-project-backend-qrd8.onrender.com/api/artworks/submit", data, {
       headers: {
         Authorization: `Bearer ${token}`
       },
