@@ -7,6 +7,28 @@ import { FaCircleArrowUp } from "react-icons/fa6";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 
+const ArtworkCard = ({ artwork, wowDelay }) => (
+  <motion.div
+    className="card-hover"
+    data-wow-duration="1s"
+    data-wow-delay={wowDelay}
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    data-bs-theme="dark"
+  >
+    <Card
+      className="mx-auto wow fadeInLeft"
+      style={{ width: "21rem", boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }}
+    >
+      <Card.Img variant="top" src={artwork.image_url} alt={artwork.name} loading="lazy" />
+      <Card.Body>
+        <Card.Title className="unbounded-uniquifier-header">{artwork.name}</Card.Title>
+        <Card.Text className="unbounded-uniquifier-p2 text-muted">{artwork.description}</Card.Text>
+      </Card.Body>
+    </Card>
+  </motion.div>
+);
+
 function Artwork() {
   const [formData, setFormData] = useState({
     name: "",
@@ -174,25 +196,13 @@ function Artwork() {
   };
 
   const renderArtworkGrid = (artworks) => (
-    <div className="grid-container p-2">
+    <Row className="g-4">
       {artworks.map((artwork, index) => (
-        <motion.div
-          className="card wow fadeInLeft"
-          key={artwork.id}
-          data-wow-duration="1s"
-          data-wow-delay={`${0.1 * index}s`}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          data-bs-theme="dark"
-        >
-          <img src={artwork.image_url} alt={artwork.name} loading="lazy" />
-          <div className="card-content">
-            <h3>{artwork.name}</h3>
-            <p>{artwork.description}</p>
-          </div>
-        </motion.div>
+        <Col key={artwork.id} sm={12} md={6} lg={4}>
+          <ArtworkCard artwork={artwork} wowDelay={`${0.1 * index}s`} />
+        </Col>
       ))}
-    </div>
+    </Row>
   );
 
   return (
@@ -219,19 +229,20 @@ function Artwork() {
           </Accordion.Item>
         </Accordion>
       </Container>
+
       <Container className="justify-content-center mb-5 mt-5">
         <Row className="mb-5">
           <section id="animated-artworks" className="wow fadeInLeft">
-            <h1 className="unbounded-uniquifier-h1">Animated Artworks</h1>
-            <hr />
+            <h1 className="unbounded-uniquifier-artwork">Animated Artworks</h1>
+            <hr className="mb-5"/>
             {renderArtworkGrid(animatedArtworks)}
           </section>
         </Row>
 
         <Row className="mb-5">
           <section id="static-artworks" className="wow fadeInLeft" ref={staticRef}>
-            <h1 className="unbounded-uniquifier-h1">Static Artworks</h1>
-            <hr />
+            <h1 className="unbounded-uniquifier-artwork">Static Artworks</h1>
+            <hr className="mb-5"/>
             {renderArtworkGrid(staticArtworks)}
           </section>
         </Row>

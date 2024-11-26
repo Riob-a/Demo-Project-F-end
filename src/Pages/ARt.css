@@ -1,65 +1,3 @@
-  /*art addition form  */
-  .grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    padding: 30px;
-    
-  }
-  
-  .card {
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
-    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.7);
-    overflow: hidden;
-  }
-  
-  /* .card img {
-    width: 100%;
-    height: auto;
-  } */
-  
-  .card-content {
-    padding: 15px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 150px;
-  }
-  
-  .card-content h3 {
-    margin: 10px 0;
-    font-size: 1.2em;
-    display: flex;
-    font-family: "Unbounded", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 900;
-    font-style: normal;
-    word-wrap: break-word;
-  }
-  
-  .card-content p {
-    color: #666;
-    font-size: 0.9em;
-    display: flex;
-    font-family: "Unbounded", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-    font-weight: 250;
-    word-wrap: break-word;
-  }
-
-  .card-color {
-    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .card-color:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0px 25px rgba(0, 0, 0, 0.7);
-  }
-
   @media (max-width: 768px) {
     .card-content h3 {
       font-size: 1em; /* Reduce font size for smaller screens */
@@ -87,18 +25,92 @@
     font-weight: 900;
     font-style: normal;
   }
-  .scroll-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-    background-color: #EA8E1D;
-    color: #000;
-    border: none;
-    border-radius: 50%;
-    padding: 10px 15px;
-    font-size: 1.2rem;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 20px;
+  align-items: stretch;
 }
+
+/* Card hover effect */
+/* .card-hover {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card-hover:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+} */
+
+/* Card styling */
+.card {
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.7);
+}
+
+.card img {
+  object-fit: cover;
+  width: 100%;
+  height: 250px;
+}
+
+.card .btn-outline-dark {
+  border: 1px solid #39545B;
+  color: #39545B;
+  transition: background-color 0.3s, color 0.3s;
+}
+.card .btn-outline-dark:hover {
+  background-color: #39545B;
+  color: #fff;
+}
+
+/* Section headers */
+#animated-artworks,
+#static-artworks {
+  margin-top: 50px;
+}
+.unbounded-uniquifier-artwork {
+  text-align: center;
+  font-family: "Unbounded", sans-serif;
+  font-weight: 900;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+/* Scroll-to-top button */
+.scroll-to-top {
+  font-size: 2rem;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: #EA8E1D;
+  background-color: #fff;
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, background-color 0.3s;
+}
+.scroll-to-top:hover {
+  transform: scale(1.1);
+  background-color: #EA8E1D;
+  color: #fff;
+}
+
+/* Loading spinner */
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Progress bar */
+.progress-bar {
+  background-color: #EA8E1D;
+}
+
 
   
