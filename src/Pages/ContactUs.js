@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
+import React, { useState, useEffect, useRef } from 'react';
+import { Form, Button, Container, Row, Col, Card, Spinner } from 'react-bootstrap';
 import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt } from 'react-icons/fa';
 import WOW from "wowjs";
 import "./Contact Me.css";
@@ -12,6 +12,8 @@ const ContactForm = () => {
   });
 
   const [responseMessage, setResponseMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const nameInputRef = useRef(null);
 
   useEffect(() => {
     new WOW.WOW().init();
@@ -29,6 +31,7 @@ const ContactForm = () => {
     const token = localStorage.getItem("access_token")
 
     e.preventDefault();
+    setLoading(true); // Start loading
 
     try {
       const response = await fetch('https://demo-project-backend-qrd8.onrender.com/api/contact', {
@@ -40,9 +43,16 @@ const ContactForm = () => {
         body: JSON.stringify(formData)
       });
 
-      if (response.ok) {
+      if (response.status === 401) {
+        // Handle session timeout
+        setResponseMessage('Session expired. Please log in again.');
+        localStorage.removeItem("access_token"); // Clear token
+        setTimeout(() => {
+          window.location.href = "/"; // Redirect to login page
+        }, 2000);
+      } else if (response.ok) {
         const result = await response.json();
-        setResponseMessage(result.message);
+        setResponseMessage('Thank you for reaching out! Your message has been submitted.');
         setFormData({ name: '', email: '', message: '' }); // Reset form
       } else {
         const errorData = await response.json();
@@ -51,6 +61,8 @@ const ContactForm = () => {
     } catch (error) {
       console.error("Error submitting contact form:", error);
       setResponseMessage('Failed to submit. Please try again later.');
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -114,11 +126,15 @@ const ContactForm = () => {
                       />
                     </Form.Group>
 
-                    <Button variant="primary unbounded-uniquifier-header" type="submit">
-                      Submit
+                    <Button variant="primary unbounded-uniquifier-header" type="submit" disabled={loading}>
+                      {loading ? <Spinner animation="border" size="sm" /> : 'Submit'}
                     </Button>
                   </Form>
-                  {responseMessage && <p className="mt-3 text-success">{responseMessage}</p>}
+                  {responseMessage && (
+                    <div className={`mt-3 ${responseMessage.includes('Thank you') ? 'text-success' : 'text-danger'}`}>
+                      {responseMessage}
+                    </div>
+                  )}
                 </Card.Body>
               </Card>
             </div>
@@ -156,3 +172,6 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
+/* {responseMessage && <p className="mt-3 text-success">{responseMessage}</p>} */
+/* setResponseMessage(result.message); */
+

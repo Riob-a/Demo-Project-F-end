@@ -109,8 +109,15 @@
 
 /* Progress bar */
 .progress-bar {
+  width:fit-content;
   background-color: #EA8E1D;
 }
+/* .card-hover {
+  transition: transform 0.3s ease, max-height 0.3s ease;
+} */
 
+.card-hover.expanded {
+  max-height: none;
+}
 
   

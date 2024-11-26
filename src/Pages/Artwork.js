@@ -7,27 +7,70 @@ import { FaCircleArrowUp } from "react-icons/fa6";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 
-const ArtworkCard = ({ artwork, wowDelay }) => (
-  <motion.div
-    className="card-hover"
-    data-wow-duration="1s"
-    data-wow-delay={wowDelay}
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-    data-bs-theme="dark"
-  >
-    <Card
-      className="mx-auto wow fadeInLeft"
-      style={{ width: "21rem", boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }}
+const ArtworkCard = ({ artwork, wowDelay }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleExpand = () => setIsExpanded(!isExpanded);
+
+  return (
+    <motion.div
+      className={`card-hover ${isExpanded ? "expanded" : ""}`}
+      data-wow-duration="1s"
+      data-wow-delay={wowDelay}
+      whileHover={{ scale: isExpanded ? 1 : 1.05 }}
+      whileTap={{ scale: isExpanded ? 1 : 0.95 }}
+      onClick={toggleExpand}
+      data-bs-theme="dark"
+      style={{
+        cursor: "pointer",
+        transition: "max-height 0.3s ease-in-out",
+      }}
     >
-      <Card.Img variant="top" src={artwork.image_url} alt={artwork.name} loading="lazy" />
-      <Card.Body>
-        <Card.Title className="unbounded-uniquifier-header">{artwork.name}</Card.Title>
-        <Card.Text className="unbounded-uniquifier-p2 text-muted">{artwork.description}</Card.Text>
-      </Card.Body>
-    </Card>
-  </motion.div>
-);
+      <Card
+        className="mx-auto wow fadeInLeft"
+        style={{
+          width: isExpanded ? "100%" : "21rem",
+          maxHeight: isExpanded ? "none" : "450px",
+          overflow: "hidden",
+        }}
+      >
+        <Card.Img
+          variant="top"
+          src={artwork.image_url}
+          alt={artwork.name}
+          loading="lazy"
+          style={{ height: isExpanded ? "auto" : "200px", objectFit: "cover" }}
+        />
+        <Card.Body>
+          <Card.Title className="unbounded-uniquifier-header">
+            {artwork.name}
+          </Card.Title>
+          <Card.Text className="unbounded-uniquifier-p2 text-muted">
+            {isExpanded
+              ? artwork.description
+              : `${artwork.description.substring(0, 100)}...`}
+          </Card.Text>
+          {isExpanded && (
+            <>
+              <Card.Text>
+                <strong className="unbounded-uniquifier-header">Style:</strong> {artwork.style}
+              </Card.Text>
+              <Button
+                variant="danger unbounded-uniquifier-header"
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent card click from collapsing
+                  setIsExpanded(false);
+                }}
+              >
+                Close
+              </Button>
+            </>
+          )}
+        </Card.Body>
+      </Card>
+    </motion.div>
+  );
+};
 
 function Artwork() {
   const [formData, setFormData] = useState({
