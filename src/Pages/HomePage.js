@@ -60,10 +60,10 @@ function HomePage() {
   return (
     <div>
       {/* Header Section */}
-      <header className="header-section bg-dark text-white text-center py-4 wow fadeInDown" data-wow-duration="1.5s">
-        <h1 className="display-4">DERRICKS CREATION DEMO</h1>
-        <p>Discover the world of art, history, and culture</p>
-        <a className="btn welcome-button btn-dark  unbounded-uniquifier-h1" href="/reference" role="button">
+      <header className="header-section bg-dark text-white text-center py-4 wow fadeInUp" data-wow-duration="1.0s">
+        <h1 className="display-4 wow fadeInUp" data-wow-duration="1.0s" data-wow-delay="1.0s">DERRICKS CREATION DEMO</h1>
+        <p className="wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="1.6s" >Discover the world of art, history, and culture</p>
+        <a className="btn welcome-button btn-dark  unbounded-uniquifier-h1 wow zoomIn" data-wow-duration="1.0s" data-wow-delay="1.8s" href="/reference" role="button">
           Learn More <FaArrowRight />
         </a>
       </header>
@@ -117,11 +117,11 @@ function HomePage() {
       <section className="welcome-section py-5 text-center bg-dark text-white wow fadeInUp" data-wow-duration="1.5s">
         <Container>
           <Row>
-            <Col>
-              <h2 className="unbounded-uniquifier-header">Welcome To The Art And History Museum Ozeum</h2>
+            <Col xs={12} md={6}>
+              <h2 className="unbounded-uniquifier-header">Welcome To Derricks DEMO</h2>
               <hr />
               <p className="unbounded-uniquifier-p1">
-                Our high-quality collection and active research, exhibitions, and education keep us at the forefront of the museum landscape.
+                Our high-quality collection and active research, exhibitions, and education keep us at the forefront of the art landscape.
               </p>
               <Button
                 variant="dark"
@@ -131,7 +131,7 @@ function HomePage() {
                 More About <FaArrowRight />
               </Button>
             </Col>
-            <Col>
+            <Col xs={12} md={6}>
               <LazyImage src={imageUrls.museumImage} alt="Museum" />
             </Col>
           </Row>

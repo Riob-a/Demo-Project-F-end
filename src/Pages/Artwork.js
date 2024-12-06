@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import WOW from "wowjs";
 import "./ARt.css";
 import { FaCircleArrowUp } from "react-icons/fa6";
+import useArtwork from "../hooks/useArtwork";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 
@@ -72,171 +73,22 @@ const ArtworkCard = ({ artwork, wowDelay }) => {
   );
 };
 
-function Artwork() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    description: "",
-    style: ""
-  });
-  const [imageFile, setImageFile] = useState(null);
-  const [animatedArtworks, setAnimatedArtworks] = useState([]);
-  const [staticArtworks, setStaticArtworks] = useState([]);
-  const [submissionStatus, setSubmissionStatus] = useState(null); // New state for submission status
-  const [isSubmitting, setIsSubmitting] = useState(false); // Track submission state
-  const [uploadProgress, setUploadProgress] = useState(0);  // Track upload progress (for progress bar)
-  const [showScrollToTop, setShowScrollToTop] = useState(false);
-  const [staticLoaded, setStaticLoaded] = useState(false);
-  const staticRef = useRef(null); // Ref for the static artworks section
-
-  const location = useLocation();
-
-  const fetchArtworks = useCallback(async (style) => {
-    const data = await fetchData(`https://demo-project-backend-qrd8.onrender.com/api/artworks/${style}`);
-    if (data) {
-      style === "animated" ? setAnimatedArtworks(data) : setStaticArtworks(data);
-    }
-  }, []);
-
-  useEffect(() => {
-    const wowInstance = new WOW.WOW();
-    wowInstance.init();
-
-    // Fetch animated artworks on load
-    fetchArtworks("animated");
-
-    // Scroll event for scroll-to-top button
-    const handleScroll = () => {
-      setShowScrollToTop(window.scrollY > 200);
-    };
-    window.addEventListener("scroll", handleScroll);
-
-    // IntersectionObserver to fetch static artworks when section is in view
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !staticLoaded) {
-            fetchArtworks("static");
-            setStaticLoaded(true); // Ensure it only loads once
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const currentStaticRef = staticRef.current; // Copy ref to local variable
-    if (currentStaticRef) observer.observe(currentStaticRef);
-
-     // Scroll to section if hash exists in URL
-    if (location.hash) {
-      const sectionId = location.hash.replace('#', '');
-      const sectionElement = document.getElementById(sectionId);
-      if (sectionElement) {
-        sectionElement.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-
-    return () => {
-      wowInstance.sync();
-      window.removeEventListener("scroll", handleScroll);
-      if (currentStaticRef) observer.unobserve(currentStaticRef);
-    };
-  }, [fetchArtworks, location.hash, staticLoaded]);
-
-  const scrollToTop = () => {
-    const scrollAnimation = () => {
-      const scrollDuration = 250;
-      const scrollStep = -window.scrollY / (scrollDuration / 25);
-
-      if (window.scrollY !== 0) {
-        window.scrollBy(0, scrollStep);
-        requestAnimationFrame(scrollAnimation);
-      }
-    };
-    requestAnimationFrame(scrollAnimation);
-  };
-
-  const fetchData = async (url, options = {}) => {
-    const token = localStorage.getItem("access_token");
-    try {
-      const response = await fetch(url, {
-        ...options,
-        headers: {
-          ...options.headers,
-          Authorization: `Bearer ${token}`
-        }
-      });
-      if (response.ok) {
-        return await response.json();
-      } else if (response.status === 401) {
-        alert("Session expired. Please Sign in again");
-        localStorage.removeItem("access_token");
-        window.location.href = "/";
-      } else {
-        console.error("Failed to fetch data");
-        return null;
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      return null;
-    }
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleFileChange = (e) => {
-    setImageFile(e.target.files[0]);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true); // Set to true to show the spinner
-    setUploadProgress(0);  // Reset progress bar to 0
-    
-    const token = localStorage.getItem("access_token");
-    const data = new FormData();
-    data.append("name", formData.name);
-    data.append("email", formData.email);
-    data.append("style", formData.style);
-    data.append("description", formData.description);
-    if (imageFile) data.append("image", imageFile);
-
-    try {
-    const response = await axios.post("https://demo-project-backend-qrd8.onrender.com/api/artworks/submit", data, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      },
-      onUploadProgress: (progressEvent) => {
-        const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-        setUploadProgress(percent); // Update progress state
-      }
-    });
-
-    if (response.status === 201) {
-      setSubmissionStatus("Artwork submitted successfully!");
-      setFormData({ name: "", email: "", description: "", style: "" });
-      setImageFile(null);
-      setTimeout(()=>{
-        setSubmissionStatus(null);
-
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        setTimeout(() => window.location.reload(), 500);
-      }, 3000);      
-
-      fetchArtworks(formData.style);
-
-    } else {
-      setSubmissionStatus("Failed to submit artwork. Please try again.");
-    }
-  }catch (error) {
-    console.error("Error:", error);
-    setSubmissionStatus("Error occurred. Please try again.")
-  }finally {
-    setIsSubmitting(false);
-  }
-  };
+const Artwork = () => {
+  const {
+    formData,
+    animatedArtworks,
+    staticArtworks,
+    submissionStatus,
+    isSubmitting,
+    uploadProgress,
+    showScrollToTop,
+    staticRef,
+    scrollToTop,
+    handleChange,
+    handleFileChange,
+    handleSubmit,
+    fetchArtworks,
+  } = useArtwork();
 
   const renderArtworkGrid = (artworks) => (
     <Row className="g-4">
@@ -358,9 +210,7 @@ function Artwork() {
                   </Form>
                   {isSubmitting && (
                     <div className="d-flex justify-content-center mt-3">
-                       {/* <Spinner animation="border" variant="primary" /> */}
                        <ProgressBar now={uploadProgress} label={`${uploadProgress}%`} />
-                       {/* <span className="ml-2">Submitting...</span> */}
                     </div>
                   )}
 
