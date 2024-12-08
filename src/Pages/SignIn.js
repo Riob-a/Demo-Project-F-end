@@ -9,10 +9,13 @@ function SignIn() {
     const [message, setMessage] = useState('');
     const [showAlert, setShowAlert] = useState(false);
     const [isError, setIsError] = useState(false); // State for error tracking
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSignIn = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
+
         try {
             const response = await fetch('https://demo-project-backend-qrd8.onrender.com/api/signin', {
                 method: 'POST',
@@ -20,6 +23,7 @@ function SignIn() {
                 body: JSON.stringify({ email, password })
             });
             const result = await response.json();
+
             if (response.ok) {
                 // Store token and user role in local storage
                 localStorage.setItem('access_token', result.access_token);
@@ -29,11 +33,10 @@ function SignIn() {
                 setShowAlert(true);
                 setIsError(false); // Login success, no error
 
-                // Delay navigation to the appropriate page by 2 seconds
                 setTimeout(() => {
                     setShowAlert(false); // Hide the alert before redirecting
                     if (result.user.role === 'admin') {
-                        navigate('/admin-dashboard'); // Redirect admin to the admin dashboard
+                        window.location.href = "https://demo-project-admin-wheat.vercel.app/home"; // Redirect admin to the admin dashboard
                     } else {
                         navigate('/home'); // Redirect regular user to the home page
                     }
@@ -47,6 +50,8 @@ function SignIn() {
             setMessage('An error occurred');
             setShowAlert(true);
             setIsError(true); // Network or other error occurred
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -92,8 +97,8 @@ function SignIn() {
                                         required
                                     />
                                 </Form.Group>
-                                <Button variant="primary" type="submit" className="mt-3 unbounded-uniquifier-h1">
-                                    Sign In
+                                <Button variant="primary" type="submit" className="mt-3 unbounded-uniquifier-h1" disabled={isLoading}>
+                                    {isLoading ? "Signing In..." : "Sign In" }
                                 </Button>
                                 {!showAlert && <p className="mt-3">{message}</p>}
                             </Form>

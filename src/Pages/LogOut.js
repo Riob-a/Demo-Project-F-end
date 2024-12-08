@@ -49,7 +49,7 @@ function Logout() {
     }, []);
 
     return (
-        <Container className="justify-content-center p-5 m-5">
+        <Container className="justify-content-center p-5 mb-5 mt-5 gx-5">
             <Col>
             <Row className="justify-content-center text-center">
                 {showAlert && (
