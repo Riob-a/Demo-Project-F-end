@@ -61,7 +61,7 @@ function HomePage() {
     <div>
       {/* Header Section */}
       <header className="header-section bg-dark text-white text-center py-4 wow fadeInUp" data-wow-duration="1.0s">
-        <h1 className="display-4 wow fadeInUp" data-wow-duration="1.0s" data-wow-delay="1.0s">DERRICKS CREATION DEMO</h1>
+        <h1 className="display-4 wow fadeInUp" data-wow-duration="1.0s" data-wow-delay="1.5s">DERRICKS CREATION DEMO</h1>
         <p className="wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="1.6s" >Discover the world of art, history, and culture</p>
         <a className="btn welcome-button btn-dark  unbounded-uniquifier-h1 wow zoomIn" data-wow-duration="1.0s" data-wow-delay="1.8s" href="/reference" role="button">
           Learn More <FaArrowRight />
