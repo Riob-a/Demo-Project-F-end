@@ -54,7 +54,9 @@ const ArtworkCard = ({ artwork, wowDelay }) => {
           {isExpanded && (
             <>
               <Card.Text>
-                <strong className="unbounded-uniquifier-header">Style:</strong> {artwork.style}
+                <strong className="unbounded-uniquifier-header">Style: </strong> {artwork.style}
+                <br />
+                <strong className="unbounded-uniquifier-header">Author: </strong>{artwork.email}
               </Card.Text>
               <Button
                 variant="danger unbounded-uniquifier-header"

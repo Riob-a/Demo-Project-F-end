@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import WOW from "wowjs";
 import "animate.css";
 import "./HomePage.css";
+import { path } from "framer-motion/client";
 
 // Centralized image URLs
 const imageUrls = {
@@ -21,7 +22,7 @@ const LazyImage = ({ src, alt, rounded = false }) => (
 );
 
 // Reusable card component without unnecessary memoization
-const CardComponent = ({ section, imgSrc, title, text, wowDelay, navigateToSection }) => (
+const CardComponent = ({ path, imgSrc, title, text, wowDelay, navigateToSection }) => (
   <motion.div
     className="wow fadeInUp card-hover"
     data-wow-duration="1s"
@@ -29,7 +30,7 @@ const CardComponent = ({ section, imgSrc, title, text, wowDelay, navigateToSecti
     data-bs-theme="dark"
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
-    onClick={() => navigateToSection(section)}
+    onClick={() => navigateToSection(path)}
   >
     <Card className="mx-auto" style={{ width: "21rem" ,  boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }}>
       <Card.Img variant="top" src={imgSrc} loading="lazy" />
@@ -39,7 +40,7 @@ const CardComponent = ({ section, imgSrc, title, text, wowDelay, navigateToSecti
       </Card.Body>
       <ListGroup variant="flush">
         <ListGroupItem className="unbounded-uniquifier-header">
-          <Card.Link href={`#${section}`}>{title} <FaArrowRight /></Card.Link>
+          <Card.Link href={`#${path}`}>{title} <FaArrowRight /></Card.Link>
         </ListGroupItem>
       </ListGroup>
     </Card>
@@ -53,8 +54,11 @@ function HomePage() {
       wowInstance.init();
     }, []);
 
-  const navigateToSection = (section) => {
-    navigate(`/artwork#${section}`);
+  const navigateToSection = (path) => {
+    navigate(path);
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    }, 0);
   };
 
   return (
@@ -75,36 +79,36 @@ function HomePage() {
             <h1 className="unbounded-uniquifier-header wow fadeInLeft">Navigate</h1>
             <hr />
             <p className="unbounded-uniquifier-header wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s">
-              Click the cards to go to the specific art section
+             Click the card to explore the website
             </p>
           </Row>
           <Row className="gy-5 text-center justify-content-center">
             <Col>
               <CardComponent
-                section="animated-artworks"
+                path= "/artwork"
                 imgSrc={imageUrls.animatedArt}
-                title="Animated"
-                text="See more animated art by tapping the card."
+                title="ART"
+                text="See the on offer art by tapping the card."
                 wowDelay="0s"
                 navigateToSection={navigateToSection}
               />
             </Col>
             <Col>
               <CardComponent
-                section="static-artworks"
+                path= "/about"
                 imgSrc={imageUrls.staticArt}
-                title="Static"
-                text="Explore our static art collection by tapping the card."
+                title="About"
+                text="Check the about section to learn more about the site ."
                 wowDelay="0.2s"
                 navigateToSection={navigateToSection}
               />
             </Col>
             <Col>
               <CardComponent
-                section="add-artwork"
+                path="/contact"
                 imgSrc={imageUrls.submitArt}
-                title="Submit"
-                text="Submit your own artwork by tapping the card."
+                title="Contact Us"
+                text="Contact us through email or throught the provided form."
                 wowDelay="0.4s"
                 navigateToSection={navigateToSection}
               />

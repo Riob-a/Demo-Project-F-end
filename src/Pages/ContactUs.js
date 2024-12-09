@@ -78,7 +78,7 @@ const ContactForm = () => {
 
       <Container className='justify-content-center mb-5'>
         <Row className="gy-5 justify-content-center">
-          <div className="text-center mx-auto mb-5 p-2 wow fadeInUp bg-dark rounded " data-wow-delay="0.1s" style={{ width: "600px", boxShadow: "0 4px 15px rgba(0, 0, 0, 0.5)" }}>
+          <div className="text-center mx-auto mb-5 p-2 wow fadeInUp  " data-wow-delay="0.1s" style={{ width: "600px" }}>
             <h5 className="text-white text-uppercase unbounded-uniquifier-header mt-5" style={{ spacing: "5px" }}><u>Contact Us</u></h5>
             <p className="lead unbounded-uniquifier-p1 text-white">We'd love to hear from you! Whether you have a question or just want to say hello, our team is here to help.</p>
           </div>
