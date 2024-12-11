@@ -30,7 +30,8 @@ strong{
     font-style: normal;
 }
 .carousel-item{
-    height: 300px;
+    height: 150px;
+    border-radius: 10px;
 }
 .image-fade{
     object-fit: cover;

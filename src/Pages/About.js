@@ -55,7 +55,7 @@ function About() {
               className="btn btn-primary unbounded-uniquifier-header wow fadeInUp"
               href="/artwork"
               role="button"
-              whileHover={{ scale: 1.05, color: "#FF0000" }}
+              whileHover={{ scale: 1.05, color: "#EA8E1D" }}
               whileTap={{ scale: 0.95 }}
               style={{ boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }}
             >
