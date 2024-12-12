@@ -15,21 +15,21 @@ function BasicExample() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="brand" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={NavLink} to="/home" activeClassName="active" className="brand">Home | </Nav.Link>
-            <Nav.Link as={NavLink} to="/reference" activeClassName="active" className="brand">Reference | </Nav.Link>
-            <Nav.Link as={NavLink} to="/artwork" activeClassName="active" className="brand">ARt | </Nav.Link>
-            <Nav.Link as={NavLink} to="/register" activeClassName="active" className="brand">Register |</Nav.Link>
+            <Nav.Link as={NavLink} to="/home"  className="brand">Home | </Nav.Link>
+            {/* <Nav.Link as={NavLink} to="/reference" activeClassName="active" className="brand">Reference | </Nav.Link> */}
+            <Nav.Link as={NavLink} to="/artwork"  className="brand">ARt | </Nav.Link>
+            <Nav.Link as={NavLink} to="/register"  className="brand">Register |</Nav.Link>
             {/* <Nav.Link as={NavLink} to="/" className="brand">Sign-in |</Nav.Link> */}
-            <Nav.Link as={NavLink} to="/logout"activeClassName="active"  className="brand">Log Out</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown" className="brand">
-              <NavDropdown.Item as={NavLink} to="/artwork" activeClassName="active" className="brand">ARt</NavDropdown.Item>
-              <NavDropdown.Item as={NavLink} to="/contact" activeClassName="active" className="brand">Contact Us</NavDropdown.Item>
-              <NavDropdown.Item as={NavLink} to="/about" activeClassName="active" className="brand">About</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/artwork"  className="brand">ARt</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/contact"  className="brand">Contact Us</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/about"  className="brand">About</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="https://automated-donation-platform-front-end.vercel.app/">
                 Fund.Girls
               </NavDropdown.Item>
             </NavDropdown>
+            <Nav.Link as={NavLink} to="/logout"  className="brand logout">Log Out</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
