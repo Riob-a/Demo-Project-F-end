@@ -30,6 +30,7 @@ function BasicExample() {
               </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link as={NavLink} to="/logout"  className="brand logout">Log Out</Nav.Link>
+            <Nav.Link as={NavLink} to="/profile" className="brand">Profile</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

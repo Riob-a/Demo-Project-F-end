@@ -14,6 +14,7 @@ import SignIn from './Pages/SignIn';
 import Register from './Pages/Register';
 import Logout from './Pages/LogOut';
 import ProtectedRoute from './Components/ProtectedRoute';
+import UserProfile from './Pages/UserProfile';
 
 function Layout(){
   const location = useLocation();
@@ -39,6 +40,7 @@ function Layout(){
         <Route path="reference" element={<ProtectedRoute element={<Reference />} />} />
         <Route path="contact" element={<ProtectedRoute element={<ContactForm />} />} />
         <Route path="about" element={<ProtectedRoute element={<About />} />} />
+        <Route path='profile' element={<ProtectedRoute element={<UserProfile />} />} />
       </Routes>
         {/* <Footer /> */}
     {!hideNavAndFooter && <Footer />} 
