@@ -145,43 +145,64 @@ const handleDelete = async () => {
         <Container className="mt-4 mb-4 unbounded-uniquifier-p">
             {user && (
                 <Card className="wow fadeInLeft" data-wow-delay="0.2s">
-                    <Card.Body>
-                        <h3>Profile</h3>
-                        <hr />
-                        {editing ? (
-                            <Form>
-                                <Form.Group>
-                                    <Form.Label>Username</Form.Label>
-                                    <Form.Control
-                                        type="text" value={formData.username} onChange={(e) => setFormData({ ...formData, username: e.target.value })} />
-                                </Form.Group>
-
-                                <Form.Group>
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control type="email"  value={formData.email}  onChange={(e) =>  setFormData({ ...formData, email: e.target.value })} />
-                                </Form.Group>
-                                <Button variant="success" onClick={handleSave} className="mt-2 me-2 mb-3">
-                                    Save
-                                </Button>
-                            </Form>
+                <Card.Body>
+                    <h3>Profile</h3>
+                    <hr />
+                    <div className="text-center">
+                        {/* Display profile image if available */}
+                        {user.profile_image_url ? (
+                            <img
+                                src={user.profile_image}
+                                alt="Profile"
+                                className="profile-image"
+                                style={{ width: "150px", height: "150px", borderRadius: "50%" }}
+                            />
                         ) : (
-                            <>
-                                <p><b>Username:</b> {user.username}</p>
-                                <p><b>Email:</b> {user.email}</p>
-                                <p><b>Created:</b> {user.created_at}</p>
-                                <hr />
-                                <Button variant="primary" onClick={handleEdit} className="me-2 mt-2 mb-3">
-                                    Edit Profile
-                                </Button>
-                            </>
+                            <div>No Profile Image</div>
                         )}
+                    </div>
+                    {editing ? (
+                        <Form>
+                            <Form.Group>
+                                <Form.Label>Username</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    value={formData.username}
+                                    onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                                />
+                            </Form.Group>
 
-                        <Button variant="danger" onClick={handleDelete} className="mt-2 mb-3">
-                            Delete Profile
-                        </Button>
-                    </Card.Body>
-                </Card>
-            )}
+                            <Form.Group>
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control
+                                    type="email"
+                                    value={formData.email}
+                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                />
+                            </Form.Group>
+                            <Button variant="success" onClick={handleSave} className="mt-2 me-2 mb-3">
+                                Save
+                            </Button>
+                        </Form>
+                    ) : (
+                        <>
+                            <p><b>Username:</b> {user.username}</p>
+                            <p><b>Email:</b> {user.email}</p>
+                            <p><b>Created:</b> {user.created_at}</p>
+                            <p><b>Profile:</b> {user.profile_image}</p>
+                            <hr />
+                            <Button variant="primary" onClick={handleEdit} className="me-2 mt-2 mb-3">
+                                Edit Profile
+                            </Button>
+                        </>
+                    )}
+
+                    <Button variant="danger" onClick={handleDelete} className="mt-2 mb-3">
+                        Delete Profile
+                    </Button>
+                </Card.Body>
+            </Card>
+        )}
 
             <h1 className="mt-5 mb-4 wow fadeInLeft" data-wow-delay="0.4s">My Artwork</h1>
             <Row className="wow fadeInLeft" data-wow-delay="0.8s">
