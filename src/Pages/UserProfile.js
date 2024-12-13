@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Card, Button, Container, Row, Col, Modal, Spinner, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import WOW from "wowjs"
 import './UserProf.css'
 
 const UserProfile = () => {
@@ -11,6 +12,11 @@ const UserProfile = () => {
     const [editing, setEditing] = useState(false);
     const [formData, setFormData] = useState({ username: "", email: "" });
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const wowInstance = new WOW.WOW();
+        wowInstance.init();
+      }, []);
 
     const handleSessionTimeout = () => {
         toast.error("Session has expired. Please sign in again.");
@@ -132,60 +138,53 @@ const handleDelete = async () => {
     }, []);
 
     if (loading) {
-        return <Spinner animation="border" variant="primary" />;
+        return <Spinner animation="border" variant="white" />;
     }
 
     return (
-        <Container className="mt-4 unbounded-uniquifier-p">
+        <Container className="mt-4 mb-4 unbounded-uniquifier-p">
             {user && (
-                <Card>
+                <Card className="wow fadeInLeft" data-wow-delay="0.2s">
                     <Card.Body>
                         <h3>Profile</h3>
+                        <hr />
                         {editing ? (
-                            <Form className="unbounded-uniquifier-p">
+                            <Form>
                                 <Form.Group>
                                     <Form.Label>Username</Form.Label>
                                     <Form.Control
-                                        type="text"
-                                        value={formData.username}
-                                        onChange={(e) =>
-                                            setFormData({ ...formData, username: e.target.value })
-                                        }
-                                    />
+                                        type="text" value={formData.username} onChange={(e) => setFormData({ ...formData, username: e.target.value })} />
                                 </Form.Group>
+
                                 <Form.Group>
                                     <Form.Label>Email</Form.Label>
-                                    <Form.Control
-                                        type="email"
-                                        value={formData.email}
-                                        onChange={(e) =>
-                                            setFormData({ ...formData, email: e.target.value })
-                                        }
-                                    />
+                                    <Form.Control type="email"  value={formData.email}  onChange={(e) =>  setFormData({ ...formData, email: e.target.value })} />
                                 </Form.Group>
-                                <Button variant="success" onClick={handleSave} className="mt-2">
+                                <Button variant="success" onClick={handleSave} className="mt-2 me-2 mb-3">
                                     Save
                                 </Button>
                             </Form>
                         ) : (
                             <>
-                                <p>Username: {user.username}</p>
-                                <p>Email: {user.email}</p>
-                                <Button variant="primary" onClick={handleEdit}>
+                                <p><b>Username:</b> {user.username}</p>
+                                <p><b>Email:</b> {user.email}</p>
+                                <p><b>Created:</b> {user.created_at}</p>
+                                <hr />
+                                <Button variant="primary" onClick={handleEdit} className="me-2 mt-2 mb-3">
                                     Edit Profile
                                 </Button>
                             </>
-                        )}<br />
+                        )}
 
-                        <Button variant="danger" onClick={handleDelete} className="mt-3">
+                        <Button variant="danger" onClick={handleDelete} className="mt-2 mb-3">
                             Delete Profile
                         </Button>
                     </Card.Body>
                 </Card>
             )}
 
-            <h3 className="mt-5">My Artworks</h3>
-            <Row>
+            <h1 className="mt-5 mb-4 wow fadeInLeft" data-wow-delay="0.4s">My Artwork</h1>
+            <Row className="wow fadeInLeft" data-wow-delay="0.8s">
                 {artworks.map((artwork) => (
                     <Col key={artwork.id} md={4} className="mb-4">
                         <Card>
@@ -193,6 +192,7 @@ const handleDelete = async () => {
                             <Card.Body>
                                 <Card.Title>{artwork.title}</Card.Title>
                                 <Card.Text>{artwork.description}</Card.Text>
+                                
                             </Card.Body>
                         </Card>
                     </Col>
