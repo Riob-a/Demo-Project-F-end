@@ -150,7 +150,7 @@ const handleDelete = async () => {
                     <hr />
                     <div className="text-center">
                         {/* Display profile image if available */}
-                        {user.profile_image_url ? (
+                        {user.profile_image ? (
                             <img
                                 src={user.profile_image}
                                 alt="Profile"
@@ -189,7 +189,7 @@ const handleDelete = async () => {
                             <p><b>Username:</b> {user.username}</p>
                             <p><b>Email:</b> {user.email}</p>
                             <p><b>Created:</b> {user.created_at}</p>
-                            <p><b>Profile:</b> {user.profile_image}</p>
+                            {/* <p><b>Profile:</b> {user.profile_image}</p> */}
                             <hr />
                             <Button variant="primary" onClick={handleEdit} className="me-2 mt-2 mb-3">
                                 Edit Profile
@@ -207,13 +207,12 @@ const handleDelete = async () => {
             <h1 className="mt-5 mb-4 wow fadeInLeft" data-wow-delay="0.4s">My Artwork</h1>
             <Row className="wow fadeInLeft" data-wow-delay="0.8s">
                 {artworks.map((artwork) => (
-                    <Col key={artwork.id} md={4} className="mb-4">
-                        <Card>
-                            <Card.Img variant="top" src={artwork.image_url} />
+                    <Col key={artwork.id} md={4} className="mb-4" data-bs-theme="dark">
+                        <Card className="profile-card">
+                            <Card.Img variant="top" src={artwork.image_url} loading="lazy"/>
                             <Card.Body>
-                                <Card.Title>{artwork.title}</Card.Title>
-                                <Card.Text>{artwork.description}</Card.Text>
-                                
+                                <Card.Title>{artwork.name}</Card.Title>
+                                <Card.Text className="text-2 text-muted"> {artwork.description}</Card.Text>                                
                             </Card.Body>
                         </Card>
                     </Col>

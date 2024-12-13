@@ -22,3 +22,40 @@ Button{
     font-weight: 900;
     font-style: normal;
 }
+.profile-card{
+    text-align: center;
+}
+.card-title{
+    font-family: "Unbounded", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+}
+.card-text{
+    font-family: "Unbounded", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 450;
+    font-style: normal;
+}
+.text-2{
+    font-family: "Unbounded", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 150;
+    font-style: normal;
+}
+
+@media (max-width: 768px) {
+    .card-content h3 {
+      font-size: 1em; /* Reduce font size for smaller screens */
+    }
+  
+    .card-content p {
+      font-size: 0.8em; /* Adjust paragraph size for smaller screens */
+    }
+  }
+/* Smaller grid for very small screens */
+  @media (max-width: 576px) {
+    .grid-container {
+      grid-template-columns: repeat(1, 1fr); /* Single column on very small screens */
+    }
+  }
