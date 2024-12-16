@@ -18,7 +18,7 @@
 }
 .navbar-nav {
   display: flex;
-  gap: 10px; /* Adjust this value to increase/decrease spacing */
+  gap: 15px; /* Adjust this value to increase/decrease spacing */
 }
 .navbar .nav-link.active {
     /* text-decoration: underline; */

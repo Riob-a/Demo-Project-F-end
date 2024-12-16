@@ -8,6 +8,7 @@ import "./UserProf.css";
 const UserProfile = () => {
     const [user, setUser] = useState(null);
     const [artworks, setArtworks] = useState([]);
+    const [contacts, setContacts] = useState([]); // State for contacts
     const [loading, setLoading] = useState(true);
     const [editing, setEditing] = useState(false);
     const [formData, setFormData] = useState({ username: "", email: "", profile_image: null });
@@ -35,12 +36,12 @@ const UserProfile = () => {
                     Authorization: `Bearer ${localStorage.getItem("access_token")}`,
                 },
             });
-
+    
             if (response.ok) {
                 const data = await response.json();
                 setUser(data);
                 setFormData({ username: data.username, email: data.email, profile_image: null });
-
+    
                 const artworkResponse = await fetch(
                     `https://demo-project-backend-qrd8.onrender.com/api/users/${data.id}/artworks`,
                     {
@@ -50,7 +51,7 @@ const UserProfile = () => {
                         },
                     }
                 );
-
+    
                 if (artworkResponse.ok) {
                     const artworkData = await artworkResponse.json();
                     setArtworks(artworkData);
@@ -59,6 +60,9 @@ const UserProfile = () => {
                 } else {
                     toast.error("Failed to fetch artworks");
                 }
+    
+                // Fetch user's contacts using the new route
+                fetchUserContacts();
             } else if (response.status === 401) {
                 handleSessionTimeout();
             } else {
@@ -70,40 +74,57 @@ const UserProfile = () => {
             setLoading(false);
         }
     };
+    
+    const fetchUserContacts = async () => {
+        try {
+            const response = await fetch("https://demo-project-backend-qrd8.onrender.com/api/users/me/contacts", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+                },
+            });
+    
+            if (response.ok) {
+                const contactsData = await response.json();
+                setContacts(contactsData);
+            } else if (response.status === 401) {
+                handleSessionTimeout();
+            } else {
+                toast.error("Failed to fetch contacts");
+            }
+        } catch (error) {
+            toast.error("Network error while fetching contacts");
+        }
+    };
+    
 
     const handleEdit = () => {
         setEditing(true);
     };
 
-    // const handleFileChange = (e) => {
-    //     setFormData({ ...formData, profile_image: e.target.files[0] });
-    // };
-
     const handleSave = async () => {
         try {
             const currentUserId = user.id;
-    
-            // Create a FormData object for file upload
+
             const formDataObj = new FormData();
             formDataObj.append("username", formData.username);
             formDataObj.append("email", formData.email);
-    
-            // Check if the user uploaded a new profile image
+
             if (formData.profile_image) {
                 formDataObj.append("profile_image", formData.profile_image);
             }
-    
+
             const response = await fetch(`https://demo-project-backend-qrd8.onrender.com/api/users/${currentUserId}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("access_token")}`,
                 },
-                body: formDataObj, // Send the FormData object
+                body: formDataObj,
             });
-    
+
             if (response.ok) {
                 const updatedUser = await response.json();
-                setUser(updatedUser); // Update the user state
+                setUser(updatedUser);
                 toast.success("Profile updated successfully");
                 setEditing(false);
                 window.location.reload();
@@ -117,7 +138,7 @@ const UserProfile = () => {
             toast.error("Network error while updating profile");
         }
     };
-    
+
     const handleDelete = async () => {
         try {
             const currentUserId = user.id;
@@ -239,6 +260,24 @@ const UserProfile = () => {
                             <Card.Body>
                                 <Card.Title>{artwork.name}</Card.Title>
                                 <Card.Text className="text-2 text-muted">{artwork.description}</Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                ))}
+            </Row>
+
+            <h1 className="mt-5 mb-4 wow fadeInLeft" data-wow-delay="0.4s">
+                My Messages
+            </h1>
+            <Row className="wow fadeInLeft" data-wow-delay="0.8s">
+                {contacts.map((contact) => (
+                    <Col key={contact.id} md={6} className="mb-4">
+                        <Card className="profile-card">
+                            <Card.Body>
+                                <Card.Title>{contact.name}</Card.Title>
+                                {/* <Card.Text><b>Email:</b> {contact.email}</Card.Text> */}
+                                <Card.Text><b>Message:</b> {contact.message}</Card.Text>
+                                <Card.Text><b>Posted At:</b> {contact.posted_at}</Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>

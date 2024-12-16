@@ -10,12 +10,12 @@ h3{
     font-weight: 900;
     font-style: normal; 
 }
-p{
+/* p{
     font-family: "Unbounded", sans-serif;
     font-optical-sizing: auto;
     font-weight: 450;
     font-style: normal;
-}
+} */
 Button{
     font-family: "Unbounded", sans-serif;
     font-optical-sizing: auto;

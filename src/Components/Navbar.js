@@ -1,10 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Image, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { NavLink } from 'react-router-dom';
 import logo from '../Img/pointed fingure.gif';
+import { useNavigate } from "react-router-dom";
 import "./Components.css";
+import { toast } from 'react-toastify';
 
 function BasicExample() {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  const fetchUserProfile = async () => {
+    try {
+      const response = await fetch("https://demo-project-backend-qrd8.onrender.com/api/users/me", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setUser(data);
+      } else if (response.status === 401) {
+        handleSessionTimeout();
+      } else {
+        toast.error("Failed to fetch user profile");
+      }
+    } catch (error) {
+      toast.error("An error occurred while fetching the profile");
+    }
+  };
+
+  useEffect(() => {
+    fetchUserProfile();
+  }, []);
+
+  const handleSessionTimeout = () => {
+    toast.error("Session expired. Please log in again.");
+    setTimeout(() => {
+      localStorage.removeItem("access_token");
+      navigate("/");
+  }, 3000);
+  };
+
   return (
     <Navbar expand="lg" bg='dark' data-bs-theme="dark" className=''>
       <Container>
@@ -21,16 +61,34 @@ function BasicExample() {
             <Nav.Link as={NavLink} to="/register"  className="brand">Register |</Nav.Link>
             {/* <Nav.Link as={NavLink} to="/" className="brand">Sign-in |</Nav.Link> */}
             <NavDropdown title="Dropdown" id="basic-nav-dropdown" className="brand">
-              <NavDropdown.Item as={NavLink} to="/artwork"  className="brand">ARt</NavDropdown.Item>
+              {/* <NavDropdown.Item as={NavLink} to="/artwork"  className="brand">ARt</NavDropdown.Item> */}
               <NavDropdown.Item as={NavLink} to="/contact"  className="brand">Contact Us</NavDropdown.Item>
               <NavDropdown.Item as={NavLink} to="/about"  className="brand">About</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="https://automated-donation-platform-front-end.vercel.app/">
                 Fund.Girls
-              </NavDropdown.Item>
+            </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link as={NavLink} to="/logout"  className="brand logout">Log Out</Nav.Link>
-            <Nav.Link as={NavLink} to="/profile" className="brand">Profile</Nav.Link>
+          </Nav>
+          
+          <Nav className="ml-auto">
+          <Nav.Link as={NavLink} to="/profile" className="brand">
+              {/* Display profile image and name */}
+              {user && (
+                <>
+                  <Image 
+                    src={user.profile_image || "https://via.placeholder.com/30"} 
+                    alt="Profile" 
+                    roundedCircle 
+                    width="30" 
+                    height="30" 
+                    className="d-inline-block align-top me-2"
+                  />
+                  {user.username} | 
+                </>
+              )}
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/logout"  className="brand">Log Out</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

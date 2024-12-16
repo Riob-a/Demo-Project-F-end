@@ -117,6 +117,9 @@ function Register() {
                     </Card>
                 </Col>
             </Row>
+            <Row className="justify-content-center text-center wow fadeInLeft" data-wow-delay="0.4s" data-wow-duration="1s">
+                <p className="unbounded-uniquifier-header">Check Spam for confirmation email</p>
+            </Row>
         </Container>
     );
 }
