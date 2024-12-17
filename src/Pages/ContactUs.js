@@ -48,7 +48,7 @@ const ContactForm = () => {
         setResponseMessage('Session expired. Please log in again.');
         localStorage.removeItem("access_token"); // Clear token
         setTimeout(() => {
-          window.location.href = "/"; // Redirect to login page
+          window.location.href = "/signin"; // Redirect to login page
         }, 2000);
       } else if (response.ok) {
         const result = await response.json();

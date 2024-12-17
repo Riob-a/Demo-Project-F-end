@@ -18,7 +18,7 @@ import UserProfile from './Pages/UserProfile';
 
 function Layout(){
   const location = useLocation();
-  const hideNavAndFooter = location.pathname === '/' || location.pathname === '/logout' || location.pathname === '/register' || location.pathname === '/logout';
+  const hideNavAndFooter = location.pathname === '/signin' || location.pathname === '/logout' || location.pathname === '/register' || location.pathname === '/logout';
 
   useEffect(() => {
     new WOW.WOW().init();
@@ -30,16 +30,20 @@ function Layout(){
         {/* <Navbar /> */}
         <Routes>
         {/* Public Routes */}
-        <Route path="/" element={<SignIn />} />
+        <Route path="/signin" element={<SignIn />} />
         <Route path="register" element={<Register />} />
+        <Route path="/" element={<HomePage />}  />
+        <Route path="about" element={<About />}  />
+
+
 
         {/* Protected Routes */}
-        <Route path="home" element={<ProtectedRoute element={<HomePage />} />} />
+        {/* <Route path="home" element={<ProtectedRoute element={<HomePage />} />} /> */}
         <Route path="logout" element={<ProtectedRoute element={<Logout />} />} />
         <Route path="artwork" element={<ProtectedRoute element={<Artwork />} />} />
         <Route path="reference" element={<ProtectedRoute element={<Reference />} />} />
         <Route path="contact" element={<ProtectedRoute element={<ContactForm />} />} />
-        <Route path="about" element={<ProtectedRoute element={<About />} />} />
+        {/* <Route path="about" element={<ProtectedRoute element={<About />} />} /> */}
         <Route path='profile' element={<ProtectedRoute element={<UserProfile />} />} />
       </Routes>
         {/* <Footer /> */}

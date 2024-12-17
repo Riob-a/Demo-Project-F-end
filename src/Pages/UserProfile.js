@@ -23,7 +23,7 @@ const UserProfile = () => {
         toast.error("Session has expired. Please sign in again.");
         setTimeout(() => {
             localStorage.removeItem("access_token");
-            navigate("/");
+            navigate("/sigin");
         }, 3000);
     };
 

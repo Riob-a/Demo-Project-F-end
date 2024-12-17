@@ -41,54 +41,87 @@ function BasicExample() {
     toast.error("Session expired. Please log in again.");
     setTimeout(() => {
       localStorage.removeItem("access_token");
-      navigate("/");
-  }, 3000);
+      navigate("/signin");
+    }, 3000);
   };
 
   return (
-    <Navbar expand="lg" bg='dark' data-bs-theme="dark" className=''>
+    <Navbar expand="lg" bg="dark" data-bs-theme="dark">
       <Container>
-        <Navbar.Brand as={NavLink} to="/home" className="Navbar-header">
-          <Image roundedCircle alt='logo' src={logo} width="30" height="30" className='d-inline-block align-top' />
-          {' '}D3 +<b> RRICKS</b>
+        <Navbar.Brand as={NavLink} to="/" className="Navbar-header">
+          <Image
+            roundedCircle
+            alt="logo"
+            src={logo}
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+          />{" "}
+          D3 +<b> RRICKS</b>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="brand" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={NavLink} to="/home"  className="brand">Home | </Nav.Link>
-            {/* <Nav.Link as={NavLink} to="/reference" activeClassName="active" className="brand">Reference | </Nav.Link> */}
-            <Nav.Link as={NavLink} to="/artwork"  className="brand">ARt | </Nav.Link>
-            <Nav.Link as={NavLink} to="/register"  className="brand">Register |</Nav.Link>
-            {/* <Nav.Link as={NavLink} to="/" className="brand">Sign-in |</Nav.Link> */}
+            <Nav.Link as={NavLink} to="/" className="brand">Home | </Nav.Link>
+            {user ? (
+            <Nav.Link as={NavLink} to="/artwork" className="brand">ARt | </Nav.Link>
+            ) : (
+              <Nav.Link
+               onClick={() => {
+                toast.info("Please sign in to view artworks.");
+                navigate("/signin")
+               }}
+               className='brand'
+               >
+                ARt |
+               </Nav.Link>
+            )}
             <NavDropdown title="Dropdown" id="basic-nav-dropdown" className="brand">
-              {/* <NavDropdown.Item as={NavLink} to="/artwork"  className="brand">ARt</NavDropdown.Item> */}
-              <NavDropdown.Item as={NavLink} to="/contact"  className="brand">Contact Us</NavDropdown.Item>
-              <NavDropdown.Item as={NavLink} to="/about"  className="brand">About</NavDropdown.Item>
+              {user ? (
+                <NavDropdown.Item as={NavLink} to="/contact" className="brand">Contact Us</NavDropdown.Item>
+              ) : (
+                <NavDropdown.Item
+                onClick={() => {
+                  toast.info("Please sig in to contact us.");
+                  navigate("/signin");
+                }}
+                className='brand'
+                >
+                  Contact Us
+                </NavDropdown.Item>
+              )}
+              <NavDropdown.Item as={NavLink} to="/about" className="brand">About</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="https://automated-donation-platform-front-end.vercel.app/">
                 Fund.Girls
-            </NavDropdown.Item>
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
           
           <Nav className="ml-auto">
-          <Nav.Link as={NavLink} to="/profile" className="brand">
-              {/* Display profile image and name */}
-              {user && (
-                <>
-                  <Image 
-                    src={user.profile_image || "https://via.placeholder.com/30"} 
-                    alt="Profile" 
-                    roundedCircle 
-                    width="30" 
-                    height="30" 
+            {!user ? (
+              // Unauthenticated user links
+              <>
+                <Nav.Link as={NavLink} to="/signin" className="brand">Sign-in |</Nav.Link>
+                <Nav.Link as={NavLink} to="/register" className="brand">Register |</Nav.Link>
+              </>
+            ) : (
+              // Authenticated user links
+              <>
+                <Nav.Link as={NavLink} to="/profile" className="brand">
+                  <Image
+                    src={user.profile_image || "https://via.placeholder.com/30"}
+                    alt="Profile"
+                    roundedCircle
+                    width="30"
+                    height="30"
                     className="d-inline-block align-top me-2"
                   />
-                  {user.username} | 
-                </>
-              )}
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/logout"  className="brand">Log Out</Nav.Link>
+                  {user.username} |
+                </Nav.Link>
+                <Nav.Link as={NavLink} to="/logout" className="brand">Log Out</Nav.Link>
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

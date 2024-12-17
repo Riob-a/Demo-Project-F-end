@@ -38,7 +38,7 @@ function SignIn() {
                     if (result.user.role === 'admin') {
                         window.location.href = "https://demo-project-admin-wheat.vercel.app/home"; // Redirect admin to the admin dashboard
                     } else {
-                        navigate('/home'); // Redirect regular user to the home page
+                        navigate('/'); // Redirect regular user to the home page
                     }
                 }, 2000);
             } else {

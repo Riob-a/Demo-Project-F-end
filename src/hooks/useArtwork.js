@@ -42,7 +42,7 @@ const useArtwork = () => {
       if (error.response?.status === 401 || error.response?.status === 403) {
         localStorage.removeItem("access_token");
         alert("Session expired. Please log in again.");
-        window.location.href = "/";
+        window.location.href = "/signin";
       }
     }
   }, []);
@@ -136,7 +136,7 @@ const useArtwork = () => {
       if (error.response?.status === 401 || error.response?.status === 403) {
         localStorage.removeItem("access_token");
         alert("Session expired. Please log in again.");
-        window.location.href = "/";
+        window.location.href = "/signin";
       } else {
         setSubmissionStatus("Error occurred. Please try again.");
       }

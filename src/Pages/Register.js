@@ -36,7 +36,7 @@ function Register() {
                 setShowAlert(true);
                 setTimeout(() => {
                     setShowAlert(false);
-                    navigate('/');
+                    navigate('/signin');
                 }, 2000);
             } else {
                 setMessage(result.message || 'Error registering user');
