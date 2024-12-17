@@ -4,6 +4,7 @@ import { Container, Row, Col, Card, Button, Image, ListGroup, ListGroupItem } fr
 import { FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
 import WOW from "wowjs";
+import { SpeedInsights } from "@vercel/speed-insights/react"
 import "animate.css";
 import "./HomePage.css";
 
@@ -159,6 +160,7 @@ function HomePage() {
           ))}
         </Row>
       </section>
+      <SpeedInsights />
     </div>
   );
 }
