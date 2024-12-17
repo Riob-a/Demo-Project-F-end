@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
-import WOW from "wowjs";
+// import WOW from "wowjs";
 import "animate.css";
 import "./Components.css";
 
@@ -11,12 +11,12 @@ function Footer() {
       <Container fluid>
         <Row>
           <Col md={3}>
-            <h2 className="Navbar-header">D3-<b>RRICKS</b></h2>
+            <h2 className="Navbar-header">D3 + <b>RRICKS</b></h2>
           </Col>
           <Col md={3}>
             <h5 className="footer-title">About Us</h5>
             <p>
-              D3-<b>RRICKS</b> is a leading platform that provides Artists and
+              D3 +<b>RRICKS</b> is a leading platform that provides Artists and
               Creatives resources for hosting art and making their Submissions.
             </p>
           </Col>
@@ -59,15 +59,15 @@ function Footer() {
 
         <Row>
           <Col md={6}>
-            <p>© 2024 D3-<b>RRICKS</b>. All rights reserved.</p>
+            <p>© 2024 D3 + <b>RRICKS</b>. All rights reserved.</p>
           </Col>
           <Col md={6} className="text-end">
             <ul className="list-inline footer-links">
               <li className="list-inline-item">
-                <a href="#" className="text-secondary">Privacy Policy</a>
+                <a href="/..." className="text-secondary">Privacy Policy</a>
               </li>
               <li className="list-inline-item">
-                <a href="#" className="text-secondary">Terms of Service</a>
+                <a href="/..." className="text-secondary">Terms of Service</a>
               </li>
             </ul>
           </Col>

@@ -24,14 +24,6 @@ body {
   }
 }
 
-/* .gradient-background {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: linear-gradient(to right, #39545B, #547562);
-} */
-
 /* fonts */
 .spicy-rice-regular {
   font-family: "Spicy Rice", serif;
@@ -63,7 +55,6 @@ body {
   font-style: normal;
 }
 
-
 /* header */
 .card-img-top {
     object-fit: cover;
@@ -87,17 +78,15 @@ body {
     font-style: normal;
 }
 .header-section p {
-    display: flex;
-    justify-content: center;
-    font-family: "Rowdies", sans-serif;
-    font-weight: 800;
-    font-style: normal;
+  font-family: "Unbounded", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 450;
+  font-style: normal;
 }
 
 /* welcome section */
 .welcome-button {
   background-color: #EA8E1D;
-  /* background-color: #39545B; */
 }
 .welcome-button .whileHover{
   color: #39545B;
@@ -108,7 +97,6 @@ body {
   font-weight: 900;
   font-style: normal;
 }
-
 .Art-card {
   background-color: #EA8E1D;
   

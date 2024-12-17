@@ -1,4 +1,4 @@
-import React, { useEffect, lazy, Suspense } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Card, Button, Image, ListGroup, ListGroupItem } from "react-bootstrap";
 import { FaArrowRight } from "react-icons/fa";
@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import WOW from "wowjs";
 import "animate.css";
 import "./HomePage.css";
-import { path } from "framer-motion/client";
 
 // Centralized image URLs
 const imageUrls = {
@@ -64,12 +63,12 @@ function HomePage() {
   return (
     <div>
       {/* Header Section */}
-      <header className="header-section bg-dark text-white text-center py-4 wow fadeInUp" data-wow-duration="1.0s">
+      <header className="header-section bg-dark text-white text-center py-4 wow fadeInUp" data-wow-duration="0.8s">
         <h1 className="display-4 wow fadeInUp" data-wow-duration="1.0s" data-wow-delay="1.5s">DERRICKS CREATION DEMO</h1>
         <p className="wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="1.6s" >Discover the world of art, history, and culture</p>
-        <a className="btn welcome-button btn-dark  unbounded-uniquifier-h1 wow zoomIn" data-wow-duration="1.0s" data-wow-delay="1.8s" href="/reference" role="button">
+        {/* <a className="btn welcome-button btn-dark  unbounded-uniquifier-h1 wow zoomIn" data-wow-duration="1.0s" data-wow-delay="1.8s" href="/reference" role="button">
           Learn More <FaArrowRight />
-        </a>
+        </a> */}
       </header>
 
       {/* Art Category Sections */}
@@ -136,7 +135,7 @@ function HomePage() {
               </Button>
             </Col>
             <Col xs={12} md={6}>
-              <LazyImage src={imageUrls.museumImage} alt="Museum" />
+              <LazyImage src={imageUrls.museumImage} alt="Museum" rounded />
             </Col>
           </Row>
         </Container>

@@ -50,7 +50,7 @@ function BasicExample() {
       <Container>
         <Navbar.Brand as={NavLink} to="/home" className="Navbar-header">
           <Image roundedCircle alt='logo' src={logo} width="30" height="30" className='d-inline-block align-top' />
-          {' '}D3-<b> RRICKS</b>
+          {' '}D3 +<b> RRICKS</b>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="brand" />
         <Navbar.Collapse id="basic-navbar-nav">

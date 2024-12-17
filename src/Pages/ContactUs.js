@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Container, Row, Col, Card, Spinner } from 'react-bootstrap';
 import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt } from 'react-icons/fa';
 import WOW from "wowjs";
@@ -13,7 +13,7 @@ const ContactForm = () => {
 
   const [responseMessage, setResponseMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const nameInputRef = useRef(null);
+  // const nameInputRef = useRef(null);
 
   useEffect(() => {
     new WOW.WOW().init();
