@@ -7,7 +7,6 @@ import { FaCircleArrowUp } from "react-icons/fa6";
 import useArtwork from "../hooks/useArtwork";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { SpeedInsights } from "@vercel/speed-insights/react"
 
 const ArtworkCard = ({ artwork, wowDelay }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -232,7 +231,6 @@ const Artwork = () => {
           style={{ fontSize: "2rem", position: "fixed", bottom: "20px", right: "20px", cursor: "pointer" }}
         />
       )}
-      <SpeedInsights /> 
     </div>
   );
 }
