@@ -1,12 +1,9 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Container, Row, Form, Button, Card, Col, Accordion, Spinner, ProgressBar } from "react-bootstrap";
 import { motion } from "framer-motion";
-import WOW from "wowjs";
 import "./ARt.css";
 import { FaCircleArrowUp } from "react-icons/fa6";
 import useArtwork from "../hooks/useArtwork";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
 
 const ArtworkCard = ({ artwork, wowDelay }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -54,7 +51,7 @@ const ArtworkCard = ({ artwork, wowDelay }) => {
           {isExpanded && (
             <>
               <Card.Text>
-                <strong className="unbounded-uniquifier-header">Style: </strong> {artwork.style}
+                {/* <strong className="unbounded-uniquifier-header">Style: </strong> {artwork.style} */}
                 <br />
                 <strong className="unbounded-uniquifier-header">Author: </strong>{artwork.email}
               </Card.Text>
