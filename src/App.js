@@ -15,7 +15,7 @@ import Register from './Pages/Register';
 import Logout from './Pages/LogOut';
 import ProtectedRoute from './Components/ProtectedRoute';
 import UserProfile from './Pages/UserProfile';
-import { SpeedInsights } from "@vercel/speed-insights/react"
+
 function Layout(){
   const location = useLocation();
   const hideNavAndFooter = location.pathname === '/signin' || location.pathname === '/logout' || location.pathname === '/register' || location.pathname === '/logout';
@@ -57,7 +57,6 @@ function App() {
       <Router>
          <Layout />
       </Router>
-      <SpeedInsights />
     </div>
   );
 }
