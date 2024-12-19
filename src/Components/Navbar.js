@@ -102,13 +102,13 @@ function BasicExample() {
             {!user ? (
               // Unauthenticated user links
               <>
-                <Nav.Link as={NavLink} to="/signin" className="brand">Sign-in |</Nav.Link>
-                <Nav.Link as={NavLink} to="/register" className="brand">Register |</Nav.Link>
+                <Nav.Link as={NavLink} to="/signin" className="brand2">Sign-in |</Nav.Link>
+                <Nav.Link as={NavLink} to="/register" className="brand2">Register |</Nav.Link>
               </>
             ) : (
               // Authenticated user links
               <>
-                <Nav.Link as={NavLink} to="/profile" className="brand">
+                <Nav.Link as={NavLink} to="/profile" className="brand2">
                   <Image
                     src={user.profile_image || "https://via.placeholder.com/30"}
                     alt="Profile"
@@ -119,7 +119,7 @@ function BasicExample() {
                   />
                   {user.username} |
                 </Nav.Link>
-                <Nav.Link as={NavLink} to="/logout" className="brand">Log Out</Nav.Link>
+                <Nav.Link as={NavLink} to="/logout" className="brand2">Log Out</Nav.Link>
               </>
             )}
           </Nav>

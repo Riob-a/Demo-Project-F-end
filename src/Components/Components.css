@@ -16,6 +16,13 @@
     font-weight: 450;
     font-style: normal;
 }
+.brand2{
+  color:#EA8E1D ;
+  font-family: "Unbounded", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 450;
+  font-style: normal;
+}
 .navbar-nav {
   display: flex;
   gap: 15px; /* Adjust this value to increase/decrease spacing */

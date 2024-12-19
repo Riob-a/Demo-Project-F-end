@@ -11,6 +11,8 @@ const UserProfile = () => {
     const [contacts, setContacts] = useState([]); // State for contacts
     const [loading, setLoading] = useState(true);
     const [editing, setEditing] = useState(false);
+    const [changingPassword, setChangingPassword] = useState(false);
+    const [passwordData, setPasswordData] = useState({ currentPassword: "", newPassword: "", confirmPassword: "" });
     const [formData, setFormData] = useState({ username: "", email: "", profile_image: null });
     const navigate = useNavigate();
 
@@ -23,7 +25,7 @@ const UserProfile = () => {
         toast.error("Session has expired. Please sign in again.");
         setTimeout(() => {
             localStorage.removeItem("access_token");
-            navigate("/sigin");
+            navigate("/signin");
         }, 3000);
     };
 
@@ -101,6 +103,44 @@ const UserProfile = () => {
     const handleEdit = () => {
         setEditing(true);
     };
+
+    const handleChangePassword = () => {
+        setChangingPassword(true);
+    };
+
+    const handleSavePassword = async () => {
+        if (passwordData.newPassword !== passwordData.confirmPassword) {
+            toast.error("New passwords do not match");
+            return;
+        }
+
+        try {
+            const response = await fetch("https://demo-project-backend-qrd8.onrender.com/api/users/change-password", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+                },
+                body: JSON.stringify({
+                    old_password: passwordData.oldPassword,
+                    new_password: passwordData.newPassword,
+                }),
+            });
+
+            if (response.ok) {
+                toast.success("Password changed successfully");
+                setChangingPassword(false);
+                setPasswordData({ oldPassword: "", newPassword: "", confirmPassword: "" });
+            } else if (response.status === 401) {
+                handleSessionTimeout();
+            } else {
+                toast.error("Failed to change password");
+            }
+        } catch (error) {
+            toast.error("Network error while changing password");
+        }
+    };
+
 
     const handleSave = async () => {
         try {
@@ -224,6 +264,35 @@ const UserProfile = () => {
                                     Back
                                 </Button>
                             </Form>
+                        ) : changingPassword ? (
+                            <Form>
+                                <Form.Group className="m-2">
+                                    <Form.Label><b>Current Password</b></Form.Label>
+                                    <Form.Control 
+                                       type="password"
+                                       value={passwordData.oldPassword}
+                                       onChange={(e) => setPasswordData({...passwordData, oldPassword: e.target.value })}
+                                    />
+                                </Form.Group>
+                                <Form.Group className="m-2">
+                                    <Form.Label><b>New Password</b></Form.Label>
+                                    <Form.Control 
+                                       type="password"
+                                       value={passwordData.newPassword}
+                                       onChange={(e) => setPasswordData({...passwordData, newPassword: e.target.value })}
+                                    />
+                                </Form.Group>
+                                <Form.Group className="m-2">
+                                    <Form.Label><b>Confirm New Password</b></Form.Label>
+                                    <Form.Control 
+                                       type="password"
+                                       value={passwordData.confirmPassword}
+                                       onChange={(e) => setPasswordData({...passwordData, confirmPassword: e.target.value })}
+                                    />
+                                </Form.Group>
+                                <Button variant="success" onClick={handleSavePassword} className="mt-2 me-2 mb-3">Save Password</Button>
+                                <Button variant="secondary" onClick={() => setChangingPassword(false)} className="mt-2 mb-3">Cancel</Button>
+                            </Form>
                         ) : (
                             <>
                                 <p>
@@ -236,8 +305,11 @@ const UserProfile = () => {
                                     <b>Created:</b> {user.created_at}
                                 </p>
                                 <hr />
-                                <Button variant="primary" onClick={handleEdit} className="me-2 mt-2 mb-3">
+                                <Button variant="primary" onClick={handleEdit} className="me-2 mt-2 mb-3 judtify-content-center">
                                     Edit Profile
+                                </Button>
+                                <Button variant="warning" onClick={handleChangePassword} className="me-2 mt-2 mb-3">
+                                    Change Password
                                 </Button>
                             </>
                         )}
