@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import { Container, Row, Form, Button, Card, Col, Accordion, Spinner, ProgressBar } from "react-bootstrap";
+import React, { useState } from "react";
+import { Container, Row, Form, Button, Card, Col, Accordion, ProgressBar } from "react-bootstrap";
 import { motion } from "framer-motion";
 import "./ARt.css";
 import { FaCircleArrowUp } from "react-icons/fa6";
@@ -12,20 +12,19 @@ const ArtworkCard = ({ artwork, wowDelay }) => {
 
   return (
     <motion.div
-      className={`card-hover ${isExpanded ? "expanded" : ""}`}
+      className={`card-hover  ${isExpanded ? "expanded" : ""}`}
       data-wow-duration="1s"
       data-wow-delay={wowDelay}
       whileHover={{ scale: isExpanded ? 1 : 1.05 }}
       whileTap={{ scale: isExpanded ? 1 : 0.95 }}
       onClick={toggleExpand}
-      data-bs-theme="dark"
       style={{
         cursor: "pointer",
         transition: "max-height 0.3s ease-in-out",
       }}
     >
       <Card
-        className="mx-auto wow fadeInLeft"
+        className="mx-auto  wow fadeInLeft grid-container"
         style={{
           width: isExpanded ? "100%" : "21rem",
           maxHeight: isExpanded ? "none" : "450px",
@@ -43,7 +42,7 @@ const ArtworkCard = ({ artwork, wowDelay }) => {
           <Card.Title className="unbounded-uniquifier-header">
             {artwork.name}
           </Card.Title>
-          <Card.Text className="unbounded-uniquifier-p2 text-muted">
+          <Card.Text className="unbounded-uniquifier-p2">
             {isExpanded
               ? artwork.description
               : `${artwork.description.substring(0, 100)}...`}
@@ -146,7 +145,7 @@ const Artwork = () => {
             <h1 className="unbounded-uniquifier-h1">Add your own pieces</h1>
             <hr />
             <Col xs={12} md={6} className="wow fadeInLeft mt-5">
-              <Card className="card-color text-white">
+              <Card className="">
                 <Card.Body className="p-5">
                   <Card.Title className="contact-card mb-4 unbounded-uniquifier-h1">Submit Your Artwork</Card.Title>
                   <Form onSubmit={handleSubmit}>

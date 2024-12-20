@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Card, Button, Image, ListGroup, ListGroupItem } from "react-bootstrap";
 import { FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { ThemeContext } from "../Components/ThemeContext";
 import WOW from "wowjs";
 import "animate.css";
 import "./HomePage.css";
@@ -14,7 +15,6 @@ const imageUrls = {
   submitArt: "https://i.pinimg.com/originals/db/5a/54/db5a547a554cfaebfcb48aa1e8462918.gif",
   museumImage: "https://i.pinimg.com/564x/10/9a/dd/109addc2397a3257c90b61acccb7a273.jpg",
 };
-
 // Lazy-loaded Image component
 const LazyImage = ({ src, alt, rounded = false }) => (
   <Image src={src} alt={alt} fluid rounded={rounded} loading="lazy" />
@@ -26,7 +26,7 @@ const CardComponent = ({ path, imgSrc, title, text, wowDelay, navigateToSection 
     className="wow fadeInUp card-hover"
     data-wow-duration="1s"
     data-wow-delay={wowDelay}
-    data-bs-theme="dark"
+    data-bs-theme=""
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
     onClick={() => navigateToSection(path)}
@@ -35,7 +35,7 @@ const CardComponent = ({ path, imgSrc, title, text, wowDelay, navigateToSection 
       <Card.Img variant="top" src={imgSrc} loading="lazy" />
       <Card.Body>
         <Card.Title className="unbounded-uniquifier-header">{title}</Card.Title>
-        <Card.Text className="unbounded-uniquifier-p2 text-muted">{text}</Card.Text>
+        <Card.Text className="unbounded-uniquifier-p2">{text}</Card.Text>
       </Card.Body>
       <ListGroup variant="flush">
         <ListGroupItem className="unbounded-uniquifier-header">
@@ -47,6 +47,8 @@ const CardComponent = ({ path, imgSrc, title, text, wowDelay, navigateToSection 
 );
 function HomePage() {
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
 
   useEffect(() => {
       const wowInstance = new WOW.WOW();
@@ -66,9 +68,9 @@ function HomePage() {
       <header className="header-section bg-dark text-white text-center py-4 wow fadeInUp" data-wow-duration="0.8s">
         <h1 className="display-4 wow fadeInUp" data-wow-duration="1.0s" data-wow-delay="1.5s">DERRICKS CREATION DEMO</h1>
         <p className="wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="1.6s" >Discover the world of art, history, and culture</p>
-        {/* <a className="btn welcome-button btn-dark  unbounded-uniquifier-h1 wow zoomIn" data-wow-duration="1.0s" data-wow-delay="1.8s" href="/reference" role="button">
-          Learn More <FaArrowRight />
-        </a> */}
+        <Button onClick={toggleTheme}>
+        Switch to {theme === "light" ? "Dark" : "Light"} Mode
+      </Button>
       </header>
 
       {/* Art Category Sections */}

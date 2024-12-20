@@ -4,11 +4,14 @@ import './index.css';
 import 'animate.css/animate.min.css';  // Import Animate.css for animations
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ThemeProvider } from "./Components/ThemeContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <ThemeProvider>
     <App />
+    </ThemeProvider>
   </React.StrictMode>
 );
 

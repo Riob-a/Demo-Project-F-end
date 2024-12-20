@@ -85,7 +85,7 @@ const ContactForm = () => {
           
           <Col xs={12} md={6}>
             <div className="wow fadeInLeft" data-wow-duration="1s">
-              <Card className="card-color text-white" style={{ boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }} border="" bg=''>
+              <Card className="mx-auto" style={{ boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }} border="" bg=''>
                 <Card.Body className="p-5">
                   <Card.Title className="contact-card mb-4 unbounded-uniquifier-header">Contact Me</Card.Title>
                   <Form onSubmit={handleSubmit}>

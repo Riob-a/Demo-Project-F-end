@@ -4,12 +4,12 @@
 
 .Navbar-header {
   font-family: "Londrina Sketch", sans-serif;
-  font-weight: 400;
+  font-weight: 450;
   font-style: normal;
   color: #EA8E1D;
   
 }
-.brand{
+/* .brand{
     color:#547562 ;
     font-family: "Unbounded", sans-serif;
     font-optical-sizing: auto;
@@ -22,13 +22,12 @@
   font-optical-sizing: auto;
   font-weight: 450;
   font-style: normal;
-}
+} */
 .navbar-nav {
   display: flex;
-  gap: 15px; /* Adjust this value to increase/decrease spacing */
+  gap: 15px; 
 }
-.navbar .nav-link.active {
-    /* text-decoration: underline; */
+/* .navbar .nav-link.active {
     font-weight: bold;
     color: #95c6a9;
   }
@@ -46,55 +45,48 @@
     background-size: auto;
     background-position: center;
     background-repeat: repeat;
-  }
+  } */
 
-/* Add smooth transitions for all links */
 .navbar .nav-link {
   transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-/* Hover effect for nav links */
-.navbar .nav-link:hover {
-  color: #95c6a9; /* Hover color */
-  transform: scale(1.1); /* Slightly increase size on hover */
-}
+/* .navbar .nav-link:hover {
+  color: #95c6a9; 
+  transform: scale(1.1); 
+} */
 
-/* Active link style */
-.navbar .nav-link.active {
+/* .navbar .nav-link.active {
   color: #95c6a9;
-  border-bottom: 3px solid #95c6a9; /* Indicator for active link */
-}
+  border-bottom: 3px solid #95c6a9; 
+} */
 
-/* Logo hover animation */
 .navbar-brand img {
   transition: transform 0.5s ease-in-out;
 }
 
 .navbar-brand img:hover {
-  transform: rotate(360deg); /* 360 degree rotation on hover */
+  transform: rotate(360deg);
 }
 
-/* Navbar collapse animation */
 .collapse {
   transition: max-height 0.5s ease-in-out;
   max-height: 0;
-  /* overflow: auto; */
 }
 
 .collapse.show {
-  max-height: 500px; /* Adjust depending on the content size */
+  max-height: 500px;
 }
 .navbar-collapse {
-  padding-left: 20px; /* Adjust this value to the desired distance */
+  padding-left: 20px; 
 }
 
-/* For extra spacing in collapsed navbar for smaller screens */
 @media (max-width: 768px) {
   .navbar-collapse {
-    margin-left: 20px; /* This will add space from the left edge */
+    margin-left: 20px; 
   }
   .navbar-nav {
-    padding-left: 10px; /* Optional: Add space to the left side of nav links */
+    padding-left: 10px; 
   }
 }
 

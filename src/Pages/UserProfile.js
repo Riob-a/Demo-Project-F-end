@@ -219,13 +219,13 @@ const UserProfile = () => {
                     <Card.Body>
                         <h3>Profile</h3>
                         <hr />
-                        <div className="text-center">
+                        <div className="text-center m-4">
                             {user.profile_image ? (
                                 <img
                                     src={user.profile_image}
                                     alt="Profile"
                                     className="profile-image"
-                                    style={{ width: "150px", height: "150px", borderRadius: "50%" }}
+                                    style={{ width: "200px", height: "200px", borderRadius: "50%" }}
                                 />
                             ) : (
                                 <div>No Profile Image</div>
@@ -255,14 +255,15 @@ const UserProfile = () => {
                                     <Form.Label><b>Profile Image</b></Form.Label>
                                     <Form.Control type="file" onChange={(e) => setFormData({ ...formData, profile_image: e.target.files[0] })} />
                                 </Form.Group>
-
-                                <Button variant="success" onClick={handleSave} className="mt-2 me-2 mb-3">
+                                <div className="float-start">
+                                <Button variant="primary" onClick={handleSave} className="mt-2 me-4 mb-3">
                                     Save
                                 </Button>
 
                                 <Button variant="secondary" onClick={() => setEditing(false)} className="mt-2 mb-3">
                                     Back
                                 </Button>
+                                </div>
                             </Form>
                         ) : changingPassword ? (
                             <Form>
@@ -290,8 +291,8 @@ const UserProfile = () => {
                                        onChange={(e) => setPasswordData({...passwordData, confirmPassword: e.target.value })}
                                     />
                                 </Form.Group>
-                                <Button variant="success" onClick={handleSavePassword} className="mt-2 me-2 mb-3">Save Password</Button>
-                                <Button variant="secondary" onClick={() => setChangingPassword(false)} className="mt-2 mb-3">Cancel</Button>
+                                <Button variant="secondary" onClick={handleSavePassword} className="mt-2 me-2 mb-3">Save Password</Button>
+                                <Button variant="dark" onClick={() => setChangingPassword(false)} className="mt-2 mb-3">Cancel</Button>
                             </Form>
                         ) : (
                             <>
@@ -308,15 +309,16 @@ const UserProfile = () => {
                                 <Button variant="primary" onClick={handleEdit} className="me-2 mt-2 mb-3 judtify-content-center">
                                     Edit Profile
                                 </Button>
-                                <Button variant="warning" onClick={handleChangePassword} className="me-2 mt-2 mb-3">
+                                <Button variant="secondary" onClick={handleChangePassword} className="me-2 mt-2 mb-3">
                                     Change Password
                                 </Button>
                             </>
                         )}
-
+                        <div className="float-end">
                         <Button variant="danger" onClick={handleDelete} className="mt-2 mb-3">
                             Delete Profile
                         </Button>
+                        </div>
                     </Card.Body>
                 </Card>
             )}
