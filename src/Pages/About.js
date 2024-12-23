@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Container, Row, Col, Image, Button, Carousel } from "react-bootstrap";
 import { FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { WOW } from "wowjs";
 import "animate.css/animate.min.css";
 import { FaChevronLeft, FaChevronRight, FaPlay, FaPause } from "react-icons/fa";
+import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
+import { ThemeContext } from "../Components/ThemeContext";
 import "./About.css";
 
 function About() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const images = [
     "https://i.pinimg.com/736x/5a/c8/af/5ac8af380fdd090598de21cabcfe8f04.jpg",
@@ -39,6 +42,15 @@ function About() {
 
   return (
     <div>
+      {/* Floating Theme Toggle Button */}
+      <Button
+        className="floating-theme-button"
+        onClick={toggleTheme}
+        variant={theme === "light" ? "dark" : "light"}
+      >
+        {theme === "light" ? <MdOutlineDarkMode size={24} /> : <MdOutlineLightMode size={24} />}
+      </Button>
+      
       {/* Welcome Section */}
       <Container className="welcome-section py-5 text-center justify-content-center mb-5 mt-5">
         <Row className="gy-5">

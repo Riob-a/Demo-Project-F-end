@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Form, Button, Container, Row, Col, Card, Spinner } from 'react-bootstrap';
 import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt } from 'react-icons/fa';
+import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
+import { ThemeContext } from "../Components/ThemeContext";
 import WOW from "wowjs";
 import "./Contact Me.css";
 
@@ -13,6 +15,7 @@ const ContactForm = () => {
 
   const [responseMessage, setResponseMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const { theme, toggleTheme } = useContext(ThemeContext);
   // const nameInputRef = useRef(null);
 
   useEffect(() => {
@@ -75,6 +78,15 @@ const ContactForm = () => {
           <a href='/home' style={{ color: "#EA8E1D" }}>HomePage</a>
         </p>
       </div>
+
+      {/* Floating Theme Toggle Button */}
+            <Button
+              className="floating-theme-button"
+              onClick={toggleTheme}
+              variant={theme === "light" ? "dark" : "light"}
+            >
+              {theme === "light" ? <MdOutlineDarkMode size={24} /> : <MdOutlineLightMode size={24} />}
+            </Button>
 
       <Container className='justify-content-center mb-5'>
         <Row className="gy-5 justify-content-center">

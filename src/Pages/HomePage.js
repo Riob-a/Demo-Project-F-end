@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Card, Button, Image, ListGroup, ListGroupItem } from "react-bootstrap";
 import { FaArrowRight } from "react-icons/fa";
+import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { motion } from "framer-motion";
 import { ThemeContext } from "../Components/ThemeContext";
 import WOW from "wowjs";
@@ -68,10 +69,16 @@ function HomePage() {
       <header className="header-section bg-dark text-white text-center py-4 wow fadeInUp" data-wow-duration="0.8s">
         <h1 className="display-4 wow fadeInUp" data-wow-duration="1.0s" data-wow-delay="1.5s">DERRICKS CREATION DEMO</h1>
         <p className="wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="1.6s" >Discover the world of art, history, and culture</p>
-        <Button onClick={toggleTheme}>
-        Switch to {theme === "light" ? "Dark" : "Light"} Mode
-      </Button>
       </header>
+
+      {/* Floating Theme Toggle Button */}
+      <Button
+        className="floating-theme-button"
+        onClick={toggleTheme}
+        variant={theme === "light" ? "dark" : "light"}
+      >
+        {theme === "light" ? <MdOutlineDarkMode size={24} /> : <MdOutlineLightMode size={24} />}
+      </Button>
 
       {/* Art Category Sections */}
       <section className="py-5 mt-5 mb-5">
