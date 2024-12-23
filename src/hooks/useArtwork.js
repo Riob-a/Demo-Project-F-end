@@ -29,7 +29,7 @@ const useArtwork = () => {
     const token = localStorage.getItem("access_token");
     try {
       const response = await axios.get(
-        `https://demo-project-backend-qrd8.onrender.com/api/artworks/${style}`,
+        `https://demo-project-backend-ude8.onrender.com/api/artworks/${style}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -104,7 +104,7 @@ const useArtwork = () => {
 
     try {
       const response = await axios.post(
-        "https://demo-project-backend-qrd8.onrender.com/api/artworks/submit",
+        "https://demo-project-backend-ude8.onrender.com/api/artworks/submit",
         data,
         {
           headers: { Authorization: `Bearer ${token}` },

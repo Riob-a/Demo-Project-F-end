@@ -1,4 +1,4 @@
-// Updated Register.js
+//  https://demo-project-backend-ude8.onrender.com
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Card, Col, Container, Row, Alert } from 'react-bootstrap';
 import WOW from "wowjs";
@@ -26,7 +26,7 @@ function Register() {
         }
 
         try {
-            const response = await fetch('https://demo-project-backend-qrd8.onrender.com/api/register', {
+            const response = await fetch('https://demo-project-backend-ude8.onrender.com/api/register', {
                 method: 'POST',
                 body: formData,
             });

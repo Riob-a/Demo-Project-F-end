@@ -31,7 +31,7 @@ const UserProfile = () => {
 
     const fetchUserProfile = async () => {
         try {
-            const response = await fetch("https://demo-project-backend-qrd8.onrender.com/api/users/me", {
+            const response = await fetch("https://demo-project-backend-ude8.onrender.com/api/users/me", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -45,7 +45,7 @@ const UserProfile = () => {
                 setFormData({ username: data.username, email: data.email, profile_image: null });
     
                 const artworkResponse = await fetch(
-                    `https://demo-project-backend-qrd8.onrender.com/api/users/${data.id}/artworks`,
+                    `https://demo-project-backend-ude8.onrender.com/api/users/${data.id}/artworks`,
                     {
                         method: "GET",
                         headers: {
@@ -79,7 +79,7 @@ const UserProfile = () => {
     
     const fetchUserContacts = async () => {
         try {
-            const response = await fetch("https://demo-project-backend-qrd8.onrender.com/api/users/me/contacts", {
+            const response = await fetch("https://demo-project-backend-ude8.onrender.com/api/users/me/contacts", {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -115,7 +115,7 @@ const UserProfile = () => {
         }
 
         try {
-            const response = await fetch("https://demo-project-backend-qrd8.onrender.com/api/users/change-password", {
+            const response = await fetch("https://demo-project-backend-ude8.onrender.com/api/users/change-password", {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -154,7 +154,7 @@ const UserProfile = () => {
                 formDataObj.append("profile_image", formData.profile_image);
             }
 
-            const response = await fetch(`https://demo-project-backend-qrd8.onrender.com/api/users/${currentUserId}`, {
+            const response = await fetch(`https://demo-project-backend-ude8.onrender.com/api/users/${currentUserId}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -182,7 +182,7 @@ const UserProfile = () => {
     const handleDelete = async () => {
         try {
             const currentUserId = user.id;
-            const response = await fetch(`https://demo-project-backend-qrd8.onrender.com/api/users/${currentUserId}`, {
+            const response = await fetch(`https://demo-project-backend-ude8.onrender.com/api/users/${currentUserId}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("access_token")}`,
