@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Container, Row, Form, Button, Card, Col, Accordion, ProgressBar } from "react-bootstrap";
 import { motion } from "framer-motion";
 import "./ARt.css";
 import { FaCircleArrowUp } from "react-icons/fa6";
+import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
+import { ThemeContext } from "../Components/ThemeContext";
 import useArtwork from "../hooks/useArtwork";
 
 const ArtworkCard = ({ artwork, wowDelay }) => {
@@ -72,6 +74,8 @@ const ArtworkCard = ({ artwork, wowDelay }) => {
 };
 
 const Artwork = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  
   const {
     formData,
     animatedArtworks,
@@ -224,9 +228,18 @@ const Artwork = () => {
         <FaCircleArrowUp
           className="scroll-to-top"
           onClick={scrollToTop}
-          style={{ fontSize: "2rem", position: "fixed", bottom: "20px", right: "20px", cursor: "pointer" }}
+          style={{ fontSize: "2rem" }}
         />
       )}
+
+      {/* Floating Theme Toggle Button */}
+            <Button
+              className="floating-theme-button"
+              onClick={toggleTheme}
+              variant={theme === "light" ? "dark" : "light"}
+            >
+              {theme === "light" ? <MdOutlineDarkMode size={24} /> : <MdOutlineLightMode size={24} />}
+            </Button>
     </div>
   );
 }

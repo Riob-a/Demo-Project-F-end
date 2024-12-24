@@ -37,12 +37,9 @@ const CardComponent = ({ path, imgSrc, title, text, wowDelay, navigateToSection 
       <Card.Body>
         <Card.Title className="unbounded-uniquifier-header">{title}</Card.Title>
         <Card.Text className="unbounded-uniquifier-p2">{text}</Card.Text>
+        <hr />
+        <Card.Link className="unbounded-uniquifier-header" href={`#${path}`}>{title} <FaArrowRight /></Card.Link>
       </Card.Body>
-      <ListGroup variant="flush">
-        <ListGroupItem className="unbounded-uniquifier-header">
-          <Card.Link href={`#${path}`}>{title} <FaArrowRight /></Card.Link>
-        </ListGroupItem>
-      </ListGroup>
     </Card>
   </motion.div>
 );

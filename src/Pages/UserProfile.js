@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Card, Button, Container, Row, Col, Spinner, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
+import { ThemeContext } from "../Components/ThemeContext";
 import WOW from "wowjs";
 import "./UserProf.css";
 
@@ -14,6 +16,7 @@ const UserProfile = () => {
     const [changingPassword, setChangingPassword] = useState(false);
     const [passwordData, setPasswordData] = useState({ currentPassword: "", newPassword: "", confirmPassword: "" });
     const [formData, setFormData] = useState({ username: "", email: "", profile_image: null });
+    const { theme, toggleTheme } = useContext(ThemeContext);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -214,6 +217,15 @@ const UserProfile = () => {
 
     return (
         <Container className="mt-4 mb-4 unbounded-uniquifier-p">
+            {/* Floating Theme Toggle Button */}
+                  <Button
+                    className="floating-theme-button"
+                    onClick={toggleTheme}
+                    variant={theme === "light" ? "dark" : "light"}
+                  >
+                    {theme === "light" ? <MdOutlineDarkMode size={24} /> : <MdOutlineLightMode size={24} />}
+                  </Button>
+
             {user && (
                 <Card className="wow fadeInLeft" data-wow-delay="0.2s">
                     <Card.Body>

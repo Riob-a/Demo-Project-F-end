@@ -12,7 +12,7 @@ function BasicExample() {
 
   const fetchUserProfile = async () => {
     try {
-      const response = await fetch("https://demo-project-backend-qrd8.onrender.com/api/users/me", {
+      const response = await fetch("https://demo-project-backend-ude8.onrender.com/api/users/me", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -46,7 +46,7 @@ function BasicExample() {
   };
 
   return (
-    <Navbar expand="lg" bg="" data-bs-theme="">
+    <Navbar expand="lg">
       <Container>
         <Navbar.Brand as={NavLink} to="/" className="Navbar-header">
           <Image
@@ -82,7 +82,7 @@ function BasicExample() {
               ) : (
                 <NavDropdown.Item
                 onClick={() => {
-                  toast.info("Please sig in to contact us.");
+                  toast.info("Please sign in to contact us.");
                   navigate("/signin");
                 }}
                 className='brand'

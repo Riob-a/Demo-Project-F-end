@@ -121,13 +121,13 @@ body.light .navbar .nav-link:hover {
   color: #ea8e1deb; 
   transform: scale(1.1); 
 }
-body.light body.dark .navbar .dropdown-menu .dropdown-item:hover {
+body.light  .navbar .dropdown-menu .dropdown-item:hover {
   background-color: #363837;
   color: #ea8e1df1;
   transform: scale(1.1);
   transition: color 0.3s ease-in-out, transform 0.3s ease-in-out; 
 }
- body.light body.dark  .navbar .dropdown-menu .dropdown-item.active{
+ body.light  .navbar .dropdown-menu .dropdown-item.active{
   color: #ea8e1df1;
   background-color: #363837;
   background-image: url('https://i.pinimg.com/564x/17/3b/23/173b2319c6ab7d62599110461bfe37fe.jpg');
@@ -136,6 +136,7 @@ body.light body.dark .navbar .dropdown-menu .dropdown-item:hover {
   background-repeat: repeat;
   transition: background-color 0.3s, color 0.3s;
 }
+
 /* dark */
 body.dark .brand{
   color:#547562 ;
@@ -177,5 +178,40 @@ body.dark  .navbar .dropdown-menu .dropdown-item.active{
   background-position: center;
   background-repeat: repeat;
   transition: background-color 0.3s, color 0.3s;
+
+}
+/* footer */
+body.dark .footer{
+  background-color: #212529;
+  color:#547562 ;
+  font-family: "Unbounded", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 450;
+  font-style: normal;
+  transition: background-color 0.3s, color 0.3s;
+}
+body.dark .footer-title{
+  color: #95c6a9;
+  font-family: "Unbounded", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 450;
+  font-style: normal;
+}
+body.light .footer{
+  background-color: white;
+  color:#ea8e1da2 ;
+  font-family: "Unbounded", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 450;
+  font-style: normal;
+  transition: background-color 0.3s, color 0.3s; 
+}
+body.light .footer-title{
+  color: #ea8e1da2;
+  font-family: "Unbounded", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 450;
+  font-style: normal;
+  transition: background-color 0.3s, color 0.3s; 
 
 }

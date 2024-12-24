@@ -7,7 +7,7 @@ import "./Components.css";
 
 function Footer() {
   return (
-    <footer className="footer p-5 bg-dark text-secondary wow fadeInUp" data-wow-delay="0.1s">
+    <footer className="footer p-5  text-secondary wow fadeInUp" data-wow-delay="0.1s">
       <Container fluid>
         <Row>
           <Col md={3}>
