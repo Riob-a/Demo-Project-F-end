@@ -26,7 +26,7 @@ function BasicExample() {
       } else if (response.status === 401) {
         handleSessionTimeout();
       } else {
-        toast.error("Failed to fetch user profile");
+        // toast.error("Failed to fetch user profile");
       }
     } catch (error) {
       toast.error("An error occurred while fetching the profile");
@@ -52,7 +52,7 @@ function BasicExample() {
   }, []);
 
   return (
-    <Navbar expand="lg">
+    <Navbar expand="lg" data-bs-theme="">
       <Container>
         <Navbar.Brand as={NavLink} to="/" className="Navbar-header">
           <Image
@@ -65,7 +65,7 @@ function BasicExample() {
           />{" "}
           D3 +<b> RRICKS</b>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" className="brand" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" className="brand bg-success-emphasis " />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={NavLink} to="/" className="brand">Home | </Nav.Link>

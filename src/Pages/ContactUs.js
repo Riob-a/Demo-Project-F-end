@@ -155,7 +155,7 @@ const ContactForm = () => {
           {/* Contact Info inside a Card */}
           <Col xs={12} md={4}>
             <div className="wow fadeInRight" data-wow-duration="1s">
-              <Card className="card-color text-white" style={{ boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }} border="" bg=''>
+              <Card className="card-color" style={{ boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }} border="" bg=''>
                 <Card.Body className="py-5">
                   <section className="text-center">
                     <Card.Title className='contact-card unbounded-uniquifier-header'><u>Our Office</u></Card.Title>

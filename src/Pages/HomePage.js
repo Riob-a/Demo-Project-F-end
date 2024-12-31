@@ -63,7 +63,7 @@ function HomePage() {
   return (
     <div>
       {/* Header Section */}
-      <header className="header-section bg-dark text-white text-center py-4 wow fadeInUp" data-wow-duration="0.8s">
+      <header className="header-section bg-dark text-white text-center py-4 wow fadeInUp" data-wow-duration="0.8s"  style={{  boxShadow: "0 0px 20px rgba(0, 0, 0, 0.9)" }}>
         <h1 className="display-4 wow fadeInUp" data-wow-duration="1.0s" data-wow-delay="1.5s">DERRICKS CREATION DEMO</h1>
         <p className="wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="1.6s" >Discover the world of art, history, and culture</p>
       </header>
