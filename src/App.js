@@ -3,6 +3,8 @@ import './App.css';
 import { BrowserRouter as Router , Route, Routes, useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import WOW from "wowjs";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS
 import Navbar from './Components/Navbar';
 import HomePage from './Pages/HomePage';
 import Footer from './Components/Footer';
@@ -15,10 +17,11 @@ import Register from './Pages/Register';
 import Logout from './Pages/LogOut';
 import ProtectedRoute from './Components/ProtectedRoute';
 import UserProfile from './Pages/UserProfile';
+import ChangePassword from './Pages/ChangePassword';
 
 function Layout(){
   const location = useLocation();
-  const hideNavAndFooter = location.pathname === '/signin' || location.pathname === '/logout' || location.pathname === '/register' || location.pathname === '/logout';
+  const hideNavAndFooter = location.pathname === '/signin' || location.pathname === '/logout' || location.pathname === '/register' || location.pathname === '/change-password';
 
   useEffect(() => {
     new WOW.WOW().init();
@@ -34,6 +37,7 @@ function Layout(){
         <Route path="register" element={<Register />} />
         <Route path="/" element={<HomePage />}  />
         <Route path="about" element={<About />}  />
+        <Route path='change-password' element={<ChangePassword />} />
 
 
 
@@ -46,6 +50,7 @@ function Layout(){
         {/* <Route path="about" element={<ProtectedRoute element={<About />} />} /> */}
         <Route path='profile' element={<ProtectedRoute element={<UserProfile />} />} />
       </Routes>
+      <ToastContainer />
         {/* <Footer /> */}
     {!hideNavAndFooter && <Footer />} 
     </> 

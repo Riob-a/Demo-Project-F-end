@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Image, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { NavLink } from 'react-router-dom';
-import logo from '../Img/pointed fingure.gif';
 import { useNavigate } from "react-router-dom";
-import "./Components.css";
 import { toast } from 'react-toastify';
+import logo from '../Img/pointed fingure.gif';
+import "./Components.css";
 
 function BasicExample() {
   const [user, setUser] = useState(null);
@@ -33,10 +33,6 @@ function BasicExample() {
     }
   };
 
-  useEffect(() => {
-    fetchUserProfile();
-  }, []);
-
   const handleSessionTimeout = () => {
     toast.error("Session expired. Please log in again.");
     setTimeout(() => {
@@ -44,6 +40,16 @@ function BasicExample() {
       navigate("/signin");
     }, 3000);
   };
+
+  const handleProtectedNavigation = (message) => {
+    toast.info(message, {
+      onClose: () => navigate("/signin"), // Redirect after toast closes
+    });
+  };
+
+  useEffect(() => {
+    fetchUserProfile();
+  }, []);
 
   return (
     <Navbar expand="lg">
@@ -63,33 +69,19 @@ function BasicExample() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={NavLink} to="/" className="brand">Home | </Nav.Link>
-            {user ? (
-            <Nav.Link as={NavLink} to="/artwork" className="brand">ARt | </Nav.Link>
-            ) : (
-              <Nav.Link
-               onClick={() => {
-                toast.info("Please sign in to view artworks.");
-                navigate("/signin")
-               }}
-               className='brand'
-               >
-                ARt |
-               </Nav.Link>
-            )}
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown" className="brand">
-              {user ? (
-                <NavDropdown.Item as={NavLink} to="/contact" className="brand">Contact Us</NavDropdown.Item>
-              ) : (
-                <NavDropdown.Item
-                onClick={() => {
-                  toast.info("Please sign in to contact us.");
-                  navigate("/signin");
-                }}
-                className='brand'
-                >
-                  Contact Us
-                </NavDropdown.Item>
-              )}
+            <Nav.Link
+              onClick={() => user ? navigate("/artwork") : handleProtectedNavigation("Please sign in to view artworks.")}
+              className="brand"
+            >
+              ARt |
+            </Nav.Link>
+            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+              <NavDropdown.Item
+                onClick={() => user ? navigate("/contact") : handleProtectedNavigation("Please sign in to contact us.")}
+                className="brand"
+              >
+                Contact Us
+              </NavDropdown.Item>
               <NavDropdown.Item as={NavLink} to="/about" className="brand">About</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="https://automated-donation-platform-front-end.vercel.app/">
@@ -97,16 +89,14 @@ function BasicExample() {
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          
+
           <Nav className="ml-auto">
             {!user ? (
-              // Unauthenticated user links
               <>
                 <Nav.Link as={NavLink} to="/signin" className="brand2">Sign-in |</Nav.Link>
                 <Nav.Link as={NavLink} to="/register" className="brand2">Register |</Nav.Link>
               </>
             ) : (
-              // Authenticated user links
               <>
                 <Nav.Link as={NavLink} to="/profile" className="brand2">
                   <Image
