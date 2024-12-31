@@ -52,7 +52,7 @@ function BasicExample() {
   }, []);
 
   return (
-    <Navbar expand="lg" data-bs-theme="">
+    <Navbar expand="lg">
       <Container>
         <Navbar.Brand as={NavLink} to="/" className="Navbar-header">
           <Image

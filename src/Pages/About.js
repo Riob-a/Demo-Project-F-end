@@ -27,7 +27,7 @@ function About() {
     if (isPlaying) {
       interval = setInterval(() => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-      }, 3000);
+      }, 6000);
     }
     return () => clearInterval(interval);
   }, [isPlaying, images.length]);
@@ -80,7 +80,7 @@ function About() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 1.0 }}
             >
               <Image
                 src={images[currentImageIndex]}
