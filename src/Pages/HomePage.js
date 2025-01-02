@@ -1,10 +1,11 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Row, Col, Card, Button, Image, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Image } from "react-bootstrap";
 import { FaArrowRight } from "react-icons/fa";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { motion } from "framer-motion";
 import { ThemeContext } from "../Components/ThemeContext";
+import { toast } from "react-toastify";
 import WOW from "wowjs";
 import "animate.css";
 import "./HomePage.css";
@@ -14,7 +15,7 @@ const imageUrls = {
   animatedArt: "https://i.pinimg.com/originals/a3/7e/48/a37e48e6e5e0edb1b2ffbee6a73fbd59.gif",
   staticArt: "https://i.pinimg.com/736x/58/fc/25/58fc25a84e479dc275a6bd99bdece3e2.jpg",
   submitArt: "https://i.pinimg.com/originals/db/5a/54/db5a547a554cfaebfcb48aa1e8462918.gif",
-  museumImage: "https://i.pinimg.com/564x/10/9a/dd/109addc2397a3257c90b61acccb7a273.jpg",
+  about: "https://i.pinimg.com/564x/10/9a/dd/109addc2397a3257c90b61acccb7a273.jpg",
 };
 // Lazy-loaded Image component
 const LazyImage = ({ src, alt, rounded = false }) => (
@@ -43,21 +44,59 @@ const CardComponent = ({ path, imgSrc, title, text, wowDelay, navigateToSection 
     </Card>
   </motion.div>
 );
+
 function HomePage() {
   const navigate = useNavigate();
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const [user, setUser] = useState(null);
 
+
+  // Fetch user profile
+  const fetchUserProfile = async () => {
+    try {
+      const response = await fetch("https://demo-project-backend-ude8.onrender.com/api/users/me", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setUser(data);
+      } else {
+        setUser(null);
+      }
+    } catch (error) {
+      setUser(null);
+    }
+  };
 
   useEffect(() => {
-      const wowInstance = new WOW.WOW();
-      wowInstance.init();
-    }, []);
+    fetchUserProfile();
+    const wowInstance = new WOW.WOW();
+    wowInstance.init();
+  }, []);
 
-  const navigateToSection = (path) => {
-    navigate(path);
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" })
-    }, 0);
+  // Handle navigation with authentication
+  const navigateToSection = (path, section) => {
+    if (!user && (path === "/artwork" || path === "/contact")) {
+      const message =
+        section === "ART"
+          ? "Please sign in to view artworks."
+          : "Please sign in to contact us.";
+      toast.info(message);
+      navigate("/signin");
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 0);
+    } else {
+      navigate(path);
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 0);
+    }
   };
 
   return (
@@ -123,7 +162,7 @@ function HomePage() {
       </section>
 
       {/* Welcome Section */}
-      <section className="welcome-section py-5 text-center bg-dark text-white wow fadeInUp" data-wow-duration="1.5s">
+      <section className="welcome-section py-5 text-center wow fadeInUp" data-wow-duration="1.5s">
         <Container>
           <Row>
             <Col xs={12} md={6}>
@@ -141,7 +180,7 @@ function HomePage() {
               </Button>
             </Col>
             <Col xs={12} md={6}>
-              <LazyImage src={imageUrls.museumImage} alt="Museum" rounded />
+              <LazyImage src={imageUrls.about} alt="Museum" rounded />
             </Col>
           </Row>
         </Container>

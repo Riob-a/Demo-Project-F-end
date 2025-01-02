@@ -41,11 +41,11 @@ function BasicExample() {
     }, 3000);
   };
 
-  const handleProtectedNavigation = (message) => {
-    toast.info(message, {
-      onClose: () => navigate("/signin"), // Redirect after toast closes
-    });
-  };
+  // const handleProtectedNavigation = (message) => {
+  //   toast.info(message, {
+  //     onClose: () => navigate("/signin"), // Redirect after toast closes
+  //   });
+  // };
 
   useEffect(() => {
     fetchUserProfile();
@@ -70,15 +70,23 @@ function BasicExample() {
           <Nav className="me-auto">
             <Nav.Link as={NavLink} to="/" className="brand">Home | </Nav.Link>
             <Nav.Link
-              onClick={() => user ? navigate("/artwork") : handleProtectedNavigation("Please sign in to view artworks.")}
-              className="brand"
+               as={NavLink}
+               to={user ? "/artwork" : "/signin"}
+               className="brand"
+               onClick={() => {
+                 if (!user) toast.info("Please sign in to view artworks.");
+               }}
             >
               ARt |
             </Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item
-                onClick={() => user ? navigate("/contact") : handleProtectedNavigation("Please sign in to contact us.")}
+                as={NavLink}
+                to={user ? "/contact" : "/signin"}
                 className="brand"
+                onClick={() => {
+                  if(!user) toast.info("Please sign in to Contact us.");
+                }}
               >
                 Contact Us
               </NavDropdown.Item>

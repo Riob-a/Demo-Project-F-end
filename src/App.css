@@ -104,6 +104,7 @@ body.light .brand{
   font-optical-sizing: auto;
   font-weight: 450;
   font-style: normal;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 body.light .brand2{
 color:#547562 ;
@@ -111,11 +112,13 @@ font-family: "Unbounded", sans-serif;
 font-optical-sizing: auto;
 font-weight: 450;
 font-style: normal;
+transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 body.light .navbar .nav-link.active {
   font-weight: bold;
   color: #ea8e1df1;
-  border-bottom: 3px solid #ea8e1df1
+  border-bottom: 3px solid #ea8e1df1;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 body.light .navbar .nav-link:hover {
   color: #ea8e1deb; 
@@ -144,17 +147,25 @@ body.light .navbar #basic-nav-dropdown{
   font-weight: 450;
   font-style: normal;
   transition: background-color 0.3s, color 0.3s;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 body.light .navbar #basic-nav-dropdown.active{
   font-weight: bold;
   color: #ea8e1df1;
   border-bottom: 3px solid #ea8e1df1;
   transition: background-color 0.3s, color 0.3s;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 body.light .navbar #basic-nav-dropdown:hover{
   color: #ea8e1df1; 
   transform: scale(1.1); 
   transition: color 0.3s ease-in-out, transform 0.3s ease-in-out; 
+}
+
+body.light .welcome-section{
+  background-color: #ffffff; 
+  color: #212529; 
+  transition: background-color 0.3s, color 0.3s;  
 }
 /* dark */
 body.dark .brand{
@@ -164,6 +175,7 @@ body.dark .brand{
   font-weight: 450;
   font-style: normal;
   transition: background-color 0.3s, color 0.3s;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 body.dark .brand2{
 color:#c77919eb ;
@@ -172,12 +184,14 @@ font-optical-sizing: auto;
 font-weight: 450;
 font-style: normal;
 transition: background-color 0.3s, color 0.3s;
+transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 body.dark .navbar .nav-link.active {
   font-weight: bold;
   color: #95c6a9;
   border-bottom: 3px solid #95c6a9;
   transition: background-color 0.3s, color 0.3s;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 body.dark .navbar .nav-link:hover {
   color: #95c6a9; 
@@ -207,17 +221,25 @@ body.dark .navbar #basic-nav-dropdown{
   font-weight: 450;
   font-style: normal;
   transition: background-color 0.3s, color 0.3s;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 body.dark .navbar #basic-nav-dropdown.active{
   font-weight: bold;
   color: #95c6a9;
   border-bottom: 3px solid #95c6a9;
   transition: background-color 0.3s, color 0.3s;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 body.dark .navbar #basic-nav-dropdown:hover{
   color: #95c6a9; 
   transform: scale(1.1); 
   transition: color 0.3s ease-in-out, transform 0.3s ease-in-out; 
+}
+
+body.dark .welcome-section{
+  background-color: #212529;
+  color: #ffffff;
+  transition: background-color 0.3s, color 0.3s;
 }
 /* footer */
 body.dark .footer{

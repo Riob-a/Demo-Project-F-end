@@ -1,35 +1,35 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
-// import WOW from "wowjs";
 import "animate.css";
 import "./Components.css";
 
 function Footer() {
   return (
-    <footer className="footer p-5  text-secondary wow fadeInUp" data-wow-delay="0.1s">
+    <footer className="footer p-4 text-secondary wow fadeInUp" data-wow-delay="0.1s">
       <Container fluid>
-        <Row>
-          <Col md={3}>
+        {/* Top Section */}
+        <Row className="text-center text-md-start">
+          <Col xs={12} md={3} className="mb-4 mb-md-0">
             <h2 className="Navbar-header">D3 + <b>RRICKS</b></h2>
           </Col>
-          <Col md={3}>
-            <h5 className="footer-title">About Us</h5>
+          <Col xs={12} md={3} className="mb-4 mb-md-0">
+            <h6 className="footer-title">About Us</h6>
             <p>
               D3 +<b>RRICKS</b> is a leading platform that provides Artists and
-              Creatives resources for hosting art and making their Submissions.
+              Creatives resources for hosting art and making their submissions.
             </p>
           </Col>
-          <Col md={3}>
-            <h5 className="footer-title">Contact Us</h5>
+          <Col xs={12} md={3} className="mb-4 mb-md-0">
+            <h6 className="footer-title">Contact Us</h6>
             <ul className="list-unstyled">
               <li>Email: info@RRICKS.com</li>
               <li>Phone: +1233567890</li>
               <li>Address: 123 Street, Nairobi, Kenya</li>
             </ul>
           </Col>
-          <Col md={3}>
-            <h5 className="footer-title">Follow Us</h5>
+          <Col xs={12} md={3}>
+            <h6 className="footer-title">Follow Us</h6>
             <ul className="list-inline footer-links">
               <li className="list-inline-item">
                 <a href="https://www.facebook.com/login/?next=https%3A%2F%2Fwww.facebook.com%2F" className="text-secondary">
@@ -57,11 +57,12 @@ function Footer() {
 
         <hr />
 
-        <Row>
-          <Col md={6}>
+        {/* Bottom Section */}
+        <Row className="text-center text-md-between">
+          <Col xs={12} md={6} className="mb-3 mb-md-0">
             <p>© 2024 D3 + <b>RRICKS</b>. All rights reserved.</p>
           </Col>
-          <Col md={6} className="text-end">
+          <Col xs={12} md={6} className="text-md-end">
             <ul className="list-inline footer-links">
               <li className="list-inline-item">
                 <a href="/..." className="text-secondary">Privacy Policy</a>
