@@ -9,6 +9,10 @@
   color: #EA8E1D;
   
 }
+.navbar-nav {
+  display: flex;
+  gap: 15px; 
+}
 /* .brand{
     color:#547562 ;
     font-family: "Unbounded", sans-serif;
@@ -23,10 +27,7 @@
   font-weight: 450;
   font-style: normal;
 } */
-.navbar-nav {
-  display: flex;
-  gap: 15px; 
-}
+
 /* .navbar .nav-link.active {
     font-weight: bold;
     color: #95c6a9;
@@ -89,6 +90,15 @@
     padding-left: 10px; 
   }
 }
+/* .custom-collapse-icon {
+  border-color: transparent; 
+  background-color: transparent; 
+}
+
+.custom-collapse-icon .navbar-toggler-icon {
+  background-color: #28a745; 
+  border-radius: 5px;
+} */
 
 
   /* footer css */

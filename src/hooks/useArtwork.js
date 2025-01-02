@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import axios from "axios";
 import WOW from "wowjs";
 import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const useArtwork = () => {
   const [formData, setFormData] = useState({
@@ -41,7 +42,7 @@ const useArtwork = () => {
       console.error("Error fetching artworks:", error);
       if (error.response?.status === 401 || error.response?.status === 403) {
         localStorage.removeItem("access_token");
-        alert("Session expired. Please log in again.");
+        toast.error("Session expired. Please log in again.");
         window.location.href = "/signin";
       }
     }

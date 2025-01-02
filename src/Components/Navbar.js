@@ -65,7 +65,7 @@ function BasicExample() {
           />{" "}
           D3 +<b> RRICKS</b>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" className="brand bg-success-emphasis " />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" className="custom-collapse-icon " />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={NavLink} to="/" className="brand">Home | </Nav.Link>

@@ -235,6 +235,24 @@ body.dark .navbar #basic-nav-dropdown:hover{
   transform: scale(1.1); 
   transition: color 0.3s ease-in-out, transform 0.3s ease-in-out; 
 }
+/* nav icon */
+body.dark .custom-collapse-icon {
+  border-color: #ea8e1df1; 
+  background-color: #95c6a9; /* Makes the background transparent */
+}
+body.dark .custom-collapse-icon .navbar-toggler-icon {
+  background-color: #95c6a9; /* Change to your desired color */
+  border-radius: 5px; /* Optional: Add some styling */
+}
+
+body.light .custom-collapse-icon {
+  border-color: #95c6a9; /* Removes the default border */
+  background-color: #ea8e1df1; /* Makes the background transparent */
+}
+body.light .custom-collapse-icon .navbar-toggler-icon {
+  background-color: #ea8e1df1; /* Change to your desired color */
+  border-radius: 5px; /* Optional: Add some styling */
+}
 
 body.dark .welcome-section{
   background-color: #212529;
