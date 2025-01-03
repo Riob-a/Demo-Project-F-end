@@ -2,12 +2,12 @@ import React, { useState, useContext } from "react";
 import { Container, Row, Form, Button, Card, Col, Accordion, ProgressBar } from "react-bootstrap";
 import { motion } from "framer-motion";
 import "./ARt.css";
-import { FaCircleArrowUp } from "react-icons/fa6";
+import { FaCircleArrowUp, FaHeart, FaRegHeart } from "react-icons/fa6";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { ThemeContext } from "../Components/ThemeContext";
 import useArtwork from "../hooks/useArtwork";
 
-const ArtworkCard = ({ artwork, wowDelay }) => {
+const ArtworkCard = ({ artwork, wowDelay, likeArtwork }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpand = () => setIsExpanded(!isExpanded);
@@ -49,6 +49,23 @@ const ArtworkCard = ({ artwork, wowDelay }) => {
               ? artwork.description
               : `${artwork.description.substring(0, 100)}...`}
           </Card.Text>
+          {/* <Button variant="primary" onClick={() => likeArtwork(artwork.id)}>
+            Like ({artwork.likes || 0})
+          </Button> */}
+          <div className="d-flex justify-content-between align-items-center">
+             <div>
+               <strong>Likes:</strong> {artwork.likes || 0}
+             </div>
+             <Button
+               variant="link"
+               onClick={(e) => {
+                 e.stopPropagation(); // Prevent card click from expanding
+                 likeArtwork(artwork.id);
+               }}
+             >
+               {artwork.isLiked ? <FaHeart color="red" /> : <FaRegHeart />}
+             </Button>
+           </div>
           {isExpanded && (
             <>
               <Card.Text>
@@ -89,6 +106,7 @@ const Artwork = () => {
     handleChange,
     handleFileChange,
     handleSubmit,
+    likeArtwork,
     fetchArtworks,
   } = useArtwork();
 
@@ -96,7 +114,7 @@ const Artwork = () => {
     <Row className="g-4">
       {artworks.map((artwork, index) => (
         <Col key={artwork.id} sm={12} md={6} lg={4}>
-          <ArtworkCard artwork={artwork} wowDelay={`${0.1 * index}s`} />
+          <ArtworkCard artwork={artwork} wowDelay={`${0.1 * index}s`} likeArtwork={likeArtwork} />
         </Col>
       ))}
     </Row>

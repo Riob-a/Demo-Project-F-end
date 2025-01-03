@@ -48,6 +48,42 @@ const useArtwork = () => {
     }
   }, []);
 
+  const likeArtwork = async (artworkId) => {
+    const token = localStorage.getItem("access_token");
+    try {
+      const response = await axios.post(
+        `https://demo-project-backend-ude8.onrender.com/api/artworks/${artworkId}/like`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      if (response.status === 200) {
+        // Update likes for the artwork locally
+        setAnimatedArtworks((prev) =>
+          prev.map((art) =>
+            art.id === artworkId ? { ...art, likes: response.data.likes } : art
+          )
+        );
+        setStaticArtworks((prev) =>
+          prev.map((art) =>
+            art.id === artworkId ? { ...art, likes: response.data.likes } : art
+          )
+        );
+        toast.success("You liked this artwork!");
+      }
+    } catch (error) {
+      console.error("Error liking artwork:", error);
+      toast.error("Could not like the artwork. Please try again.");
+    if (error.response && error.response.status === 400) {
+      toast.error("Invalid request. Please check the artwork or your session.");
+    } else {
+      toast.error("Could not like the artwork. Please try again.");
+    }
+  }
+  };
+
+
   useEffect(() => {
     const wowInstance = new WOW.WOW();
     wowInstance.init();
@@ -161,6 +197,7 @@ const useArtwork = () => {
     handleFileChange,
     handleSubmit,
     fetchArtworks,
+    likeArtwork,
   };
 };
 
