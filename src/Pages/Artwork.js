@@ -63,25 +63,17 @@ const ArtworkCard = ({ artwork, wowDelay, likeArtwork, unlikeArtwork }) => {
               ? artwork.description
               : `${artwork.description.substring(0, 100)}...`}
           </Card.Text>
-          {/* <Button variant="primary" onClick={() => likeArtwork(artwork.id)}>
-            Like ({artwork.likes || 0})
-          </Button> */}
           <div className="d-flex justify-content-between align-items-center">
-             <div>
-               <strong>Likes:</strong> {artwork.likes || 0}
-             </div>
-             <Button
-               variant="link"
-               onClick={handleLikeToggle}
-             >
-               {/* {artwork.isLiked ? <FaHeart color="red" /> : <FaRegHeart />} */}
-               {isLiked ? <FaHeart color="red" /> : <FaRegHeart />}
-             </Button>
-           </div>
+            <div>
+              <strong>Likes:</strong> {artwork.likes || 0}
+            </div>
+            <Button variant="link" onClick={handleLikeToggle}>
+              {isLiked ? <FaHeart color="red" /> : <FaRegHeart />}
+            </Button>
+          </div>
           {isExpanded && (
             <>
               <Card.Text>
-                {/* <strong className="unbounded-uniquifier-header">Style: </strong> {artwork.style} */}
                 <br />
                 <strong className="unbounded-uniquifier-header">Author: </strong>{artwork.email}
               </Card.Text>
@@ -105,7 +97,7 @@ const ArtworkCard = ({ artwork, wowDelay, likeArtwork, unlikeArtwork }) => {
 const Artwork = ({ artworkId }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const [isLiked, setIsLiked] = useState(false);
-  
+
   const {
     formData,
     animatedArtworks,
@@ -120,6 +112,7 @@ const Artwork = ({ artworkId }) => {
     handleFileChange,
     handleSubmit,
     likeArtwork,
+    unlikeArtwork,
     fetchArtworks,
   } = useArtwork();
 
@@ -127,7 +120,12 @@ const Artwork = ({ artworkId }) => {
     <Row className="g-4">
       {artworks.map((artwork, index) => (
         <Col key={artwork.id} sm={12} md={6} lg={4}>
-          <ArtworkCard artwork={artwork} wowDelay={`${0.1 * index}s`} likeArtwork={likeArtwork} />
+          <ArtworkCard
+            artwork={artwork}
+            wowDelay={`${0.1 * index}s`}
+            likeArtwork={likeArtwork}
+            unlikeArtwork={unlikeArtwork}
+          />
         </Col>
       ))}
     </Row>
@@ -162,7 +160,7 @@ const Artwork = ({ artworkId }) => {
         <Row className="mb-5">
           <section id="animated-artworks" className="wow fadeInLeft">
             <h1 className="unbounded-uniquifier-artwork">Animated Artworks</h1>
-            <hr className="mb-5"/>
+            <hr className="mb-5" />
             {renderArtworkGrid(animatedArtworks)}
           </section>
         </Row>
@@ -170,7 +168,7 @@ const Artwork = ({ artworkId }) => {
         <Row className="mb-5">
           <section id="static-artworks" className="wow fadeInLeft" ref={staticRef}>
             <h1 className="unbounded-uniquifier-artwork">Static Artworks</h1>
-            <hr className="mb-5"/>
+            <hr className="mb-5" />
             {renderArtworkGrid(staticArtworks)}
           </section>
         </Row>
@@ -180,7 +178,7 @@ const Artwork = ({ artworkId }) => {
             <h1 className="unbounded-uniquifier-h1">Add your own pieces</h1>
             <hr />
             <Col xs={12} md={6} className="wow fadeInLeft mt-5">
-              <Card className="">
+              <Card>
                 <Card.Body className="p-5">
                   <Card.Title className="contact-card mb-4 unbounded-uniquifier-h1">Submit Your Artwork</Card.Title>
                   <Form onSubmit={handleSubmit}>
@@ -243,11 +241,13 @@ const Artwork = ({ artworkId }) => {
                   </Form>
                   {isSubmitting && (
                     <div className="d-flex justify-content-center mt-3">
-                       <ProgressBar now={uploadProgress} label={`${uploadProgress}%`} />
+                      <ProgressBar now={uploadProgress} label={`${uploadProgress}%`} />
                     </div>
                   )}
 
-                  {submissionStatus && ( <div className="mt-3">{submissionStatus}</div> )}
+                  {submissionStatus && (
+                    <div className="mt-3">{submissionStatus}</div>
+                  )}
                 </Card.Body>
               </Card>
             </Col>
@@ -264,15 +264,15 @@ const Artwork = ({ artworkId }) => {
       )}
 
       {/* Floating Theme Toggle Button */}
-            <Button
-              className="floating-theme-button"
-              onClick={toggleTheme}
-              variant={theme === "light" ? "dark" : "light"}
-            >
-              {theme === "light" ? <MdOutlineDarkMode size={24} /> : <MdOutlineLightMode size={24} />}
-            </Button>
+      <Button
+        className="floating-theme-button"
+        onClick={toggleTheme}
+        variant={theme === "light" ? "dark" : "light"}
+      >
+        {theme === "light" ? <MdOutlineDarkMode size={24} /> : <MdOutlineLightMode size={24} />}
+      </Button>
     </div>
   );
-}
+};
 
 export default Artwork;
