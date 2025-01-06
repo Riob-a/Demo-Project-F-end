@@ -60,16 +60,7 @@ const useArtwork = () => {
       );
       if (response.status === 200) {
         // Update likes for the artwork locally
-        setAnimatedArtworks((prev) =>
-          prev.map((art) =>
-            art.id === artworkId ? { ...art, likes: response.data.likes } : art
-          )
-        );
-        setStaticArtworks((prev) =>
-          prev.map((art) =>
-            art.id === artworkId ? { ...art, likes: response.data.likes } : art
-          )
-        );
+        updateArtworkLikes(artworkId, response.data.likes);
         toast.success("You liked this artwork!");
       }
     } catch (error) {

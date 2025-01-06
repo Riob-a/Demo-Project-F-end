@@ -7,10 +7,24 @@ import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { ThemeContext } from "../Components/ThemeContext";
 import useArtwork from "../hooks/useArtwork";
 
-const ArtworkCard = ({ artwork, wowDelay, likeArtwork }) => {
+const ArtworkCard = ({ artwork, wowDelay, likeArtwork, unlikeArtwork }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-
+  const [isLiked, setIsLiked] = useState(artwork.isLiked || false);
   const toggleExpand = () => setIsExpanded(!isExpanded);
+
+  const handleLikeToggle = async (e) => {
+    e.stopPropagation(); // Prevent card click from expanding
+    try {
+      if (isLiked) {
+        await unlikeArtwork(artwork.id);
+      } else {
+        await likeArtwork(artwork.id);
+      }
+      setIsLiked(!isLiked); // Toggle like state locally
+    } catch (error) {
+      console.error("Error toggling like:", error);
+    }
+  };
 
   return (
     <motion.div
@@ -58,12 +72,10 @@ const ArtworkCard = ({ artwork, wowDelay, likeArtwork }) => {
              </div>
              <Button
                variant="link"
-               onClick={(e) => {
-                 e.stopPropagation(); // Prevent card click from expanding
-                 likeArtwork(artwork.id);
-               }}
+               onClick={handleLikeToggle}
              >
-               {artwork.isLiked ? <FaHeart color="red" /> : <FaRegHeart />}
+               {/* {artwork.isLiked ? <FaHeart color="red" /> : <FaRegHeart />} */}
+               {isLiked ? <FaHeart color="red" /> : <FaRegHeart />}
              </Button>
            </div>
           {isExpanded && (
@@ -90,8 +102,9 @@ const ArtworkCard = ({ artwork, wowDelay, likeArtwork }) => {
   );
 };
 
-const Artwork = () => {
+const Artwork = ({ artworkId }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const [isLiked, setIsLiked] = useState(false);
   
   const {
     formData,
