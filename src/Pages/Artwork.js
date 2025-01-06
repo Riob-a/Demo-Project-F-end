@@ -65,7 +65,7 @@ const ArtworkCard = ({ artwork, wowDelay, likeArtwork, unlikeArtwork }) => {
           </Card.Text>
           <div className="d-flex justify-content-between align-items-center">
             <div>
-              <strong>Likes:</strong> {artwork.likes || 0}
+              <strong>Likes:</strong> {artwork.likes !== undefined ? artwork.likes : 0}
             </div>
             <Button variant="link" onClick={handleLikeToggle}>
               {isLiked ? <FaHeart color="red" /> : <FaRegHeart />}
