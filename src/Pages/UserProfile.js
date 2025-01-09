@@ -10,7 +10,8 @@ import "./UserProf.css";
 const UserProfile = () => {
     const [user, setUser] = useState(null);
     const [artworks, setArtworks] = useState([]);
-    const [contacts, setContacts] = useState([]); // State for contacts
+    const [contacts, setContacts] = useState([]); 
+    const [likedArtworks, setLikedArtworks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [editing, setEditing] = useState(false);
     const [changingPassword, setChangingPassword] = useState(false);
@@ -63,7 +64,7 @@ const UserProfile = () => {
                 } else if (artworkResponse.status === 401) {
                     handleSessionTimeout();
                 } else {
-                    toast.error("Failed to fetch artworks");
+                    toast.error("Oops, couldn't get your artworks");
                 }
     
                 // Fetch user's contacts using the new route
@@ -71,7 +72,7 @@ const UserProfile = () => {
             } else if (response.status === 401) {
                 handleSessionTimeout();
             } else {
-                toast.error("Failed to fetch user profile");
+                toast.error("Oops, couldn't get your user profile");
             }
             setLoading(false);
         } catch (error) {
@@ -79,6 +80,33 @@ const UserProfile = () => {
             setLoading(false);
         }
     };
+
+    const fetchLikedArtworks = async () => {
+        try {
+            const response = await fetch("https://demo-project-backend-ude8.onrender.com/api/users/me/liked-artworks", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+                },
+            });
+    
+            if (response.ok) {
+                const data = await response.json();
+                setLikedArtworks(data);
+            } else if (response.status === 401) {
+                handleSessionTimeout();
+            } else {
+                toast.error("Failed to fetch liked artworks");
+            }
+        } catch (error) {
+            toast.error("Network error while fetching liked artworks");
+        }
+    };
+    
+    useEffect(() => {
+        // fetchUserProfile();
+        fetchLikedArtworks(); // Fetch liked artworks
+    }, []);
     
     const fetchUserContacts = async () => {
         try {
@@ -95,7 +123,7 @@ const UserProfile = () => {
             } else if (response.status === 401) {
                 handleSessionTimeout();
             } else {
-                toast.error("Failed to fetch contacts");
+                toast.error("Oops, couldn't get your messages");
             }
         } catch (error) {
             toast.error("Network error while fetching contacts");
@@ -337,7 +365,9 @@ const UserProfile = () => {
 
             <h1 className="mt-5 mb-4 wow fadeInLeft" data-wow-delay="0.4s">
                 My Artwork
+                <hr />
             </h1>
+            
             <Row className="wow fadeInLeft" data-wow-delay="0.8s">
                 {artworks.map((artwork) => (
                     <Col key={artwork.id} md={4} className="mb-4">
@@ -345,7 +375,7 @@ const UserProfile = () => {
                             <Card.Img variant="top" src={artwork.image_url} loading="lazy" />
                             <Card.Body>
                                 <Card.Title>{artwork.name}</Card.Title>
-                                <Card.Text className="text-2 text-muted">{artwork.description}</Card.Text>
+                                <Card.Text className="text-2">{artwork.description}</Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>
@@ -354,6 +384,7 @@ const UserProfile = () => {
 
             <h1 className="mt-5 mb-4 wow fadeInLeft" data-wow-delay="0.4s">
                 My Messages
+                <hr />
             </h1>
             <Row className="wow fadeInLeft" data-wow-delay="0.8s">
                 {contacts.map((contact) => (
@@ -369,6 +400,24 @@ const UserProfile = () => {
                     </Col>
                 ))}
             </Row>
+
+           <h1 className="mt-5 mb-4 wow fadeInLeft" data-wow-delay="0.4s">
+            Liked Artworks
+            <hr />
+           </h1>
+           <Row className="wow fadeInLeft" data-wow-delay="0.8s">
+           {likedArtworks.map((artwork) => (
+              <Col key={artwork.id} md={4} className="mb-4">
+                  <Card className="profile-card">
+                      <Card.Img variant="top" src={artwork.image_url} loading="lazy" />
+                      <Card.Body>
+                          <Card.Title>{artwork.name}</Card.Title>
+                          <Card.Text className="text-2">{artwork.description}</Card.Text>
+                      </Card.Body>
+                 </Card>
+             </Col>
+          ))}
+           </Row>
         </Container>
     );
 };

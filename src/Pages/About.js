@@ -52,7 +52,7 @@ function About() {
       </Button>
       
       {/* Welcome Section */}
-      <Container className="welcome-section py-5 text-center justify-content-center mb-5 mt-5">
+      <Container className="welcome-section-two py-5 text-center justify-content-center mb-5 mt-5">
         <Row className="gy-5">
           <Col xs={12} md={6}>
             <h1 className="wow fadeInUp unbounded-uniquifier-h1">About</h1>
@@ -129,7 +129,7 @@ function About() {
       </Container>
 
       {/* Testimonials */}
-      <Container className="testimonials-section py-5 bg-dark text-white text-center">
+      <Container className="testimonials-section py-5 bg-dark text-white text-center rounded-5">
         <h2 className="wow fadeInUp">What Our Users Say</h2>
         <Carousel className="mt-4 wow fadeInUp" data-wow-delay="0.8s">
           <Carousel.Item>
@@ -149,10 +149,10 @@ function About() {
         <h2 className="wow fadeInUp">Ready to Share Your Creativity?</h2>
         <br />
         <motion.a
-          className="btn btn-secondary wow fadeInUp"
+          className="btn join-us wow fadeInUp"
           href="/register"
           role="button"
-          whileHover={{ scale: 1.05, color: "#FFFFFF" }}
+          whileHover={{ scale: 1.05, }}
           whileTap={{ scale: 0.95 }}
           style={{ boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }}
         >

@@ -35,9 +35,13 @@ const useArtwork = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
+      const artworks = response.data.map((artwork) => ({
+        ...artwork,
+        isLiked: artwork.isLiked || false, // Default to false if not provided
+      }));
       style === "animated"
-        ? setAnimatedArtworks(response.data)
-        : setStaticArtworks(response.data);
+        ? setAnimatedArtworks(artworks)
+        : setStaticArtworks(artworks);
     } catch (error) {
       console.error("Error fetching artworks:", error);
       if (error.response?.status === 401 || error.response?.status === 403) {

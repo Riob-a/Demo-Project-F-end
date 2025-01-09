@@ -162,7 +162,7 @@ function HomePage() {
       </section>
 
       {/* Welcome Section */}
-      <section className="welcome-section py-5 text-center wow fadeInUp" data-wow-duration="1.5s">
+      <section className="welcome-section py-5 text-center wow fadeInUp rounded-5 p-1 m-2" data-wow-duration="1.5s">
         <Container>
           <Row>
             <Col xs={12} md={6}>

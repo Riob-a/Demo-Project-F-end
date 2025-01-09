@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Container, Row, Form, Button, Card, Col, Accordion, ProgressBar } from "react-bootstrap";
 import { motion } from "framer-motion";
 import "./ARt.css";
-import { FaCircleArrowUp, FaHeart, FaRegHeart } from "react-icons/fa6";
+import { FaCircleArrowUp, FaHeart, FaRegHeart, FaXmark } from "react-icons/fa6";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { ThemeContext } from "../Components/ThemeContext";
 import useArtwork from "../hooks/useArtwork";
@@ -63,7 +63,7 @@ const ArtworkCard = ({ artwork, wowDelay, likeArtwork, unlikeArtwork }) => {
               ? artwork.description
               : `${artwork.description.substring(0, 100)}...`}
           </Card.Text>
-          <div className="d-flex justify-content-between align-items-center">
+          <div className="d-flex justify-content-between align-items-center unbounded-uniquifier-p">
             <div>
               <strong>Likes:</strong> {artwork.likes !== undefined ? artwork.likes : 0}
             </div>
@@ -85,6 +85,7 @@ const ArtworkCard = ({ artwork, wowDelay, likeArtwork, unlikeArtwork }) => {
                 }}
               >
                 Close
+                <FaXmark />
               </Button>
             </>
           )}
@@ -96,7 +97,6 @@ const ArtworkCard = ({ artwork, wowDelay, likeArtwork, unlikeArtwork }) => {
 
 const Artwork = ({ artworkId }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
-  const [isLiked, setIsLiked] = useState(false);
 
   const {
     formData,

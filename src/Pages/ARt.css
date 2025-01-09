@@ -83,5 +83,29 @@
 .card-hover.expanded {
   max-height: none;
 }
-
+body.light .join-us{
+  background: linear-gradient(45deg, #8E706A, #755B6B, #0F3A90, #008888);
+  background-size: 400% 400%;
+  animation: gradientShift 20s ease infinite;
+  color: #ffffff;
+  transition: background-color 0.3s, color 0.3s;
+}
+/* Gradient animation keyframes */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+body.dark .join-us{
+  background: linear-gradient(45deg, #39545B, #547562, #EA8E1D, #FF0000);
+  background-size: 400% 400%;
+  animation: gradientShift 20s ease infinite;
+  transition: background-color 0.3s, color 0.3s;
+}
   
