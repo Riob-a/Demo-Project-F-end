@@ -79,12 +79,13 @@ const ArtworkCard = ({ artwork, wowDelay, likeArtwork, unlikeArtwork }) => {
               </Card.Text>
               <Button
                 variant="danger unbounded-uniquifier-header"
+                className="rounded-5"
                 onClick={(e) => {
                   e.stopPropagation(); // Prevent card click from collapsing
                   setIsExpanded(false);
                 }}
               >
-                Close 
+                {/* Close  */}
                 <FaXmark />
               </Button>
             </>
@@ -134,7 +135,7 @@ const Artwork = ({ artworkId }) => {
   return (
     <div>
       <Container>
-        <Accordion data-bs-theme="dark" className="justify-content-center mb-5 mt-5 wow zoomIn">
+        <Accordion data-bs-theme="acc" className="justify-content-center mb-5 mt-5 wow zoomIn">
           <Accordion.Item eventKey="0">
             <Accordion.Header className="unbounded-uniquifier-header">Artwork Sections</Accordion.Header>
             <Accordion.Body>

@@ -84,4 +84,12 @@
   max-height: none;
 }
 
+body.light .acc .theme {
+  background:#ffffff;
+  color:#212529;
+}
+body.dark .acc .theme{
+  background:#212529;
+  color:#ffffff;
+}
   

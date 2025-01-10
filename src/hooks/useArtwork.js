@@ -96,12 +96,12 @@ const useArtwork = () => {
     }
   };
 
-  const updateArtworkLikes = (artworkId, likes) => {
+  const updateArtworkLikes = (artworkId, likes, likedByUser) => {
     setAnimatedArtworks((prev) =>
-      prev.map((art) => (art.id === artworkId ? { ...art, likes } : art))
+      prev.map((art) => (art.id === artworkId ? { ...art, likes, isLiked: likedByUser } : art))
     );
     setStaticArtworks((prev) =>
-      prev.map((art) => (art.id === artworkId ? { ...art, likes } : art))
+      prev.map((art) => (art.id === artworkId ? { ...art, likes, isLiked: likedByUser } : art))
     );
   };
 
