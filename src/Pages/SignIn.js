@@ -66,7 +66,7 @@ function SignIn() {
             </Row>
             <Row className="justify-content-center mb-5">
                 <Col xs={12} md={6} className="wow fadeInLeft mt-5" data-wow-duration="1s" data-wow-delay="0.2s">
-                    <Card className="card-color" style={{ boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }}>
+                    <Card className="card-color rounded-5" style={{ boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }}>
                         <Card.Body className="p-5">
                             <Card.Title className="contact-card mb-4 unbounded-uniquifier-h1">Sign In</Card.Title>
 

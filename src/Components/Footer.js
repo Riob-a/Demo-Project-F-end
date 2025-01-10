@@ -11,7 +11,7 @@ function Footer() {
         {/* Top Section */}
         <Row className="text-center text-md-start">
           <Col xs={12} md={3} className="mb-4 mb-md-0">
-            <h2 className="Navbar-header">D3 + <b>RRICKS</b></h2>
+            <h2 className="Navbar-header-2">D3 + <b>RRICKS</b></h2>
           </Col>
           <Col xs={12} md={3} className="mb-4 mb-md-0">
             <h6 className="footer-title">About Us</h6>

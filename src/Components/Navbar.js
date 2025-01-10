@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import logo from '../Img/pointed fingure.gif';
 import "./Components.css";
 
-function BasicExample() {
+function PageNav() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
@@ -111,8 +111,8 @@ function BasicExample() {
                     src={user.profile_image || "https://via.placeholder.com/30"}
                     alt="Profile"
                     roundedCircle
-                    width="30"
-                    height="30"
+                    width="20"
+                    height="20"
                     className="d-inline-block align-top me-2"
                   />
                   {user.username} |
@@ -127,4 +127,4 @@ function BasicExample() {
   );
 }
 
-export default BasicExample;
+export default PageNav;

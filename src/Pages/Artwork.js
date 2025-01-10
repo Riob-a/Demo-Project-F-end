@@ -84,7 +84,7 @@ const ArtworkCard = ({ artwork, wowDelay, likeArtwork, unlikeArtwork }) => {
                   setIsExpanded(false);
                 }}
               >
-                Close
+                Close 
                 <FaXmark />
               </Button>
             </>
@@ -177,8 +177,8 @@ const Artwork = ({ artworkId }) => {
           <section id="add-artwork" className="wow fadeInLeft">
             <h1 className="unbounded-uniquifier-h1">Add your own pieces</h1>
             <hr />
-            <Col xs={12} md={6} className="wow fadeInLeft mt-5">
-              <Card>
+            <Col xs={12} md={6} className="wow fadeInLeft mt-5 mb-5">
+              <Card className="rounded-5">
                 <Card.Body className="p-5">
                   <Card.Title className="contact-card mb-4 unbounded-uniquifier-h1">Submit Your Artwork</Card.Title>
                   <Form onSubmit={handleSubmit}>

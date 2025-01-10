@@ -7,7 +7,7 @@
   font-weight: 450;
   font-style: normal;
   color: #EA8E1D;
-  
+  margin-left: -55px;
 }
 .navbar-nav {
   display: flex;
@@ -102,6 +102,13 @@
 
 
   /* footer css */
+  .Navbar-header-2 {
+    font-family: "Londrina Sketch", sans-serif;
+    font-weight: 450;
+    font-style: normal;
+    color: #EA8E1D;
+    /* margin-left: -55px; */
+  }
   .footer-title{
     color: #95c6a9;
     font-family: "Unbounded", sans-serif;

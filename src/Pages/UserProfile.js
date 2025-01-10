@@ -240,7 +240,7 @@ const UserProfile = () => {
     }, []);
 
     if (loading) {
-        return <Spinner animation="border" variant="white" className="d-block mx-auto mt-5" />;
+        return <Spinner animation="border" variant="white" className="d-block mx-auto mt-5 mb-5 " />;
     }
 
     return (
@@ -295,18 +295,19 @@ const UserProfile = () => {
                                     <Form.Label><b>Profile Image</b></Form.Label>
                                     <Form.Control type="file" onChange={(e) => setFormData({ ...formData, profile_image: e.target.files[0] })} />
                                 </Form.Group>
+                                <hr />
                                 <div className="float-start">
-                                <Button variant="primary" onClick={handleSave} className="mt-2 me-4 mb-3">
+                                <Button variant="primary" onClick={handleSave} className="mt-2 me-4 mb-3 rounded-5 prof-button">
                                     Save
                                 </Button>
 
-                                <Button variant="secondary" onClick={() => setEditing(false)} className="mt-2 mb-3">
+                                <Button variant="secondary" onClick={() => setEditing(false)} className="mt-2 mb-3 rounded-5 prof-button">
                                     Back
                                 </Button>
                                 </div>
                             </Form>
                         ) : changingPassword ? (
-                            <Form>
+                            <Form className="m-2">
                                 <Form.Group className="m-2">
                                     <Form.Label><b>Current Password</b></Form.Label>
                                     <Form.Control 
@@ -331,8 +332,9 @@ const UserProfile = () => {
                                        onChange={(e) => setPasswordData({...passwordData, confirmPassword: e.target.value })}
                                     />
                                 </Form.Group>
-                                <Button variant="secondary" onClick={handleSavePassword} className="mt-2 me-2 mb-3">Save Password</Button>
-                                <Button variant="dark" onClick={() => setChangingPassword(false)} className="mt-2 mb-3">Cancel</Button>
+                                <hr />
+                                <Button variant="" onClick={handleSavePassword} className="mt-2 me-2 mb-3 rounded-5 prof-button">Save Password</Button>
+                                <Button variant="" onClick={() => setChangingPassword(false)} className="mt-2 mb-3 rounded-5 prof-button">Cancel</Button>
                             </Form>
                         ) : (
                             <>
@@ -346,16 +348,16 @@ const UserProfile = () => {
                                     <b>Created:</b> {user.created_at}
                                 </p>
                                 <hr />
-                                <Button variant="primary" onClick={handleEdit} className="me-2 mt-2 mb-3 judtify-content-center">
+                                <Button variant="primary" onClick={handleEdit} className="me-2 mt-2 mb-3 justify-content-center rounded-5 prof-button">
                                     Edit Profile
                                 </Button>
-                                <Button variant="secondary" onClick={handleChangePassword} className="me-2 mt-2 mb-3">
+                                <Button variant="secondary" onClick={handleChangePassword} className="me-2 mt-2 mb-3 rounded-5 prof-button">
                                     Change Password
                                 </Button>
                             </>
                         )}
                         <div className="float-end">
-                        <Button variant="danger" onClick={handleDelete} className="mt-2 mb-3">
+                        <Button variant="danger" onClick={handleDelete} className="mt-2 mb-3 rounded-5 prof-delbutton">
                             Delete Profile
                         </Button>
                         </div>

@@ -59,3 +59,28 @@ Button{
       grid-template-columns: repeat(1, 1fr); /* Single column on very small screens */
     }
   }
+ body.dark .prof-delbutton{
+  background: linear-gradient(45deg, #39545B, #547562, #EA8E1D, #FF0000);
+  background-size: 400% 400%;
+  animation: gradientShift 20s ease infinite;
+  color: #212529;
+  transition: background-color 0.3s, color 0.3s;
+  }
+  body.light .prof-delbutton{
+    background: linear-gradient(45deg, #8E706A, #755B6B, #0F3A90, #008888);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+    color: #ffffff;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  body.light .prof-button{
+    color: #ffffff;
+    background-color: #212529;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  body.dark .prof-button{
+    color: #212529;
+    background-color: #ffffff;
+    transition: background-color 0.3s, color 0.3s;
+  }

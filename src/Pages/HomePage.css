@@ -37,14 +37,16 @@
 .header-section {
     background-image: url('https://i.pinimg.com/originals/c7/b5/11/c7b511c3764c719ac4ef779b39fbfde0.gif');
     background-position: center;
-    background-repeat: repeat-x;
-    height: 500px;
+    background-repeat: repeat;
+    border-bottom-right-radius:25px ;
+    border-bottom-left-radius: 25px;
+    height: 800px;
     width: auto;
   }
 .header-section h1 {
     display: flex;
     justify-content: center;
-    padding-top: 150px;
+    padding-top: 350px;
     font-family: "Unbounded", sans-serif;
     font-optical-sizing: auto;
     font-weight: 900;
@@ -64,15 +66,9 @@
 .welcome-button .whileHover{
   color: #39545B;
 }
-.welcome-section-heading {
-  font-family: "Playfair Display", serif;
-  font-optical-sizing: auto;
-  font-weight: 900;
-  font-style: normal;
-}
-.Art-card {
-  background-color: #EA8E1D;
-  
+.welcome-section h2 {
+  border-right: #39545B;
+  height: auto;
 }
 /* theme button */
 .floating-theme-button {

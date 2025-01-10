@@ -59,7 +59,7 @@ function Register() {
             </Row>
             <Row className="justify-content-center mb-5 mt-2">
                 <Col xs={12} md={6} className="wow fadeInLeft mt-5" data-wow-duration="1s" data-wow-delay="0.4s">
-                    <Card className="" style={{ boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }}>
+                    <Card className="rounded-5" style={{ boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }}>
                         <Card.Body className="p-5">
                             <Card.Title className="contact-card mb-4 unbounded-uniquifier-h1">Register</Card.Title>
 
