@@ -238,10 +238,10 @@ body.dark .navbar #basic-nav-dropdown:hover{
 /* nav icon */
 body.dark .custom-collapse-icon {
   border-color: #ea8e1df1; 
-  background-color: #95c6a9; /* Makes the background transparent */
+  background-color: #8E706A; /* Makes the background transparent */
 }
 body.dark .custom-collapse-icon .navbar-toggler-icon {
-  background-color: #95c6a9; /* Change to your desired color */
+  background-color: #8E706A; /* Change to your desired color */
   border-radius: 5px; /* Optional: Add some styling */
 }
 

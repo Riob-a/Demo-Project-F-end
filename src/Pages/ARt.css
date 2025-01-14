@@ -92,4 +92,22 @@ body.dark .acc .theme{
   background:#212529;
   color:#ffffff;
 }
-  
+/* Accordion-specific dark mode support */
+body.light .accordion-header,
+body.light .accordion-body {
+  background: #f8f9fa;
+  color: #212529;
+  border-radius: 25px;
+}
+
+body.dark .accordion-header,
+body.dark .accordion-body {
+  background: #212529;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+body.dark .accordion-header:hover,
+body.dark .accordion-body:hover {
+  background: #212529f4;
+}
