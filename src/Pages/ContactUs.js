@@ -37,7 +37,7 @@ const ContactForm = () => {
     setLoading(true); // Start loading
 
     try {
-      const response = await fetch('https://demo-project-backend-ude8.onrender.com/api/contact', {
+      const response = await fetch('https://demo-project-backend-jj40.onrender.com/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
