@@ -54,7 +54,7 @@ function HomePage() {
   // Fetch user profile
   const fetchUserProfile = async () => {
     try {
-      const response = await fetch("https://demo-project-backend-ude8.onrender.com/api/users/me", {
+      const response = await fetch("https://demo-project-backend-jj40.onrender.com/api/users/me", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -80,17 +80,15 @@ function HomePage() {
   }, []);
 
   // Handle navigation with authentication
-  const navigateToSection = (path, section) => {
-    if (!user && (path === "/artwork" || path === "/contact")) {
-      const message =
-        section === "ART"
+  const navigateToSection = (path) => {
+    if (!user){
+      if (path === "/artwork" || path === "/contact") {
+      const message = path === "/artwork"
           ? "Please sign in to view artworks."
           : "Please sign in to contact us.";
       toast.info(message);
       navigate("/signin");
-      setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }, 0);
+      }
     } else {
       navigate(path);
       setTimeout(() => {
