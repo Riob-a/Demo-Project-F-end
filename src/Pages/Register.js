@@ -1,4 +1,4 @@
-//  https://demo-project-backend-jj40.onrender.com
+//  https://demo-project-backend-5u11.onrender.com
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Card, Col, Container, Row, Alert } from 'react-bootstrap';
 import WOW from "wowjs";
@@ -26,7 +26,7 @@ function Register() {
         }
 
         try {
-            const response = await fetch('https://demo-project-backend-jj40.onrender.com/api/register', {
+            const response = await fetch('https://demo-project-backend-5u11.onrender.com/api/register', {
                 method: 'POST',
                 body: formData,
             });
