@@ -26,7 +26,7 @@ function ChangePassword() {
         }
 
         try {
-            const response = await fetch('https://demo-project-backend-5u11.onrender.com/api/users/change-password', {
+            const response = await fetch('https://demo-project-backend-bl40.onrender.com/api/users/change-password', {
                 method: 'PUT',
                 headers: { 
                     'Content-Type': 'application/json',

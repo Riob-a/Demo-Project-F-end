@@ -13,7 +13,7 @@ function Logout() {
             const token = localStorage.getItem('access_token');
             if (token) {
                 try {
-                    const response = await fetch('https://demo-project-backend-5u11.onrender.com/api/logout', {
+                    const response = await fetch('https://demo-project-backend-bl40.onrender.com/api/logout', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

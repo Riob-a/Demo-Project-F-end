@@ -54,7 +54,7 @@ function HomePage() {
   // Fetch user profile
   const fetchUserProfile = async () => {
     try {
-      const response = await fetch("https://demo-project-backend-5u11.onrender.com/api/users/me", {
+      const response = await fetch("https://demo-project-backend-bl40.onrender.com/api/users/me", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
