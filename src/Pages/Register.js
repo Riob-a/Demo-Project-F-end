@@ -26,7 +26,7 @@ function Register() {
         }
 
         try {
-            const response = await fetch('https://demo-project-backend-bl40.onrender.com/api/register', {
+            const response = await fetch('https://demo-project-backend-production.up.railway.app/api/register', {
                 method: 'POST',
                 body: formData,
             });

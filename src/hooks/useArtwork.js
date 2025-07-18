@@ -30,7 +30,7 @@ const useArtwork = () => {
     const token = localStorage.getItem("access_token");
     try {
       const response = await axios.get(
-        `https://demo-project-backend-bl40.onrender.com/api/artworks/${style}`,
+        `https://demo-project-backend-production.up.railway.app/api/artworks/${style}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -56,7 +56,7 @@ const useArtwork = () => {
     const token = localStorage.getItem("access_token");
     try {
       const response = await axios.post(
-        `https://demo-project-backend-bl40.onrender.com/api/artworks/${artworkId}/like`,
+        `https://demo-project-backend-production.up.railway.app/api/artworks/${artworkId}/like`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -82,7 +82,7 @@ const useArtwork = () => {
     const token = localStorage.getItem("access_token");
     try {
       const response = await axios.delete(
-        `https://demo-project-backend-bl40.onrender.com/api/artworks/${artworkId}/like`,
+        `https://demo-project-backend-production.up.railway.app/api/artworks/${artworkId}/like`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -171,7 +171,7 @@ const useArtwork = () => {
 
     try {
       const response = await axios.post(
-        "https://demo-project-backend-bl40.onrender.com/api/artworks/submit",
+        "https://demo-project-backend-production.up.railway.app/api/artworks/submit",
         data,
         {
           headers: { Authorization: `Bearer ${token}` },
